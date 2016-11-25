@@ -1,0 +1,2218 @@
+[
+  {
+    "children": [
+      {
+        "children": [],
+        "id": 356,
+        "name": "酒水饮料",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "id": 1,
+          "passWord": "eedd3cc14ccf496a8bb89f9ad7359306",
+          "userName": "pjmxby"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 292,
+        "name": "保险费",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 11,
+        "name": "物业水电",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 10,
+        "name": "柴米油盐",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 289,
+        "name": "医疗社保",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 302,
+        "name": "餐饮饮食",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 357,
+        "name": "伙食费",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 304,
+        "name": "日常用品",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 106,
+        "name": "酒水饮料",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 469,
+        "name": "医疗社保",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 305,
+        "name": "柴米油盐",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 7,
+        "name": "餐饮饮食",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 472,
+        "name": "保险费",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 107,
+        "name": "伙食费",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 414,
+        "name": "超市购物",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 307,
+        "name": "医药保健",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 303,
+        "name": "水果零食",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 9,
+        "name": "日常用品",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 12,
+        "name": "医药保健",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 234,
+        "name": "超市购物",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 306,
+        "name": "物业水电",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 8,
+        "name": "水果零食",
+        "parent": {
+          "$ref": "$[0]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      }
+    ],
+    "id": 1,
+    "name": "基本生活",
+    "parent": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 240,
+              "name": "9P370加油",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 13,
+              "name": "交通费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 415,
+              "name": "停车费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 294,
+              "name": "汽车用品",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 310,
+              "name": "养车费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 474,
+              "name": "汽车用品",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 420,
+              "name": "9P370加油",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 473,
+              "name": "7D58D加油",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 309,
+              "name": "话费网费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 14,
+              "name": "话费网费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 15,
+              "name": "养车费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 293,
+              "name": "7D58D加油",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 235,
+              "name": "停车费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 295,
+              "name": "汽车保养",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 308,
+              "name": "交通费",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 475,
+              "name": "汽车保养",
+              "parent": {
+                "$ref": "$[0].parent.children[0]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 2,
+          "name": "交通通讯",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 320,
+              "name": "孝敬长辈",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 319,
+              "name": "礼品礼金",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 318,
+              "name": "人际往来",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 24,
+              "name": "礼品礼金",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 23,
+              "name": "人际往来",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 25,
+              "name": "孝敬长辈",
+              "parent": {
+                "$ref": "$[0].parent.children[1]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 5,
+          "name": "人情往来",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 417,
+          "name": "来福灵",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "$ref": "$[0]"
+        },
+        {
+          "children": [],
+          "id": 300,
+          "name": "人情往来",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 27,
+              "name": "投资亏损",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 360,
+              "name": "公积金还贷",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 322,
+              "name": "投资亏损",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 321,
+              "name": "房产车产",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 323,
+              "name": "电器家居",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 324,
+              "name": "其他杂项",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 180,
+              "name": "公积金还贷",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 29,
+              "name": "其他杂项",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 28,
+              "name": "电器家居",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 26,
+              "name": "房产车产",
+              "parent": {
+                "$ref": "$[0].parent.children[5]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 6,
+          "name": "其他支出",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 298,
+          "name": "文化娱乐",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 296,
+          "name": "基本生活",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 297,
+          "name": "交通通讯",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 301,
+          "name": "其他支出",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [],
+          "id": 299,
+          "name": "美容装扮",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 17,
+              "name": "博彩彩票",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 315,
+              "name": "教育培训",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 314,
+              "name": "数码产品",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 16,
+              "name": "旅游娱乐",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 20,
+              "name": "教育培训",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 18,
+              "name": "书报音像",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 313,
+              "name": "书报音像",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 312,
+              "name": "博彩彩票",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 311,
+              "name": "旅游娱乐",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 19,
+              "name": "数码产品",
+              "parent": {
+                "$ref": "$[0].parent.children[11]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 3,
+          "name": "文化娱乐",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 358,
+              "name": "理发",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 316,
+              "name": "服饰装扮",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 317,
+              "name": "化妆品美容",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 108,
+              "name": "理发",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 21,
+              "name": "服饰装扮",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 22,
+              "name": "化妆品美容",
+              "parent": {
+                "$ref": "$[0].parent.children[12]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 4,
+          "name": "美容装扮",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": 418,
+              "name": "餐饮饮食",
+              "parent": {
+                "$ref": "$[0].parent.children[13]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 419,
+              "name": "日常用品",
+              "parent": {
+                "$ref": "$[0].parent.children[13]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 239,
+              "name": "日常用品",
+              "parent": {
+                "$ref": "$[0].parent.children[13]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            },
+            {
+              "children": [],
+              "id": 238,
+              "name": "餐饮饮食",
+              "parent": {
+                "$ref": "$[0].parent.children[13]"
+              },
+              "tUser": {
+                "$ref": "$[0].children[0].tUser"
+              },
+              "visible": true
+            }
+          ],
+          "id": 237,
+          "name": "来福灵",
+          "parent": {
+            "$ref": "$[0].parent"
+          },
+          "tUser": {
+            "$ref": "$[0].children[0].tUser"
+          },
+          "visible": true
+        }
+      ],
+      "id": 30,
+      "name": "支出",
+      "tUser": {
+        "$ref": "$[0].children[0].tUser"
+      },
+      "visible": true
+    },
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "$ref": "$[0].parent.children[0]"
+  },
+  {
+    "$ref": "$[0].parent.children[11]"
+  },
+  {
+    "$ref": "$[0].parent.children[12]"
+  },
+  {
+    "$ref": "$[0].parent.children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[5]"
+  },
+  {
+    "$ref": "$[0].children[11]"
+  },
+  {
+    "$ref": "$[0].children[21]"
+  },
+  {
+    "$ref": "$[0].children[17]"
+  },
+  {
+    "$ref": "$[0].children[3]"
+  },
+  {
+    "$ref": "$[0].children[2]"
+  },
+  {
+    "$ref": "$[0].children[18]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[9]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[10]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[3]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[0]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[5]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[9]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[5]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[3]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[5]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[9]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[0]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[8]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[7]"
+  },
+  {
+    "$ref": "$[0].parent"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "id": 50,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 53,
+            "name": "结婚礼金",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 346,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 345,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 344,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 51,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 52,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 422,
+            "name": "公积金贴息",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 343,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 348,
+            "name": "结婚礼金",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 342,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 347,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 49,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 47,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 242,
+            "name": "公积金贴息",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 48,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[0]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          }
+        ],
+        "id": 46,
+        "name": "共同收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 334,
+        "name": "徐碧莹收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "id": 339,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 337,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 41,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 43,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 340,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 45,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 338,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 44,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 40,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 336,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 335,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 42,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[2]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          }
+        ],
+        "id": 39,
+        "name": "徐碧莹收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 341,
+        "name": "共同收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "id": 355,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 101,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 352,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 354,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 350,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 102,
+            "name": "补助津贴",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 104,
+            "name": "投资收益",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 105,
+            "name": "其他收入",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 103,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 179,
+            "name": "公积金提取",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 351,
+            "name": "奖金",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 359,
+            "name": "公积金提取",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 353,
+            "name": "公务报销",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          },
+          {
+            "children": [],
+            "id": 100,
+            "name": "工资",
+            "parent": {
+              "$ref": "$[30].children[4]"
+            },
+            "tUser": {
+              "$ref": "$[0].children[0].tUser"
+            },
+            "visible": true
+          }
+        ],
+        "id": 99,
+        "name": "潘骏谋收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      },
+      {
+        "children": [],
+        "id": 349,
+        "name": "潘骏谋收入",
+        "parent": {
+          "$ref": "$[30]"
+        },
+        "tUser": {
+          "$ref": "$[0].children[0].tUser"
+        },
+        "visible": true
+      }
+    ],
+    "id": 31,
+    "name": "收入",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 32,
+    "name": "余额变更",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 33,
+    "name": "转账/取现",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 34,
+    "name": "信用卡还款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 35,
+    "name": "借入",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 36,
+    "name": "借出",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 37,
+    "name": "还款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 38,
+    "name": "收款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "$ref": "$[30].children[2]"
+  },
+  {
+    "$ref": "$[30].children[2].children[8]"
+  },
+  {
+    "$ref": "$[30].children[2].children[2]"
+  },
+  {
+    "$ref": "$[30].children[2].children[11]"
+  },
+  {
+    "$ref": "$[30].children[2].children[3]"
+  },
+  {
+    "$ref": "$[30].children[2].children[7]"
+  },
+  {
+    "$ref": "$[30].children[2].children[5]"
+  },
+  {
+    "$ref": "$[30].children[0]"
+  },
+  {
+    "$ref": "$[30].children[0].children[13]"
+  },
+  {
+    "$ref": "$[30].children[0].children[15]"
+  },
+  {
+    "$ref": "$[30].children[0].children[12]"
+  },
+  {
+    "$ref": "$[30].children[0].children[0]"
+  },
+  {
+    "$ref": "$[30].children[0].children[5]"
+  },
+  {
+    "$ref": "$[30].children[0].children[6]"
+  },
+  {
+    "$ref": "$[30].children[0].children[1]"
+  },
+  {
+    "$ref": "$[30].children[4]"
+  },
+  {
+    "$ref": "$[30].children[4].children[13]"
+  },
+  {
+    "$ref": "$[30].children[4].children[1]"
+  },
+  {
+    "$ref": "$[30].children[4].children[5]"
+  },
+  {
+    "$ref": "$[30].children[4].children[8]"
+  },
+  {
+    "$ref": "$[30].children[4].children[6]"
+  },
+  {
+    "$ref": "$[30].children[4].children[7]"
+  },
+  {
+    "$ref": "$[0].children[8]"
+  },
+  {
+    "$ref": "$[0].children[13]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[3]"
+  },
+  {
+    "$ref": "$[30].children[4].children[9]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[6]"
+  },
+  {
+    "$ref": "$[0].children[19]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[12]"
+  },
+  {
+    "$ref": "$[0].parent.children[13]"
+  },
+  {
+    "$ref": "$[0].parent.children[13].children[3]"
+  },
+  {
+    "$ref": "$[0].parent.children[13].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[0]"
+  },
+  {
+    "$ref": "$[30].children[0].children[14]"
+  },
+  {
+    "$ref": "$[0].children[4]"
+  },
+  {
+    "$ref": "$[0].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[11]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[3]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[13]"
+  },
+  {
+    "$ref": "$[0].parent.children[7]"
+  },
+  {
+    "$ref": "$[0].parent.children[8]"
+  },
+  {
+    "$ref": "$[0].parent.children[6]"
+  },
+  {
+    "$ref": "$[0].parent.children[10]"
+  },
+  {
+    "$ref": "$[0].parent.children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[9]"
+  },
+  {
+    "$ref": "$[0].children[5]"
+  },
+  {
+    "$ref": "$[0].children[16]"
+  },
+  {
+    "$ref": "$[0].children[7]"
+  },
+  {
+    "$ref": "$[0].children[10]"
+  },
+  {
+    "$ref": "$[0].children[20]"
+  },
+  {
+    "$ref": "$[0].children[15]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[14]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[8]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[8]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[7]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[6]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[11].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[1].children[0]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[3]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[4]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[5]"
+  },
+  {
+    "children": [],
+    "id": 325,
+    "name": "支出",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 326,
+    "name": "收入",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 327,
+    "name": "余额变更",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 328,
+    "name": "转账/取现",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 329,
+    "name": "信用卡还款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 330,
+    "name": "借入",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 331,
+    "name": "借出",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 332,
+    "name": "还款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "children": [],
+    "id": 333,
+    "name": "收款",
+    "tUser": {
+      "$ref": "$[0].children[0].tUser"
+    },
+    "visible": true
+  },
+  {
+    "$ref": "$[30].children[1]"
+  },
+  {
+    "$ref": "$[30].children[2].children[10]"
+  },
+  {
+    "$ref": "$[30].children[2].children[9]"
+  },
+  {
+    "$ref": "$[30].children[2].children[1]"
+  },
+  {
+    "$ref": "$[30].children[2].children[6]"
+  },
+  {
+    "$ref": "$[30].children[2].children[0]"
+  },
+  {
+    "$ref": "$[30].children[2].children[4]"
+  },
+  {
+    "$ref": "$[30].children[3]"
+  },
+  {
+    "$ref": "$[30].children[0].children[10]"
+  },
+  {
+    "$ref": "$[30].children[0].children[8]"
+  },
+  {
+    "$ref": "$[30].children[0].children[4]"
+  },
+  {
+    "$ref": "$[30].children[0].children[3]"
+  },
+  {
+    "$ref": "$[30].children[0].children[2]"
+  },
+  {
+    "$ref": "$[30].children[0].children[11]"
+  },
+  {
+    "$ref": "$[30].children[0].children[9]"
+  },
+  {
+    "$ref": "$[30].children[5]"
+  },
+  {
+    "$ref": "$[30].children[4].children[4]"
+  },
+  {
+    "$ref": "$[30].children[4].children[10]"
+  },
+  {
+    "$ref": "$[30].children[4].children[2]"
+  },
+  {
+    "$ref": "$[30].children[4].children[12]"
+  },
+  {
+    "$ref": "$[30].children[4].children[3]"
+  },
+  {
+    "$ref": "$[30].children[4].children[0]"
+  },
+  {
+    "$ref": "$[0].children[0]"
+  },
+  {
+    "$ref": "$[0].children[6]"
+  },
+  {
+    "$ref": "$[0].parent.children[12].children[0]"
+  },
+  {
+    "$ref": "$[30].children[4].children[11]"
+  },
+  {
+    "$ref": "$[0].parent.children[5].children[1]"
+  },
+  {
+    "$ref": "$[0].children[14]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[2]"
+  },
+  {
+    "$ref": "$[0].parent.children[13].children[0]"
+  },
+  {
+    "$ref": "$[0].parent.children[13].children[1]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[6]"
+  },
+  {
+    "$ref": "$[30].children[0].children[7]"
+  },
+  {
+    "$ref": "$[0].children[9]"
+  },
+  {
+    "$ref": "$[0].children[12]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[7]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[5]"
+  },
+  {
+    "$ref": "$[0].parent.children[0].children[15]"
+  }
+]

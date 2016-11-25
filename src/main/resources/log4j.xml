@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN"
+        "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- [控制台STDOUT] -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p: %m%n"/>
+        </layout>
+        <!--过滤器设置输出的级别 -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="debug"/>
+            <param name="levelMax" value="warn"/>
+        </filter>
+    </appender>
+
+    <!-- [公共Appender] -->
+    <appender name="DEFAULT-APPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs-mhj/console.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="info"/>
+        <param name="MaxFileSize" value="5MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- [错误日志APPENDER] -->
+    <appender name="ERROR-APPENDER" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs-mhj/error.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="error"/>
+        <param name="MaxFileSize" value="5MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 通过<category></category>的定义可以将各个包中的类日志输出到不同的日志文件中 -->
+    <category name="org.springframework">
+        <priority value="error"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <!-- 通过<category></category>的定义可以将各个包中的类日志输出到不同的日志文件中 -->
+    <category name=" org.hibernate.jpa">
+        <priority value="error"/>
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+    <!-- Root Logger -->
+    <root>
+        <level value="info"></level>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </root>
+</log4j:configuration>  
