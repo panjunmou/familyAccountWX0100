@@ -8,7 +8,6 @@ import com.pjm.familyAccountWx.service.PayUserService;
 import com.pjm.familyAccountWx.service.PurposeService;
 import com.pjm.familyAccountWx.service.TallyService;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
-import com.pjm.familyAccountWx.vo.TallyParam;
 import com.pjm.familyAccountWx.vo.TallyVo;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,7 @@ public class TallyController extends BaseController {
 
     @RequestMapping(value = "saveTally", method = RequestMethod.POST)
     @ResponseBody
-    public Json saveTally(TallyParam tallyParam, HttpServletRequest request) throws Exception {
+    public Json saveTally(TallyVo tallyParam, HttpServletRequest request) throws Exception {
         Json json = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
@@ -54,13 +53,31 @@ public class TallyController extends BaseController {
         return json;
     }
 
-    @RequestMapping(value = "hardWareSuitList", method = RequestMethod.GET)
+    @RequestMapping(value = "updateTally", method = RequestMethod.POST)
     @ResponseBody
-    public Json hardWareSuitList(TallyParam tallyParam,PageModel ph) throws Exception {
+    public Json updateTally(TallyVo tallyParam, HttpServletRequest request) throws Exception {
+        Json json = new Json();
+        try {
+            LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+            tallyService.updateTally(tallyParam, loginUserInfo.getName());
+            json.setSuccess(true);
+            json.setMsg("修改成功");
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            json.setMsg(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @RequestMapping(value = "tallyList", method = RequestMethod.GET)
+    @ResponseBody
+    public Json tallyList(TallyVo tallyParam, PageModel ph) throws Exception {
         Json json = new Json();
         json.setSuccess(true);
         json.setMsg(null);
-        PageModel pageModel = tallyService.getTallyList(tallyParam,ph);
+        PageModel pageModel = tallyService.getTallyList(tallyParam, ph);
         json.setObj(pageModel);
         return json;
     }
@@ -73,7 +90,7 @@ public class TallyController extends BaseController {
     }
 
     @RequestMapping(value = "editPage")
-    public String editPage(Long id, Model model,HttpServletRequest request) throws Exception {
+    public String editPage(Long id, Model model, HttpServletRequest request) throws Exception {
         TallyVo tallyVo = tallyService.getTally(id);
         model.addAttribute("tally", tallyVo);
         Integer purposeType = tallyVo.getPurposeType();
@@ -88,11 +105,11 @@ public class TallyController extends BaseController {
 
         if (purposeType == -1) {
             //支出
-            String purposeInList = purposeService.queryPurpose(userName,-1);
+            String purposeInList = purposeService.queryPurpose(userName, -1);
             model.addAttribute("purposeInList", purposeInList);
             return "tally/tallyInEdit";
         } else {
-            String purposeOutList = purposeService.queryPurpose(userName,1);
+            String purposeOutList = purposeService.queryPurpose(userName, 1);
             model.addAttribute("purposeOutList", purposeOutList);
             return "tally/tallyInEdit";
         }

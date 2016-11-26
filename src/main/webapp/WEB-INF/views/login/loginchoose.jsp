@@ -20,7 +20,6 @@
 			<p class="weui_btn_area">
 				<a href="${ctx}/login/loginPage?type=pcglxl" class="weui_btn weui_btn_primary">潘春光/刘晓丽</a>
 				<a href="${ctx}/login/loginPage?type=pjmxby" class="weui_btn weui_btn_primary">潘骏谋/徐碧莹</a>
-				<a href="${ctx}/login/loginPage?type=other" class="weui_btn weui_btn_primary">其他账号</a>
 			</p>
 		</div>
 	</div>

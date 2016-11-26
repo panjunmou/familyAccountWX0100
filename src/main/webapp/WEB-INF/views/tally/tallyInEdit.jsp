@@ -58,10 +58,10 @@
             });
 
             $(".weui_btn").click(function (e) {
-                var money = $("#money" + tabId).val();
-                var date = $("#date" + tabId).val();
-                var account = $("#account" + tabId).attr("data-values");
-                var purpose = $("#purposeType" + tabId).val();
+                var money = $("#moneytabIn").val();
+                var date = $("#datetabIn").val();
+                var account = $("#accounttabIn").attr("data-values");
+                var purpose = $("#purposeTypetabIn").val();
                 var payUser = $("#usePersontabIn").attr("data-values");
                 var remark = $("#remark").val();
 
@@ -86,6 +86,7 @@
                     return;
                 }
                 ajaxJS('${ctx}/tally/updateTally', {
+                    id:'${tally.id}',
                     money: money,
                     payDate: date,
                     accountId: account,
@@ -145,13 +146,13 @@
     <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label">用途</label></div>
         <div class="weui_cell_bd weui_cell_primary">
-            <input class="weui_input" id="usefulltabIn" type="text" value=""/>
+            <input class="weui_input" id="usefulltabIn" type="text" value="${tally.purposeName}"/>
         </div>
     </div>
     <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label">消费者</label></div>
         <div class="weui_cell_bd weui_cell_primary">
-            <input class="weui_input" id="usePersontabIn" type="text"/>
+            <input class="weui_input" id="usePersontabIn" type="text" value="${tally.payUserNames}" data-values="${tally.payUserIds}"/>
         </div>
     </div>
 </div>
@@ -165,7 +166,7 @@
     </div>
 </div>
 <a href="javascript:;" class="weui_btn weui_btn_primary">保 存</a>
-<input type="hidden" value="" id="purposeTypetabIn">
+<input type="hidden" value="${tally.purposeId}" id="purposeTypetabIn">
 <!-- 底部导航 -->
 <div id="footerBar">
     <jsp:include page="../common/footer.jsp"></jsp:include>

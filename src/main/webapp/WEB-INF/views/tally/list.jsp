@@ -39,7 +39,7 @@
 
                 $("[name='page']").val(parseInt($("[name='page']").val()) + 1);
 
-                var url = '${ctx}/tally/hardWareSuitList';
+                var url = '${ctx}/tally/tallyList';
 
                 ajaxJS(url, $("form").serialize(), false, "get", function (result) {
                     if (result.success) {//成功
@@ -91,7 +91,7 @@
                 $("form [name='account']").val('');
                 $("form [name='payUser']").val('');
             }
-            var url = '${ctx}/tally/hardWareSuitList';
+            var url = '${ctx}/tally/tallyList';
             ajaxJS(url, $("form").serialize(), false, "get", function (result) {
                 if (result.success) {//成功
                     $("#content").empty();

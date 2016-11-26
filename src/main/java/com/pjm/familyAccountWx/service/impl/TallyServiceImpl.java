@@ -11,13 +11,14 @@ import com.pjm.familyAccountWx.model.TPayUser;
 import com.pjm.familyAccountWx.model.TPurpose;
 import com.pjm.familyAccountWx.model.TTally;
 import com.pjm.familyAccountWx.service.TallyService;
-import com.pjm.familyAccountWx.vo.TallyParam;
 import com.pjm.familyAccountWx.vo.TallyVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -37,19 +38,19 @@ public class TallyServiceImpl implements TallyService {
     private PayUserDao payUserDao;
 
     @Override
-    public void addTally(TallyParam tallyParam, String name) throws Exception {
+    public void addTally(TallyVo TallyVo, String name) throws Exception {
         TTally tTally = new TTally();
         tTally.setCreateUser(name);
         tTally.setCreateDate(new Date());
-        this.copyParamToEntity(tallyParam, tTally);
+        this.copyVoToEntity(TallyVo, tTally);
         tallyDao.save(tTally);
     }
 
     @Override
-    public PageModel getTallyList(TallyParam tallyParam, PageModel ph) throws Exception {
+    public PageModel getTallyList(TallyVo vo, PageModel ph) throws Exception {
         List<TallyVo> list = new ArrayList<TallyVo>();
 
-        QueryResult<TTally> pageResult = tallyDao.getTallyList(tallyParam, ph);
+        QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph);
         for (TTally tally : pageResult.getReultList()) {
             TallyVo tallyVo = new TallyVo();
             this.copyEntityToVo(tally, tallyVo);
@@ -71,9 +72,41 @@ public class TallyServiceImpl implements TallyService {
         return tallyVo;
     }
 
+    @Override
+    public void updateTally(TallyVo tallyVo, String name) throws Exception {
+        Long id = tallyVo.getId();
+        TTally tTally = tallyDao.find(id, TTally.class);
+        this.copyVoToEntity(tallyVo, tTally);
+        tallyDao.update(tTally);
+    }
+
+    private void copyVoToEntity(TallyVo tallyVo, TTally tTally) throws Exception {
+        BeanUtils.copyProperties(tallyVo, tTally);
+        String payDate = tallyVo.getPayDate();
+        Long accountId = tallyVo.getAccountId();
+        Long purposeId = tallyVo.getPurposeId();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parseDate = simpleDateFormat.parse(payDate);
+        TAccount tAccount = accountDao.find(accountId, TAccount.class);
+        TPurpose tPurpose = purposeDao.find(purposeId, TPurpose.class);
+        tTally.settAccount(tAccount);
+        tTally.settPurpose(tPurpose);
+        tTally.setPayDate(parseDate);
+        String payUserIds = tallyVo.getPayUserIds();
+        if (!StringUtils.isEmpty(payUserIds)) {
+            String[] split = payUserIds.split(",");
+            Set<TPayUser> tPayUserSet = new HashSet<TPayUser>();
+            for (String idStr : split) {
+                Long payUserId = Long.parseLong(idStr);
+                TPayUser tPayUser = payUserDao.find(payUserId, TPayUser.class);
+                tPayUserSet.add(tPayUser);
+            }
+            tTally.settPayUserSet(tPayUserSet);
+        }
+    }
+
     private void copyEntityToVo(TTally tally, TallyVo tallyVo) {
-        Long id = tally.getId();
-        BigDecimal money = tally.getMoney();
+        BeanUtils.copyProperties(tally, tallyVo);
         TAccount tAccount = tally.gettAccount();
         Date payDate = tally.getPayDate();
         TPurpose tPurpose = tally.gettPurpose();
@@ -81,7 +114,6 @@ public class TallyServiceImpl implements TallyService {
         Set<TPayUser> tPayUsers = tally.gettPayUserSet();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = simpleDateFormat.format(payDate);
-        tallyVo.setMoney(money);
         tallyVo.setAccountId(tAccount.getId());
         tallyVo.setAccountName(tAccount.getName());
         tallyVo.setPurposeId(tPurpose.getId());
@@ -94,7 +126,6 @@ public class TallyServiceImpl implements TallyService {
         purposeName += tPurpose.getName();
         tallyVo.setPurposeName(purposeName);
         tallyVo.setPayDate(date);
-        tallyVo.setId(id);
         tallyVo.setPurposeType(purposeType);
         if (tPayUsers != null && tPayUsers.size() > 0) {
             StringBuffer payUserIds = new StringBuffer("");
@@ -105,40 +136,8 @@ public class TallyServiceImpl implements TallyService {
                 payUserIds.append(tPayUserId).append(",");
                 payUserNames.append(name).append(",");
             }
-            tallyVo.setPayUserIds(payUserIds.deleteCharAt(payUserIds.length()-1).toString());
-            tallyVo.setPayUserNames(payUserNames.deleteCharAt(payUserNames.length()-1).toString());
-        }
-    }
-
-    private void copyParamToEntity(TallyParam tallyParam, TTally tTally) throws Exception {
-        String tabId = tallyParam.getTabId();
-        BigDecimal money = tallyParam.getMoney();
-        String payDate = tallyParam.getPayDate();
-        Long accountId = tallyParam.getAccountId();
-        Long purposeId = tallyParam.getPurposeId();
-        String remark = tallyParam.getRemark();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parseDate = simpleDateFormat.parse(payDate);
-        TAccount tAccount = accountDao.find(accountId, TAccount.class);
-        TPurpose tPurpose = purposeDao.find(purposeId, TPurpose.class);
-        tTally.setMoney(money);
-        tTally.settAccount(tAccount);
-        tTally.settPurpose(tPurpose);
-        tTally.setPayDate(parseDate);
-        tTally.setRemark(remark);
-        if (tabId.equalsIgnoreCase("tabIn")) {
-            //支出
-            String payUserIds = tallyParam.getPayUserIds();
-            if (!StringUtils.isEmpty(payUserIds)) {
-                String[] split = payUserIds.split(",");
-                Set<TPayUser> tPayUserSet = new HashSet<TPayUser>();
-                for (String idStr : split) {
-                    Long payUserId = Long.parseLong(idStr);
-                    TPayUser tPayUser = payUserDao.find(payUserId, TPayUser.class);
-                    tPayUserSet.add(tPayUser);
-                }
-                tTally.settPayUserSet(tPayUserSet);
-            }
+            tallyVo.setPayUserIds(payUserIds.deleteCharAt(payUserIds.length() - 1).toString());
+            tallyVo.setPayUserNames(payUserNames.deleteCharAt(payUserNames.length() - 1).toString());
         }
     }
 }

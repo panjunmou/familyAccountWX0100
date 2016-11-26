@@ -9,6 +9,8 @@ public class TallyVo {
 
     private Long id;
 
+    private String tabId;
+
     private BigDecimal money;
 
     private String payDate;
@@ -112,5 +114,13 @@ public class TallyVo {
 
     public void setPurposeType(Integer purposeType) {
         this.purposeType = purposeType;
+    }
+
+    public String getTabId() {
+        return tabId;
+    }
+
+    public void setTabId(String tabId) {
+        this.tabId = tabId;
     }
 }
