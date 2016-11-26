@@ -1,6 +1,6 @@
 
 +function (e) {
-    e.rawCitiesData = purposeOutData;
+    e.rawCitiesData2 = purposeOutData;
 
 }($), +function (e) {
     "use strict";
@@ -21,7 +21,7 @@
             }, u = function (e, a) {
                 for (var n = 0; n < t.length; n++)if (t[n].name === e)for (var s = 0; s < t[n].sub.length; s++)if (t[n].sub[s].name === a)return m(t[n].sub[s]);
                 return [""]
-            }, t = e.rawCitiesData, b = t.map(function (e) {
+            }, t = e.rawCitiesData2, b = t.map(function (e) {
                 return e.name
             }), p = m(t[0]), y = m(t[0].sub[0]), r = b[0], l = p[0], c = y[0], i = [{
                 values: b,

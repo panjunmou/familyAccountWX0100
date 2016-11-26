@@ -27,25 +27,25 @@
 <!-- 	<div class="weui_tab_bd"></div> -->
 <div style="width: 100%; height: 48px;">&nbsp;</div>
 <div class="weui_tabbar" style="position: fixed; left: 0%; right: 0%; bottom: 0%; top: auto; width: 100%">
-	<a id="tabbar_home" href="${ctx}/tally/list?tabbar=0" class="weui_tabbar_item">
+	<a id="tabbar_home" href="${ctx}/index/list?tabbar=0" class="weui_tabbar_item">
 		<div class="weui_tabbar_icon">
 			<img src="${ctx}/style/images/wechat/index.png" alt="icon" />
 		</div>
 		<p class="weui_tabbar_label">账目明细</p>
 	</a>
-	<a id="tabbar_xw" href="${ctx}/tally/tally?tabbar=1" class="weui_tabbar_item">
+	<a id="tabbar_xw" href="${ctx}/index/tally?tabbar=1" class="weui_tabbar_item">
 		<div class="weui_tabbar_icon">
 			<img src="${ctx}/style/images/wechat/xw.png" alt="icon" />
 		</div>
 		<p class="weui_tabbar_label">记一笔</p>
 	</a>
-	<a id="tabbar_zx" href="${ctx}/tally/baobiao?tabbar=2" class="weui_tabbar_item">
+	<a id="tabbar_zx" href="${ctx}/index/baobiao?tabbar=2" class="weui_tabbar_item">
 		<div class="weui_tabbar_icon">
 			<img src="${ctx}/style/images/wechat/zx.png" alt="icon" />
 		</div>
 		<p class="weui_tabbar_label">报表</p>
 	</a>
-	<a id="tabbar_shopcart" href="${ctx}/tally/baoxian?tabbar=3" class="weui_tabbar_item">
+	<a id="tabbar_shopcart" href="${ctx}/index/baoxian?tabbar=3" class="weui_tabbar_item">
 		<div class="weui_tabbar_icon">
 			<img src="${ctx}/style/images/wechat/gwc.png" alt="icon" />
 		</div>

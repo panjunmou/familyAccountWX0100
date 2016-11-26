@@ -14,14 +14,15 @@
     <title>首页</title>
     <script type="text/javascript">
         var purposeInData = $.parseJSON('${purposeInList}');
+
         var purposeOutData = $.parseJSON('${purposeOutList}');
 
         $(function () {
 
-            $("#date").calendar();
-            $("#date2").calendar();
+            $("#datetabIn").calendar();
+            $("#datetabOut").calendar();
 
-            $("#account").select({
+            $("#accounttabIn").select({
                 title: "选择账户",
                 items: $.parseJSON('${accountList}'),
                 onOpen: function () {
@@ -32,7 +33,7 @@
                 }
             });
 
-            $("#account2").select({
+            $("#accounttabOut").select({
                 title: "选择账户",
                 items: $.parseJSON('${accountList}'),
                 onOpen: function () {
@@ -43,7 +44,7 @@
                 }
             });
 
-            $("#usePerson").select({
+            $("#usePersontabIn").select({
                 title: "选择消费者",
                 multi: true,
                 items: $.parseJSON('${payUserList}'),
@@ -55,7 +56,7 @@
                 }
             });
 
-            $("#usefull").purposeIn({
+            $("#usefulltabIn").purposeIn({
                 title: "请选择用途",
                 showDistrict: false,
                 onClose: function (e) {
@@ -66,11 +67,11 @@
                     var sub = oneObj.sub;
                     var towObj = sub[towIndex];
                     var id = towObj.id;
-                    $("[name='purposeTypeId']").val(id);
+                    $("#purposeTypetabIn").val(id);
                 }
             });
 
-            $("#usefull2").purposeOut({
+            $("#usefulltabOut").purposeOut({
                 title: "请选择用途",
                 showDistrict: false,
                 onClose: function (e) {
@@ -81,30 +82,70 @@
                     var sub = oneObj.sub;
                     var towObj = sub[towIndex];
                     var id = towObj.id;
-                    $("[name='purposeTypeId']").val(id);
+                    $("#purposeTypetabOut").val(id);
                 }
             });
 
             $(".weui_btn").click(function (e) {
-                var amount = $("#intentionAmount").val();
-                if (isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-                    $.alert("请输入正确的意向金金额！", "提示");
+                var tabId = $(".weui_tab_bd_item_active").attr("id");
+                var money = $("#money" + tabId).val();
+                var date = $("#date" + tabId).val();
+                var account = $("#account" + tabId).attr("data-values");
+                var purpose = $("#purposeType" + tabId).val();
+                var payUser = $("#usePersontabIn").attr("data-values");
+                var remark = $("#remark").val();
+
+                if (isNaN(parseFloat(money)) || parseFloat(money) <= 0) {
+                    $.alert("请输入金额！", "提示");
                     return;
                 }
-                ajaxJS('${ctx}/get/intentionAdd', {
-                    intentionAmount: $("#intentionAmount").val()
+                if (isNaN(parseFloat(date)) || parseFloat(date) <= 0) {
+                    $.alert("请选择日期！", "提示");
+                    return;
+                }
+                if (isNaN(parseFloat(account)) || parseFloat(account) <= 0) {
+                    $.alert("请选择账号！", "提示");
+                    return;
+                }
+                if (isNaN(parseFloat(purpose)) || parseFloat(purpose) <= 0) {
+                    $.alert("请选择用途！", "提示");
+                    return;
+                }
+                if (tabId == "tabIn") {
+                    if (isNaN(parseFloat(payUser)) || parseFloat(payUser) <= 0) {
+                        $.alert("请选择消费者！", "提示");
+                        return;
+                    }
+                }
+                ajaxJS('${ctx}/tally/saveTally', {
+                    tabId: tabId,
+                    money: money,
+                    payDate: date,
+                    accountId: account,
+                    purposeId: purpose,
+                    payUserIds: payUser,
+                    remark: remark
                 }, false, "post", function (result) {
-                    if (result.success) {//成功
-                        //showSucc(result.msg);
-                        $.alert({
-                            title: '提示',
+                    if (result.success) {
+                        //成功
+                        $.modal({
+                            title: "提示",
                             text: result.msg,
-                            onOK: function () {
-                                //点击确认
-                                window.location.href = "${ctx}/wechat/intentionList";
-                            }
+                            buttons: [
+                                {
+                                    text: "查看明细",
+                                    onClick: function () {
+                                        window.location.href = "${ctx}/index/list?tabbar=0";
+                                    }
+                                },
+                                {
+                                    text: "再记一笔",
+                                    onClick: function () {
+                                        window.location.href = "${ctx}/index/tally?tabbar=1";
+                                    }
+                                }
+                            ]
                         });
-
                     } else {
                         showError(result.msg);
                     }
@@ -127,63 +168,63 @@
     </div>
     <div class="weui_tab_bd">
         <div id="tabIn" class="weui_tab_bd_item weui_tab_bd_item_active">
-            <div class="weui_cells weui_cells_form">
+            <div class="weui_cells weui_cells_form" style="margin-top: 0px">
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">金额</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" type="number" placeholder="请输入金额" id="money">
+                        <input class="weui_input" type="number" placeholder="请输入金额" id="moneytabIn">
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="date" type="text" data-toggle='date'/>
+                        <input class="weui_input" id="datetabIn" type="text" data-toggle='date'/>
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">账户</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="account" type="text" value=""/>
+                        <input class="weui_input" id="accounttabIn" type="text" value=""/>
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">用途</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="usefull" type="text" value=""/>
+                        <input class="weui_input" id="usefulltabIn" type="text" value=""/>
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">消费者</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="usePerson" type="text" value=""/>
+                        <input class="weui_input" id="usePersontabIn" type="text" value=""/>
                     </div>
                 </div>
             </div>
         </div>
         <div id="tabOut" class="weui_tab_bd_item">
-            <div class="weui_cells weui_cells_form">
+            <div class="weui_cells weui_cells_form" style="margin-top: 0px">
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">金额</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" type="number" placeholder="请输入金额" id="money2">
+                        <input class="weui_input" type="number" placeholder="请输入金额" id="moneytabOut">
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="date2" type="text" data-toggle='date'/>
+                        <input class="weui_input" id="datetabOut" type="text" data-toggle='date'/>
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">账户</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="account2" type="text" value=""/>
+                        <input class="weui_input" id="accounttabOut" type="text" value=""/>
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">用途</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="usefull2" type="text" value=""/>
+                        <input class="weui_input" id="usefulltabOut" type="text" value=""/>
                     </div>
                 </div>
             </div>
@@ -193,13 +234,14 @@
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_textarea" placeholder="请输入评论" rows="3"></textarea>
+                    <textarea id="remark" class="weui_textarea" placeholder="请输入评论" rows="3"></textarea>
                     <div class="weui_textarea_counter"><span>0</span>/200</div>
                 </div>
             </div>
         </div>
         <a href="javascript:;" class="weui_btn weui_btn_primary">保 存</a>
-        <input type="hidden" value="" name="purposeTypeId">
+        <input type="hidden" value="" id="purposeTypetabIn">
+        <input type="hidden" value="" id="purposeTypetabOut">
     </div>
 </div>
 <!-- 底部导航 -->

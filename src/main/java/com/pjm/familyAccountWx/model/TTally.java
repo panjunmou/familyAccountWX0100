@@ -35,6 +35,8 @@ public class TTally extends IdEntity {
             @JoinColumn(name = "PAYUSER_ID")})
     private Set<TPayUser> tPayUserSet = new HashSet<TPayUser>(0);
 
+    private String remark;
+
     public BigDecimal getMoney() {
         return money;
     }
@@ -73,5 +75,13 @@ public class TTally extends IdEntity {
 
     public void settPayUserSet(Set<TPayUser> tPayUserSet) {
         this.tPayUserSet = tPayUserSet;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -15,7 +15,7 @@
                     passWord: passWord
                 }, true, "post", function (result) {
                     if (result.success) {
-                        window.location.href = "${ctx}/tally/list";
+                        window.location.href = "${ctx}/index/list";
                     } else {
                         showError(result.msg);
                     }
