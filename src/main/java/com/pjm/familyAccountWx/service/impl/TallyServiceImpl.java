@@ -140,4 +140,11 @@ public class TallyServiceImpl implements TallyService {
             tallyVo.setPayUserNames(payUserNames.deleteCharAt(payUserNames.length() - 1).toString());
         }
     }
+
+    @Override
+    public void delete(Long id) throws Exception {
+        TTally tTally = tallyDao.find(id, TTally.class);
+        tTally.setVisible(false);
+        tallyDao.update(tTally);
+    }
 }

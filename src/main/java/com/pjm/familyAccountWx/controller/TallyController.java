@@ -82,6 +82,23 @@ public class TallyController extends BaseController {
         return json;
     }
 
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Json delete(Long id) throws Exception {
+        Json json = new Json();
+        try {
+            tallyService.delete(id);
+            json.setSuccess(true);
+            json.setMsg("删除成功");
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            json.setMsg(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
     @RequestMapping(value = "viewPage")
     public String viewPage(Long id, Model model) throws Exception {
         TallyVo tallyVo = tallyService.getTally(id);

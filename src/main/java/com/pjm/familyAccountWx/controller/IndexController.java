@@ -31,7 +31,18 @@ public class IndexController {
      * @throws Exception
      */
     @RequestMapping("/list")
-    public String list() {
+    public String list(Model model, HttpServletRequest request) {
+        LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute("loginUserInfo");
+        Long id = loginUserInfo.getId();
+        try {
+            String accountList = accountservice.queryAccountListByUserId(id);
+            model.addAttribute("accountList", accountList);
+
+            String payUserList = payUserService.queryPayUserListByUserId(id);
+            model.addAttribute("payUserList", payUserList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "tally/list";
     }
 

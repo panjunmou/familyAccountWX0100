@@ -37,6 +37,8 @@ public class TTally extends IdEntity {
 
     private String remark;
 
+    private boolean visible = true;
+
     public BigDecimal getMoney() {
         return money;
     }
@@ -83,5 +85,13 @@ public class TTally extends IdEntity {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

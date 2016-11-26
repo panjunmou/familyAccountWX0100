@@ -21,6 +21,7 @@ public class TallyVo {
     private Long purposeId;
     private String purposeName;
 
+    private String payUserId;
     private String payUserIds;
     private String payUserNames;
 
@@ -122,5 +123,13 @@ public class TallyVo {
 
     public void setTabId(String tabId) {
         this.tabId = tabId;
+    }
+
+    public String getPayUserId() {
+        return payUserId;
+    }
+
+    public void setPayUserId(String payUserId) {
+        this.payUserId = payUserId;
     }
 }

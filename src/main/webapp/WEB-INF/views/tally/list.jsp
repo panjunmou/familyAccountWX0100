@@ -15,9 +15,28 @@
     <link href="${ ctx }/style/css/list.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         $(function () {
+
+            var accountList = $.parseJSON('${accountList}');
+
+            $.each(accountList, function (i, v) {
+                $("[type='account']").append(
+                        '<li> ' +
+                        '<a href="javascript:void(0);" onclick="searchList(\'account\', \'' + v.value + '\')">' + v.title + '</a> ' +
+                        '</li>')
+            });
+
+            var payUserList = $.parseJSON('${payUserList}');
+
+            $.each(payUserList, function (i, v) {
+                $("[type='payUser']").append(
+                        '<li> ' +
+                        '<a href="javascript:void(0);" onclick="searchList(\'payUser\', \'' + v.value + '\')">' + v.title + '</a> ' +
+                        '</li>')
+            });
+
             initSilde();
 
-            searchList('all','');
+            searchList('all', '');
 
             //下拉刷新
             $(document.body).pullToRefresh();
@@ -73,6 +92,23 @@
                         text: "删除",
                         className: 'color-danger',
                         onClick: function () {
+                            $.confirm({
+                                title: '提示',
+                                text: '确认删除选中的数据么?',
+                                onOK: function () {
+                                    //点击确认
+                                    ajaxJS("${ctx}/tally/delete", {id: id}, false, "post", function (result) {
+                                        if (result.success) {//成功
+                                            $.alert("提示", result.msg, function () {
+                                                //点击确认后的回调函数
+                                                window.location.href = "${ctx}/index/list?tabbar=0";
+                                            });
+                                        } else {
+                                            showError(result.msg)
+                                        }
+                                    });
+                                }
+                            });
                         }
                     }
                 ]
@@ -81,15 +117,17 @@
 
         function searchList(type, value) {
             if (type == "type") {
-                $("form [name='type']").val(value);
+                $("form [name='purposeType']").val(value);
             } else if (type == 'account') {
-                $("form [name='account']").val(value);
+                $("form [name='accountId']").val(value);
             } else if (type == 'payUser') {
-                $("form [name='payUser']").val(value);
+                $("form [name='payUserId']").val(value);
+            } else if (type == 'remark') {
+                $("form [name='remark']").val(value);
             } else if (type == 'all') {
-                $("form [name='type']").val('');
-                $("form [name='account']").val('');
-                $("form [name='payUser']").val('');
+                $("form [name='accountId']").val('');
+                $("form [name='payUserId']").val('');
+                $("form [name='purposeType']").val('');
             }
             var url = '${ctx}/tally/tallyList';
             ajaxJS(url, $("form").serialize(), false, "get", function (result) {
@@ -105,16 +143,27 @@
         function addTallyList(result) {
             var list = result.obj.rows;
             $.each(list, function (i, v) {
+                var purposeType = v.purposeType;
                 var obj =
-                        '<div class="order" onclick="showActions('+v.id+')"> ' +
+                        '<div class="order" onclick="showActions(' + v.id + ')"> ' +
                         '<div class="order-title"> ' +
-                        '<div class="pull-left order-title-id-unpaid">用途:'+v.purposeName+'</div> ' +
-                        '<div class="pull-right order-title-state-unpaid">'+v.payDate+'</div> ' +
+                        '<div class="pull-left order-title-id-unpaid">用途:';
+                if (purposeType == -1) {
+                    obj = obj + '<span style="color: green">';
+                } else {
+                    obj = obj + '<span style="color: orange">';
+                }
+                obj = obj + v.purposeName + '</span></div> ' +
+                        '<div class="pull-right order-title-state-unpaid">' + v.payDate + '</div> ' +
                         '<div class="clear"></div> </div> ' +
                         '<div class="order-content"> ' +
-                        '<div class="order-info">账户:'+v.accountName+'</div> ' +
-                        '<div class="order-info">消费者:'+v.payUserNames+'</div> ' +
-                        '<div class="order-info">金额:'+v.money+'</div> ' +
+                        '<div class="order-info">账户:' + v.accountName + '</div> ';
+                if (purposeType == -1) {
+                    obj = obj +
+                            '<div class="order-info">消费者:' + v.payUserNames + '</div> ';
+                }
+                obj = obj +
+                        '<div class="order-info">金额:' + v.money + '</div> ' +
                         '</div> ' +
                         '</div>';
                 $("#content").append(obj);
@@ -145,7 +194,7 @@
         <div class="weui_search_inner">
             <i class="weui_icon_search"></i>
             <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required
-                   onkeyup="searchList('wareSuitName', $(this).val())"/>
+                   onkeyup="searchList('remark', $(this).val())"/>
             <a href="javascript:void(0);" class="weui_icon_clear" id="search_clear"></a>
         </div>
         <label for="search_input" class="weui_search_text" id="search_text"> <i class="weui_icon_search"></i>
@@ -187,17 +236,19 @@
                 <a href="javascript:void(0);" onclick="searchList('type', '1')">收入</a>
             </li>
         </ul>
-        <ul>
+        <ul type="account">
 
         </ul>
-        <ul>
+        <ul type="payUser">
 
         </ul>
     </div>
 </div>
 <form>
-    <input type="hidden" name="account" value=""/>
-    <input type="hidden" name="payUser" value=""/>
+    <input type="hidden" name="accountId" value=""/>
+    <input type="hidden" name="payUserId" value=""/>
+    <input type="hidden" name="purposeType" value=""/>
+    <input type="hidden" name="remark" value=""/>
     <input type="hidden" name="page" value="1"/>
     <input type="hidden" name="pageSize" value="5"/>
 </form>
