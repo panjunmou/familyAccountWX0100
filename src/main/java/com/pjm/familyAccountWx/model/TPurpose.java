@@ -27,7 +27,11 @@ public class TPurpose extends IdEntity {
     @JoinColumn(name = "userId")
     private TUser tUser;
 
+    @Column(name = "visible")
     private boolean visible;
+
+    @Column(name = "purposeType",length = 2)
+    private Integer purposeType;
 
     public String getName() {
         return name;
@@ -67,5 +71,13 @@ public class TPurpose extends IdEntity {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public Integer getPurposeType() {
+        return purposeType;
+    }
+
+    public void setPurposeType(Integer purposeType) {
+        this.purposeType = purposeType;
     }
 }

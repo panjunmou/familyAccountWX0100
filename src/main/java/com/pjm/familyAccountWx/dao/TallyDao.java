@@ -13,10 +13,4 @@ import java.util.List;
 @Repository
 public class TallyDao extends BaseDao {
 
-    public List<TPurpose> queryPurpose(String userName) {
-        Query query = em.createQuery("select t from TPurpose t where t.tUser.userName =:userName");
-        query.setParameter("userName", userName);
-        List resultList = query.getResultList();
-        return resultList;
-    }
 }

@@ -46,4 +46,5 @@ public class PurposePicker {
     public void setType(String type) {
         this.type = type;
     }
+
 }

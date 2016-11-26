@@ -5,5 +5,4 @@ package com.pjm.familyAccountWx.service;
  */
 public interface TallyService {
 
-    String queryPurpose(String userName) throws Exception;
 }

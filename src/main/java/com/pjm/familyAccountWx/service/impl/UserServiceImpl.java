@@ -17,13 +17,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
-    public boolean login(String userName, String passWord) throws Exception {
+    public TUser login(String userName, String passWord) throws Exception {
         String md5Hex = DigestUtils.md5Hex(passWord);
-        TUser tUser = userDao.queryByNameAndPwd(userName,md5Hex);
-        if (tUser == null) {
-            return false;
-        } else {
-            return true;
-        }
+        TUser tUser = userDao.queryByNameAndPwd(userName, md5Hex);
+        return tUser;
     }
 }

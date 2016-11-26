@@ -1,11 +1,11 @@
 
 +function (e) {
-    e.rawCitiesData = cityData;
+    e.rawCitiesData = purposeInData;
 
 }($), +function (e) {
     "use strict";
     var a;
-    e.fn.cityPicker = function (n) {
+    e.fn.purposeIn = function (n) {
         return n = e.extend({}, a, n), this.each(function () {
             var a = function (e) {
                 for (var a = [], n = 0; n < e.length; n++) {
@@ -45,5 +45,5 @@
                 f && (v.value = f.split(" "), v.value[0] && (r = v.value[0], v.cols[1].values = s(v.value[0])), v.value[1] ? (l = v.value[1], n.showDistrict && (v.cols[2].values = u(v.value[0], v.value[1]))) : (c = v.value[2], n.showDistrict && (v.cols[2].values = u(v.value[0], v.cols[1].values[0])))), e(this).picker(v)
             }
         })
-    }, a = e.fn.cityPicker.prototype.defaults = {showDistrict: !0}
+    }, a = e.fn.purposeIn.prototype.defaults = {showDistrict: !0}
 }($);

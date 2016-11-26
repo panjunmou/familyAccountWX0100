@@ -1,7 +1,9 @@
 package com.pjm.familyAccountWx.controller;
 
 import com.pjm.familyAccountWx.common.Json;
+import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.UserService;
+import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,9 +50,12 @@ public class LoginCountroller {
     @ResponseBody
     public Json login(HttpServletRequest request, String userName, String passWord) throws Exception {
         Json json = new Json();
-        boolean flag = userService.login(userName, passWord);
-        if (flag) {
-            request.getSession().setAttribute("userName", userName);
+        TUser tUser = userService.login(userName, passWord);
+        if (tUser != null) {
+            LoginUserInfo loginUserInfo = new LoginUserInfo();
+            loginUserInfo.setId(tUser.getId());
+            loginUserInfo.setName(tUser.getUserName());
+            request.getSession().setAttribute("loginUserInfo", loginUserInfo);
             json.setSuccess(true);
             json.setMsg("登录成功");
         } else {
