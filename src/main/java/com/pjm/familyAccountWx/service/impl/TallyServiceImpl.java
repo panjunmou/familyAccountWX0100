@@ -1,5 +1,7 @@
 package com.pjm.familyAccountWx.service.impl;
 
+import com.pjm.familyAccountWx.common.PageModel;
+import com.pjm.familyAccountWx.common.QueryResult;
 import com.pjm.familyAccountWx.dao.AccountDao;
 import com.pjm.familyAccountWx.dao.PayUserDao;
 import com.pjm.familyAccountWx.dao.PurposeDao;
@@ -10,15 +12,14 @@ import com.pjm.familyAccountWx.model.TPurpose;
 import com.pjm.familyAccountWx.model.TTally;
 import com.pjm.familyAccountWx.service.TallyService;
 import com.pjm.familyAccountWx.vo.TallyParam;
+import com.pjm.familyAccountWx.vo.TallyVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by PanJM on 2016/11/22.
@@ -40,11 +41,57 @@ public class TallyServiceImpl implements TallyService {
         TTally tTally = new TTally();
         tTally.setCreateUser(name);
         tTally.setCreateDate(new Date());
-        this.copyVoToEntity(tallyParam, tTally);
+        this.copyParamToEntity(tallyParam, tTally);
         tallyDao.save(tTally);
     }
 
-    private void copyVoToEntity(TallyParam tallyParam, TTally tTally) throws Exception {
+    @Override
+    public PageModel getTallyList(TallyParam tallyParam, PageModel ph) throws Exception {
+        List<TallyVo> list = new ArrayList<TallyVo>();
+
+        QueryResult<TTally> pageResult = tallyDao.getTallyList(tallyParam, ph);
+        for (TTally tally : pageResult.getReultList()) {
+            TallyVo tallyVo = new TallyVo();
+            this.copyEntityToVo(tally, tallyVo);
+            list.add(tallyVo);
+        }
+        if (ph == null) {
+            ph = new PageModel();
+        }
+        ph.setTotal(pageResult.getTotalCount());
+        ph.setRows(list);
+        return ph;
+    }
+
+    private void copyEntityToVo(TTally tally, TallyVo tallyVo) {
+        BigDecimal money = tally.getMoney();
+        TAccount tAccount = tally.gettAccount();
+        Date payDate = tally.getPayDate();
+        TPurpose tPurpose = tally.gettPurpose();
+        Set<TPayUser> tPayUsers = tally.gettPayUserSet();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = simpleDateFormat.format(payDate);
+        tallyVo.setMoney(money);
+        tallyVo.setAccountId(tAccount.getId());
+        tallyVo.setAccountName(tAccount.getName());
+        tallyVo.setPurposeId(tPurpose.getId());
+        tallyVo.setPurposeName(tPurpose.getName());
+        tallyVo.setPayDate(date);
+        if (tPayUsers != null && tPayUsers.size() > 0) {
+            StringBuffer payUserIds = new StringBuffer("");
+            StringBuffer payUserNames = new StringBuffer("");
+            for (TPayUser tPayUser : tPayUsers) {
+                Long id = tPayUser.getId();
+                String name = tPayUser.getName();
+                payUserIds.append(id).append(",");
+                payUserNames.append(name).append(",");
+            }
+            tallyVo.setPayUserIds(payUserIds.deleteCharAt(payUserIds.length()-1).toString());
+            tallyVo.setPayUserNames(payUserNames.deleteCharAt(payUserNames.length()-1).toString());
+        }
+    }
+
+    private void copyParamToEntity(TallyParam tallyParam, TTally tTally) throws Exception {
         String tabId = tallyParam.getTabId();
         BigDecimal money = tallyParam.getMoney();
         String payDate = tallyParam.getPayDate();

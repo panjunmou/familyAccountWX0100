@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.service;
 
+import com.pjm.familyAccountWx.common.PageModel;
 import com.pjm.familyAccountWx.vo.TallyParam;
 
 /**
@@ -8,4 +9,6 @@ import com.pjm.familyAccountWx.vo.TallyParam;
 public interface TallyService {
 
     void addTally(TallyParam tallyParam, String name) throws Exception;
+
+    PageModel getTallyList(TallyParam tallyParam, PageModel ph) throws Exception;
 }

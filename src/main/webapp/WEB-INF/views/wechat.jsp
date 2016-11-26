@@ -18,6 +18,8 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/style/css/weui.min.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/style/css/jquery-weui.min.css">
 
+<link rel="stylesheet" type="text/css" href="${ctx}/style/css/jquery.silde.css">
+
 <script type="text/javascript">
 	function backBtnListener(method) {
 		pushHistory();

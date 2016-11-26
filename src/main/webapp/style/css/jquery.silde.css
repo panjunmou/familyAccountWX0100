@@ -1,0 +1,176 @@
+@charset "utf-8";
+/**
+ * 参考自：http://www.tezisuo.com/wap/disanfang.html
+ * 2016-09-24
+ * pzw
+ **/
+.outer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-direction: column;
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+}
+
+.transparentmask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 100;
+	display: none;
+}
+
+.assets .typebox {
+	position: fixed;
+	top: 44px;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	font-size: 13px;
+	color: #666;
+	-webkit-box-sizing: border-box;
+	border-bottom: 1px solid #ddd;
+	z-index: 999;
+}
+
+.assets .typebox.active {
+	top: 0;
+}
+
+.assets .typebox li {
+	float: left;
+	/* 	width: 25%; */
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	position: relative;
+	background: #FFF;
+	overflow: hidden;
+}
+
+.assets .typebox li:after {
+	content: "";
+	width: 1px;
+	height: 20px;
+	/*border-right: 1px dashed #dddddd;*/
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+
+.assets .typebox li:last-child:after {
+	border-right: none;
+}
+
+.assets .typebox li:last-child {
+	border-right: none;
+}
+
+.assets .typebox li b, .assets .typebox li a {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+@media all and (max-width:320px) {
+	.assets .typebox li b, .assets .typebox li a {
+		font-size: 13px;
+		font-weight: normal;
+	}
+}
+
+.assets .typebox .active {
+	color: #f66e63;
+}
+
+.assets .typebox li span {
+	float: right;
+	margin-top: 15px;
+	margin-left: 5px;
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	-webkit-transform: rotate(45deg);
+	-webkit-transition: -webkit-transform .3s;
+	transition: transform .3s;
+}
+
+.assets .typebox .active span {
+	margin-top: 18px;
+	margin-left: 6px;
+	border-right: 1px solid #f66e63;
+	border-bottom: 1px solid #f66e63;
+	-webkit-transform: rotate(225deg);
+}
+
+.assets .conditions {
+	position: fixed;
+	left: 0;
+	top: 41px;
+	width: 100%;
+	z-index: 999;
+}
+
+.assets .conditions ul {
+	display: none;
+	position: absolute;
+	width: 100%;
+	z-index: 999;
+	height: 300px;
+	overflow: auto;
+}
+
+.assets .conditions ul a {
+	color: gray;
+}
+
+.assets .conditions li {
+	-webkit-box-sizing: border-box;
+	height: 45px;
+	line-height: 45px;
+	font-size: 13px;
+	color: #666;
+	text-indent: 3.5%;
+	border-bottom: 1px solid #ddd;
+	background: #FFF;
+}
+
+.assets .conditions li a {
+	display: block;
+	text-indent: 3.5%;
+}
+
+.assets .conditions .activecolor a {
+	position: relative;
+	color: #f66e63;
+	font-weight: bold;
+}
+
+.assets .conditions .activecolor a:after {
+	content: "√";
+	font-size: 13px;
+	position: absolute;
+	top: 0;
+	right: 10%;
+	font-weight: bold;
+}
+
+.assets .inner {
+	padding-bottom: 51px;
+}

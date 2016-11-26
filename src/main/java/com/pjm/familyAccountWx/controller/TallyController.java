@@ -2,6 +2,7 @@ package com.pjm.familyAccountWx.controller;
 
 import com.pjm.familyAccountWx.common.BaseController;
 import com.pjm.familyAccountWx.common.Json;
+import com.pjm.familyAccountWx.common.PageModel;
 import com.pjm.familyAccountWx.service.TallyService;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import com.pjm.familyAccountWx.vo.TallyParam;
@@ -39,6 +40,17 @@ public class TallyController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return json;
+    }
+
+    @RequestMapping(value = "hardWareSuitList", method = RequestMethod.GET)
+    @ResponseBody
+    public Json hardWareSuitList(TallyParam tallyParam,PageModel ph) throws Exception {
+        Json json = new Json();
+        json.setSuccess(true);
+        json.setMsg(null);
+        PageModel pageModel = tallyService.getTallyList(tallyParam,ph);
+        json.setObj(pageModel);
         return json;
     }
 }
