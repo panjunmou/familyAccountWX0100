@@ -11,7 +11,7 @@
 <html>
 <head>
     <jsp:include page="../wechat.jsp"></jsp:include>
-    <title>首页</title>
+    <title>新增账目</title>
     <script type="text/javascript">
         var purposeInData = $.parseJSON('${purposeInList}');
 

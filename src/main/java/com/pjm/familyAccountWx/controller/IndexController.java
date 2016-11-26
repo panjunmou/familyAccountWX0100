@@ -64,7 +64,7 @@ public class IndexController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "tally/tally";
+        return "tally/tallyAdd";
     }
 
     /**

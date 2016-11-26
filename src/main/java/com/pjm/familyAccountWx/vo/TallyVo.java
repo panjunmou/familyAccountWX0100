@@ -7,6 +7,8 @@ import java.math.BigDecimal;
  */
 public class TallyVo {
 
+    private Long id;
+
     private BigDecimal money;
 
     private String payDate;
@@ -21,6 +23,16 @@ public class TallyVo {
     private String payUserNames;
 
     private String remark;
+
+    private Integer purposeType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public BigDecimal getMoney() {
         return money;
@@ -92,5 +104,13 @@ public class TallyVo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getPurposeType() {
+        return purposeType;
+    }
+
+    public void setPurposeType(Integer purposeType) {
+        this.purposeType = purposeType;
     }
 }

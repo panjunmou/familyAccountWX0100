@@ -63,11 +63,21 @@ public class TallyServiceImpl implements TallyService {
         return ph;
     }
 
+    @Override
+    public TallyVo getTally(Long id) throws Exception {
+        TTally tTally = tallyDao.find(id, TTally.class);
+        TallyVo tallyVo = new TallyVo();
+        this.copyEntityToVo(tTally, tallyVo);
+        return tallyVo;
+    }
+
     private void copyEntityToVo(TTally tally, TallyVo tallyVo) {
+        Long id = tally.getId();
         BigDecimal money = tally.getMoney();
         TAccount tAccount = tally.gettAccount();
         Date payDate = tally.getPayDate();
         TPurpose tPurpose = tally.gettPurpose();
+        Integer purposeType = tPurpose.getPurposeType();
         Set<TPayUser> tPayUsers = tally.gettPayUserSet();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = simpleDateFormat.format(payDate);
@@ -75,15 +85,24 @@ public class TallyServiceImpl implements TallyService {
         tallyVo.setAccountId(tAccount.getId());
         tallyVo.setAccountName(tAccount.getName());
         tallyVo.setPurposeId(tPurpose.getId());
-        tallyVo.setPurposeName(tPurpose.getName());
+        TPurpose parent = tPurpose.getParent();
+        String purposeName = "";
+        if (parent != null) {
+            String name = parent.getName();
+            purposeName += name + " ";
+        }
+        purposeName += tPurpose.getName();
+        tallyVo.setPurposeName(purposeName);
         tallyVo.setPayDate(date);
+        tallyVo.setId(id);
+        tallyVo.setPurposeType(purposeType);
         if (tPayUsers != null && tPayUsers.size() > 0) {
             StringBuffer payUserIds = new StringBuffer("");
             StringBuffer payUserNames = new StringBuffer("");
             for (TPayUser tPayUser : tPayUsers) {
-                Long id = tPayUser.getId();
+                Long tPayUserId = tPayUser.getId();
                 String name = tPayUser.getName();
-                payUserIds.append(id).append(",");
+                payUserIds.append(tPayUserId).append(",");
                 payUserNames.append(name).append(",");
             }
             tallyVo.setPayUserIds(payUserIds.deleteCharAt(payUserIds.length()-1).toString());

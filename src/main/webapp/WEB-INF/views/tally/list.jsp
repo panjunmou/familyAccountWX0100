@@ -11,7 +11,7 @@
 <html>
 <head>
     <jsp:include page="../wechat.jsp"></jsp:include>
-    <title>首页</title>
+    <title>账目明细</title>
     <link href="${ ctx }/style/css/list.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         $(function () {
@@ -59,13 +59,14 @@
                         text: "查看",
                         className: "color-primary",
                         onClick: function () {
-
+                            window.location.href = "${ctx}/tally/viewPage?id=" + id;
                         }
                     },
                     {
                         text: "编辑",
                         className: "color-warning",
                         onClick: function () {
+                            window.location.href = "${ctx}/tally/editPage?id=" + id;
                         }
                     },
                     {
@@ -105,7 +106,7 @@
             var list = result.obj.rows;
             $.each(list, function (i, v) {
                 var obj =
-                        '<div class="order" onclick="showActions()"> ' +
+                        '<div class="order" onclick="showActions('+v.id+')"> ' +
                         '<div class="order-title"> ' +
                         '<div class="pull-left order-title-id-unpaid">用途:'+v.purposeName+'</div> ' +
                         '<div class="pull-right order-title-state-unpaid">'+v.payDate+'</div> ' +
