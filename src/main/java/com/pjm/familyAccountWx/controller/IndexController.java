@@ -86,7 +86,7 @@ public class IndexController {
      */
     @RequestMapping("/baobiao")
     public String baobiao() {
-        return "tally/baobiao";
+        return "baobiao/baobiaolist";
     }
 
     /**
@@ -97,6 +97,6 @@ public class IndexController {
      */
     @RequestMapping("/baoxian")
     public String baoxian() {
-        return "tally/baoxian";
+        return "baoxian/baoxianlist";
     }
 }

@@ -8,12 +8,12 @@
 </head>
 <body class="bodyBg">
 	<div class="weui_msg">
-		<div class="weui_icon_area">
-			<img style="width: 50%" src="${ctx}/style/images/icon/logo.png" />
+		<div class="weui_icon_area" style="height: 63px;">
+			<%--<img style="width: 50%" src="${ctx}/s	tyle/images/icon/logo.png" />--%>
 		</div>
 		<div class="weui_text_area">
 			<h2 class="weui_msg_title">
-				<font color="#BBBAB9" size="3sp">登录</font>
+				<font color="black" size="3sp">登  录</font>
 			</h2>
 		</div>
 		<div class="weui_opr_area">

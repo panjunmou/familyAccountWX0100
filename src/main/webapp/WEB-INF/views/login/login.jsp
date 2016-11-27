@@ -39,8 +39,8 @@
 </head>
 <body class="bodyBg">
 <div class="weui_msg">
-    <div class="weui_icon_area">
-        <img style="width: 50%" src="${ctx}/style/images/icon/logo.png"/>
+    <div class="weui_icon_area" style="height: 63px;">
+        <%--<img style="width: 50%" src="${ctx}/style/images/icon/logo.png"/>--%>
     </div>
     <div class="weui_text_area">
         <h2 class="weui_msg_title">

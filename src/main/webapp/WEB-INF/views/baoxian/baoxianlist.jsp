@@ -1,16 +1,24 @@
 <%--
   Created by IntelliJ IDEA.
   User: PanJM
-  Date: 2016/11/26
-  Time: 17:26
+  Date: 2016/11/19
+  Time: 20:23
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="../common/config.jsp" %>
+<!DOCTYPE HTML>
 <html>
 <head>
+    <jsp:include page="../wechat.jsp"></jsp:include>
     <title>保险</title>
 </head>
 <body>
-敬请期待
+<div id="content">
+    敬请期待
+</div>
+<!-- 底部导航 -->
+<jsp:include page="../common/footer.jsp"></jsp:include>
+<!-- 底部导航 -->
 </body>
 </html>

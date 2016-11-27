@@ -164,6 +164,7 @@
                 }
                 obj = obj +
                         '<div class="order-info">金额:' + v.money + '</div> ' +
+                        '<div class="order-info">备注:' + v.remark + '</div> ' +
                         '</div> ' +
                         '</div>';
                 $("#content").append(obj);
