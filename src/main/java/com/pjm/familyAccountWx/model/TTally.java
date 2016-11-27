@@ -39,6 +39,10 @@ public class TTally extends IdEntity {
 
     private boolean visible = true;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private TUser tUser;
+
     public BigDecimal getMoney() {
         return money;
     }
@@ -93,5 +97,13 @@ public class TTally extends IdEntity {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public TUser gettUser() {
+        return tUser;
+    }
+
+    public void settUser(TUser tUser) {
+        this.tUser = tUser;
     }
 }

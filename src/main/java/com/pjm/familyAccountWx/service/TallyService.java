@@ -8,9 +8,9 @@ import com.pjm.familyAccountWx.vo.TallyVo;
  */
 public interface TallyService {
 
-    void addTally(TallyVo TallyVo, String name) throws Exception;
+    void addTally(TallyVo TallyVo, String name, Long userId) throws Exception;
 
-    PageModel getTallyList(TallyVo TallyVo, PageModel ph) throws Exception;
+    PageModel getTallyList(TallyVo TallyVo, PageModel ph, Long userId) throws Exception;
 
     TallyVo getTally(Long id) throws Exception;
 

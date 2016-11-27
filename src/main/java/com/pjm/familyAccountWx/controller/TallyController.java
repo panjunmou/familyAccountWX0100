@@ -41,7 +41,7 @@ public class TallyController extends BaseController {
         Json json = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            tallyService.addTally(tallyParam, loginUserInfo.getName());
+            tallyService.addTally(tallyParam, loginUserInfo.getName(),loginUserInfo.getId());
             json.setSuccess(true);
             json.setMsg("保存成功");
         } catch (ServiceException e) {
@@ -73,11 +73,13 @@ public class TallyController extends BaseController {
 
     @RequestMapping(value = "tallyList", method = RequestMethod.GET)
     @ResponseBody
-    public Json tallyList(TallyVo tallyParam, PageModel ph) throws Exception {
+    public Json tallyList(TallyVo tallyParam, PageModel ph,HttpServletRequest request) throws Exception {
         Json json = new Json();
         json.setSuccess(true);
         json.setMsg(null);
-        PageModel pageModel = tallyService.getTallyList(tallyParam, ph);
+        LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+        Long userId = loginUserInfo.getId();
+        PageModel pageModel = tallyService.getTallyList(tallyParam, ph,userId);
         json.setObj(pageModel);
         return json;
     }

@@ -6,10 +6,7 @@ import com.pjm.familyAccountWx.dao.AccountDao;
 import com.pjm.familyAccountWx.dao.PayUserDao;
 import com.pjm.familyAccountWx.dao.PurposeDao;
 import com.pjm.familyAccountWx.dao.TallyDao;
-import com.pjm.familyAccountWx.model.TAccount;
-import com.pjm.familyAccountWx.model.TPayUser;
-import com.pjm.familyAccountWx.model.TPurpose;
-import com.pjm.familyAccountWx.model.TTally;
+import com.pjm.familyAccountWx.model.*;
 import com.pjm.familyAccountWx.service.TallyService;
 import com.pjm.familyAccountWx.vo.TallyVo;
 import org.springframework.beans.BeanUtils;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -38,19 +33,21 @@ public class TallyServiceImpl implements TallyService {
     private PayUserDao payUserDao;
 
     @Override
-    public void addTally(TallyVo TallyVo, String name) throws Exception {
+    public void addTally(TallyVo TallyVo, String name, Long userId) throws Exception {
         TTally tTally = new TTally();
+        this.copyVoToEntity(TallyVo, tTally);
         tTally.setCreateUser(name);
         tTally.setCreateDate(new Date());
-        this.copyVoToEntity(TallyVo, tTally);
+        TUser tUser = tallyDao.find(userId, TUser.class);
+        tTally.settUser(tUser);
         tallyDao.save(tTally);
     }
 
     @Override
-    public PageModel getTallyList(TallyVo vo, PageModel ph) throws Exception {
+    public PageModel getTallyList(TallyVo vo, PageModel ph, Long userId) throws Exception {
         List<TallyVo> list = new ArrayList<TallyVo>();
 
-        QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph);
+        QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph,userId);
         for (TTally tally : pageResult.getReultList()) {
             TallyVo tallyVo = new TallyVo();
             this.copyEntityToVo(tally, tallyVo);

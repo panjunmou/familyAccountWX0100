@@ -18,7 +18,7 @@ import java.util.Set;
 @Repository
 public class TallyDao extends BaseDao {
 
-    public QueryResult<TTally> getTallyList(TallyVo tallyParam, PageModel ph) throws Exception {
+    public QueryResult<TTally> getTallyList(TallyVo tallyParam, PageModel ph, Long userId) throws Exception {
 
         List<Condition> conditions = CollectionsUtil.newArrayList();
 
@@ -52,6 +52,7 @@ public class TallyDao extends BaseDao {
         }
 
         conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
+        conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
 
         ph.setSort("payDate");
         ph.setOrder(PageModel.desc);
