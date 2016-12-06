@@ -15,6 +15,9 @@ import java.util.Set;
 @Table(name = "biz_tally")
 public class TTally extends IdEntity {
 
+    @Column(name = "TALLY_NO", length = 20,nullable = false)
+    private String tallyNo;
+
     @Column(name = "MONEY", length = 10, scale = 2)
     private BigDecimal money;
 
@@ -22,17 +25,17 @@ public class TTally extends IdEntity {
     private Date payDate;
 
     @ManyToOne
-    @JoinColumn(name = "ACCOUNT_ID")
+    @JoinColumn(name = "ACCOUNT_NO",referencedColumnName = "ACCOUNT_NO")
     private TAccount tAccount;
 
     @ManyToOne
-    @JoinColumn(name = "PURPOSE_ID")
+    @JoinColumn(name = "PURPOSE_NO",referencedColumnName = "PURPOSE_NO")
     private TPurpose tPurpose;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "biz_tally_payUser", joinColumns = {
-            @JoinColumn(name = "TALLY_ID")}, inverseJoinColumns = {
-            @JoinColumn(name = "PAYUSER_ID")})
+            @JoinColumn(name = "TALLY_NO",referencedColumnName = "TALLY_NO")}, inverseJoinColumns = {
+            @JoinColumn(name = "PAYUSER_NO",referencedColumnName = "PAYUSER_NO")})
     private Set<TPayUser> tPayUserSet = new HashSet<TPayUser>(0);
 
     private String remark;
@@ -40,7 +43,7 @@ public class TTally extends IdEntity {
     private boolean visible = true;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_NO",referencedColumnName = "USER_NO")
     private TUser tUser;
 
     public BigDecimal getMoney() {
@@ -105,5 +108,13 @@ public class TTally extends IdEntity {
 
     public void settUser(TUser tUser) {
         this.tUser = tUser;
+    }
+
+    public String getTallyNo() {
+        return tallyNo;
+    }
+
+    public void setTallyNo(String tallyNo) {
+        this.tallyNo = tallyNo;
     }
 }

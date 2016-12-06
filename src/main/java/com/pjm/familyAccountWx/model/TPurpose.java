@@ -13,24 +13,27 @@ import java.util.Set;
 @Table(name = "biz_purpose")
 public class TPurpose extends IdEntity {
 
+    @Column(name = "PURPOSE_NO", length = 20, nullable = false)
+    private String purposeNo;
+
     @Column(name = "NAME", length = 20)
     private String name;
 
-    @OneToMany(mappedBy = "parent",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private Set<TPurpose> children = new HashSet<TPurpose>(0);
 
     @ManyToOne
-    @JoinColumn(name = "parentId")
+    @JoinColumn(name = "PARENT_NO", referencedColumnName = "PURPOSE_NO")
     private TPurpose parent;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "USER_NO", referencedColumnName = "USER_NO")
     private TUser tUser;
 
-    @Column(name = "visible")
+    @Column(name = "VISIBLE")
     private boolean visible;
 
-    @Column(name = "purposeType",length = 2)
+    @Column(name = "PURPOSE_TYPE", length = 2)
     private Integer purposeType;
 
     public String getName() {
@@ -79,5 +82,13 @@ public class TPurpose extends IdEntity {
 
     public void setPurposeType(Integer purposeType) {
         this.purposeType = purposeType;
+    }
+
+    public String getPurposeNo() {
+        return purposeNo;
+    }
+
+    public void setPurposeNo(String purposeNo) {
+        this.purposeNo = purposeNo;
     }
 }

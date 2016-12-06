@@ -13,10 +13,13 @@ import javax.persistence.Table;
 @Table(name = "biz_user")
 public class TUser extends IdEntity {
 
-    @Column(name = "USERNAME",length = 32)
+    @Column(name = "USER_NO", length = 20,nullable = false)
+    private String userNo;
+
+    @Column(name = "USERNAME", length = 32)
     private String userName;
 
-    @Column(name = "PASSWORD",length = 64)
+    @Column(name = "PASSWORD", length = 64)
     private String passWord;
 
     public String getUserName() {
@@ -33,5 +36,13 @@ public class TUser extends IdEntity {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
     }
 }

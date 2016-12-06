@@ -11,11 +11,14 @@ import javax.persistence.*;
 @Table(name = "biz_account")
 public class TAccount extends IdEntity {
 
+    @Column(name = "ACCOUNT_NO",length = 20,nullable = false)
+    private String accountNo;
+
     @Column(name = "NAME", length = 20)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_NO",referencedColumnName = "USER_NO")
     private TUser tUser;
 
     @Column(name = "SEQ", length = 2)
@@ -43,5 +46,13 @@ public class TAccount extends IdEntity {
 
     public void setSeq(Integer seq) {
         this.seq = seq;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 }
