@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "biz_user")
 public class TUser extends IdEntity {
 
-    @Column(name = "USER_NO", length = 20,nullable = false)
+    @Column(name = "USER_NO", length = 32,nullable = false)
     private String userNo;
 
     @Column(name = "USERNAME", length = 32)

@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "biz_tally")
 public class TTally extends IdEntity {
 
-    @Column(name = "TALLY_NO", length = 20,nullable = false)
+    @Column(name = "TALLY_NO", length = 32,nullable = false)
     private String tallyNo;
 
     @Column(name = "MONEY", length = 10, scale = 2)

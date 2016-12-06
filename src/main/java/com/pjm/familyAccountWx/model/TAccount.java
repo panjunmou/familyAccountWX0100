@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "biz_account")
 public class TAccount extends IdEntity {
 
-    @Column(name = "ACCOUNT_NO",length = 20,nullable = false)
+    @Column(name = "ACCOUNT_NO",length = 32,nullable = false)
     private String accountNo;
 
     @Column(name = "NAME", length = 20)

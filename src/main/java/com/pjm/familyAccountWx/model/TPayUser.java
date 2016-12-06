@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "biz_payUser")
 public class TPayUser extends IdEntity {
 
-    @Column(name = "PAYUSER_NO", length = 20,nullable = false)
+    @Column(name = "PAYUSER_NO", length = 32,nullable = false)
     private String payUserNo;
 
     @Column(name = "NAME", length = 20)
