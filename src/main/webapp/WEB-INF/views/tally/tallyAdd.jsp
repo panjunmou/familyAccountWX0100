@@ -17,6 +17,10 @@
 
         var purposeOutData = $.parseJSON('${purposeOutList}');
 
+        var accountData = $.parseJSON('${accountList}');
+
+        var payUserData = $.parseJSON('${payUserList}');
+
         $(function () {
 
             $("#datetabIn").calendar();
@@ -24,7 +28,7 @@
 
             $("#accounttabIn").select({
                 title: "选择账户",
-                items: $.parseJSON('${accountList}'),
+                items: accountData,
                 onOpen: function () {
                     $("#footerBar").hide();
                 },
@@ -35,7 +39,7 @@
 
             $("#accounttabOut").select({
                 title: "选择账户",
-                items: $.parseJSON('${accountList}'),
+                items: accountData,
                 onOpen: function () {
                     $("#footerBar").hide();
                 },
@@ -47,7 +51,7 @@
             $("#usePersontabIn").select({
                 title: "选择消费者",
                 multi: true,
-                items: $.parseJSON('${payUserList}'),
+                items: payUserData,
                 onOpen: function () {
                     $("#footerBar").hide();
                 },
@@ -151,6 +155,30 @@
                     }
                 });
             });
+
+            //初始化支出
+            //账户
+            $("#accounttabIn").attr("data-values", accountData[0].value);
+            $("#accounttabIn").attr("value", accountData[0].title);
+
+            //消费者
+            $("#usePersontabIn").attr("data-values", payUserData[0].value);
+            $("#usePersontabIn").attr("value", payUserData[0].title);
+
+            //用途
+            $("#usefulltabIn").val(purposeInData[0].name + " " + purposeInData[0].sub[0].name);
+            $("#purposeTypetabIn").val(purposeInData[0].sub[0].id);
+            //初始化支出
+
+            //初始化收入
+            //账户
+            $("#accounttabOut").attr("data-values", accountData[0].value);
+            $("#accounttabOut").attr("value", accountData[0].title);
+
+            //用途
+            $("#usefulltabOut").val(purposeOutData[0].name + " " + purposeOutData[0].sub[0].name);
+            $("#purposeTypetabOut").val(purposeOutData[0].sub[0].id);
+            //初始化收入
         });
     </script>
     <script type="text/javascript" src="${ctx}/js/jquery/purposeIn.js"></script>
@@ -178,7 +206,7 @@
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="datetabIn" type="text" data-toggle='date'/>
+                        <input class="weui_input" id="datetabIn" type="text" data-toggle='date' value="${today}"/>
                     </div>
                 </div>
                 <div class="weui_cell">
@@ -212,7 +240,7 @@
                 <div class="weui_cell">
                     <div class="weui_cell_hd"><label class="weui_label">日期</label></div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" id="datetabOut" type="text" data-toggle='date'/>
+                        <input class="weui_input" id="datetabOut" type="text" data-toggle='date' value="${today}"/>
                     </div>
                 </div>
                 <div class="weui_cell">

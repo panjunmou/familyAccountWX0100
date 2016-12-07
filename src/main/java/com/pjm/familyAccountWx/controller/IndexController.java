@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by PanJM on 2016/11/26.
@@ -72,6 +74,10 @@ public class IndexController {
             String payUserList = payUserService.queryPayUserListByUserId(id);
             model.addAttribute("payUserList", payUserList);
 
+            Date todayDate = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String today = simpleDateFormat.format(todayDate);
+            model.addAttribute("today", today);
         } catch (Exception e) {
             e.printStackTrace();
         }
