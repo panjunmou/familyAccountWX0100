@@ -1,8 +1,8 @@
 package com.pjm.familyAccountWx.controller;
 
-import com.pjm.familyAccountWx.common.BaseController;
-import com.pjm.familyAccountWx.common.Json;
-import com.pjm.familyAccountWx.common.PageModel;
+import com.pjm.familyAccountWx.common.controller.BaseController;
+import com.pjm.familyAccountWx.common.vo.Json;
+import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.service.Accountservice;
 import com.pjm.familyAccountWx.service.PayUserService;
 import com.pjm.familyAccountWx.service.PurposeService;

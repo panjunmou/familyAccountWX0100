@@ -1,4 +1,4 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.controller;
 
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
 

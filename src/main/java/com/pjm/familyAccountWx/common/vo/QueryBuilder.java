@@ -1,5 +1,7 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.vo;
 
+import com.pjm.familyAccountWx.common.constants.DBConstants;
+import com.pjm.familyAccountWx.common.util.CollectionsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

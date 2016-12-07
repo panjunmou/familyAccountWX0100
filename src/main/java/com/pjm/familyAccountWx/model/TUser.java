@@ -1,6 +1,6 @@
 package com.pjm.familyAccountWx.model;
 
-import com.pjm.familyAccountWx.common.IdEntity;
+import com.pjm.familyAccountWx.common.vo.IdEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

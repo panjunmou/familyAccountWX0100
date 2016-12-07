@@ -1,7 +1,9 @@
 package com.pjm.familyAccountWx.service.impl;
 
-import com.pjm.familyAccountWx.common.PageModel;
-import com.pjm.familyAccountWx.common.QueryResult;
+import com.pjm.familyAccountWx.common.enu.BizSeqType;
+import com.pjm.familyAccountWx.common.util.CalendarUtil;
+import com.pjm.familyAccountWx.common.vo.PageModel;
+import com.pjm.familyAccountWx.common.vo.QueryResult;
 import com.pjm.familyAccountWx.dao.AccountDao;
 import com.pjm.familyAccountWx.dao.PayUserDao;
 import com.pjm.familyAccountWx.dao.PurposeDao;
@@ -40,6 +42,7 @@ public class TallyServiceImpl implements TallyService {
         tTally.setCreateDate(new Date());
         TUser tUser = tallyDao.find(userId, TUser.class);
         tTally.settUser(tUser);
+        tTally.setTallyNo(tallyDao.callBizSeqCode(BizSeqType.TALLY.getSeqType()));
         tallyDao.save(tTally);
     }
 

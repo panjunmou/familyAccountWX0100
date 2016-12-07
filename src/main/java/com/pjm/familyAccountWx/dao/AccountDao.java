@@ -1,8 +1,7 @@
 package com.pjm.familyAccountWx.dao;
 
-import com.pjm.familyAccountWx.common.BaseDao;
+import com.pjm.familyAccountWx.common.dao.BaseDao;
 import com.pjm.familyAccountWx.model.TAccount;
-import com.pjm.familyAccountWx.model.TPurpose;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;

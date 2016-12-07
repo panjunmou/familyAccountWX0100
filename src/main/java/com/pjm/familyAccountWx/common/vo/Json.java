@@ -1,4 +1,4 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.vo;
 
 /**
  * 返回Json对象

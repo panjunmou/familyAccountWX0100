@@ -1,12 +1,8 @@
-package com.pjm.familyAccountWx.enu;
+package com.pjm.familyAccountWx.common.enu;
 
 public enum BizSeqType {
 
-    ACCOUNT("ACCOUNT", "账户"),
-    PAYUSER("PAYUSER", "使用者"),
-    PURPOSE("PURPOSE", "用途"),
-    TALLY("TALLY", "开支"),
-    USER("USER", "用户");
+    TALLY("tally", "账目明细");
 
     private String seqType;
     private String description;

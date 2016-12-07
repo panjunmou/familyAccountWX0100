@@ -1,13 +1,16 @@
 package com.pjm.familyAccountWx.dao;
 
-import com.pjm.familyAccountWx.common.*;
+import com.pjm.familyAccountWx.common.dao.BaseDao;
+import com.pjm.familyAccountWx.common.util.CollectionsUtil;
+import com.pjm.familyAccountWx.common.vo.Condition;
+import com.pjm.familyAccountWx.common.vo.PageModel;
+import com.pjm.familyAccountWx.common.vo.QueryResult;
 import com.pjm.familyAccountWx.model.TPayUser;
 import com.pjm.familyAccountWx.model.TTally;
 import com.pjm.familyAccountWx.vo.TallyVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

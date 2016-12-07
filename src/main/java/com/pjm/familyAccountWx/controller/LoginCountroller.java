@@ -1,6 +1,6 @@
 package com.pjm.familyAccountWx.controller;
 
-import com.pjm.familyAccountWx.common.Json;
+import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.UserService;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;

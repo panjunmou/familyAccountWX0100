@@ -1,4 +1,6 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.vo;
+
+import com.pjm.familyAccountWx.common.util.CollectionsUtil;
 
 import java.io.Serializable;
 import java.util.List;

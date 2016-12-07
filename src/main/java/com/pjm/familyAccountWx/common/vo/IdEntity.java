@@ -1,4 +1,4 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.vo;
 
 import javax.persistence.*;
 import java.io.Serializable;

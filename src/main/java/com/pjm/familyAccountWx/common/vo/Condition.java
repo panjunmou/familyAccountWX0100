@@ -1,4 +1,6 @@
-package com.pjm.familyAccountWx.common;
+package com.pjm.familyAccountWx.common.vo;
+
+import com.pjm.familyAccountWx.common.constants.DBConstants;
 
 /**
  * 封装查询条件

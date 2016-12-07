@@ -1,6 +1,6 @@
 package com.pjm.familyAccountWx.service;
 
-import com.pjm.familyAccountWx.common.PageModel;
+import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.vo.TallyVo;
 
 /**
