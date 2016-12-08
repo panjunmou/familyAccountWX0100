@@ -181,8 +181,8 @@
             //初始化收入
         });
     </script>
-    <script type="text/javascript" src="${ctx}/js/jquery/purposeIn.js"></script>
-    <script type="text/javascript" src="${ctx}/js/jquery/purposeOut.js"></script>
+    <script type="text/javascript" src="${ctx}/js/biz/purposeIn.js"></script>
+    <script type="text/javascript" src="${ctx}/js/biz/purposeOut.js"></script>
 </head>
 <body>
 <div class="weui_tab">

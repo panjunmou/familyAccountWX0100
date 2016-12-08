@@ -121,7 +121,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="${ctx}/js/jquery/purposeIn.js"></script>
+    <script type="text/javascript" src="${ctx}/js/biz/purposeIn.js"></script>
 </head>
 <body>
 <div class="weui_cells weui_cells_form" style="margin-top: 0px">
