@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.controller;
 
+import com.pjm.familyAccountWx.common.constants.GlobalConstant;
 import com.pjm.familyAccountWx.service.Accountservice;
 import com.pjm.familyAccountWx.service.PayUserService;
 import com.pjm.familyAccountWx.service.PurposeService;
@@ -26,6 +27,15 @@ public class IndexController {
     @Resource
     private PayUserService payUserService;
 
+    @RequestMapping("/index")
+    public String index(HttpServletRequest request) {
+        LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute(GlobalConstant.LOGIN_USER_INFO);
+        if ((loginUserInfo != null) && (loginUserInfo.getId() != null)) {
+            return "/console/home";
+        }
+        return "/console/login";
+    }
+
     /**
      * 列表
      *
@@ -34,7 +44,7 @@ public class IndexController {
      */
     @RequestMapping("/list")
     public String list(Model model, HttpServletRequest request) {
-        LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute("loginUserInfo");
+        LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute(GlobalConstant.LOGIN_USER_INFO);
         Long id = loginUserInfo.getId();
         try {
             String accountList = accountservice.queryAccountListByUserId(id);
@@ -58,14 +68,14 @@ public class IndexController {
     public String tally(Model model, HttpServletRequest request) {
         try {
 
-            LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute("loginUserInfo");
+            LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute(GlobalConstant.LOGIN_USER_INFO);
             String userName = loginUserInfo.getName();
             Long id = loginUserInfo.getId();
 
-            String purposeInList = purposeService.queryPurpose(userName,-1);
+            String purposeInList = purposeService.queryPurpose(userName, -1);
             model.addAttribute("purposeInList", purposeInList);
 
-            String purposeOutList = purposeService.queryPurpose(userName,1);
+            String purposeOutList = purposeService.queryPurpose(userName, 1);
             model.addAttribute("purposeOutList", purposeOutList);
 
             String accountList = accountservice.queryAccountListByUserId(id);

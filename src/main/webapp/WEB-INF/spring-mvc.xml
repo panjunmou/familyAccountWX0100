@@ -59,4 +59,13 @@
             <value>4096</value>
         </property>
     </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.pjm.familyAccountWx.common.interceptors.SecurityInterceptor">
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.controller;
 
+import com.pjm.familyAccountWx.common.constants.GlobalConstant;
 import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.UserService;
@@ -55,7 +56,7 @@ public class LoginCountroller {
             LoginUserInfo loginUserInfo = new LoginUserInfo();
             loginUserInfo.setId(tUser.getId());
             loginUserInfo.setName(tUser.getUserName());
-            request.getSession().setAttribute("loginUserInfo", loginUserInfo);
+            request.getSession().setAttribute(GlobalConstant.LOGIN_USER_INFO, loginUserInfo);
             json.setSuccess(true);
             json.setMsg("登录成功");
         } else {
