@@ -40,7 +40,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
         LoginUserInfo loginUserInfo = (LoginUserInfo) request.getSession().getAttribute(GlobalConstant.LOGIN_USER_INFO);
 
         System.out.println("url = " + url);
-        if (url.indexOf("/login") > -1) {
+        if (url.indexOf("/login") > -1 || url.equals("/index/index")) {
             return true;
         } else {
             if (loginUserInfo == null) {

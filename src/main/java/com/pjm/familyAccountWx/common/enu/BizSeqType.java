@@ -2,7 +2,8 @@ package com.pjm.familyAccountWx.common.enu;
 
 public enum BizSeqType {
 
-    TALLY("tally", "账目明细");
+    TALLY("tally", "账目明细"),
+    USER("USER", "用户");
 
     private String seqType;
     private String description;

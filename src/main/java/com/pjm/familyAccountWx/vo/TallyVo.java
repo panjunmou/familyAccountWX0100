@@ -1,11 +1,13 @@
 package com.pjm.familyAccountWx.vo;
 
+import com.pjm.familyAccountWx.common.vo.BaseVo;
+
 import java.math.BigDecimal;
 
 /**
  * Created by PanJM on 2016/11/26.
  */
-public class TallyVo {
+public class TallyVo extends BaseVo{
 
     private Long id;
 

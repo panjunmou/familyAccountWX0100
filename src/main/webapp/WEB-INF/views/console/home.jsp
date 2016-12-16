@@ -22,14 +22,13 @@
     <script type="text/javascript">
         var index_layout;
         var index_tabs;
-        var index_tabsMenu;
         var layout_west_tree;
         var layout_west_tree_url = '';
-        var sessionInfo_userId = '${sessionInfo.id}';
+        var sessionInfo_userId = '${loginUserInfo.id}';
         if (sessionInfo_userId) {//如果没有登录,直接跳转到登录页面
-            layout_west_tree_url = '${ctx}/sys/resource/tree';
+            <%--layout_west_tree_url = '${ctx}/sys/resource/tree';--%>
         } else {
-            window.location.href = '${ctx}/console/index';
+            window.location.href = '${ctx}/index/index';
         }
 
         function loadTree() {
@@ -96,7 +95,7 @@
                             }]
                     });
 
-            $.ajax({
+            /*$.ajax({
                 type: "post",
                 url: layout_west_tree_url,
                 dataType: "JSON",
@@ -119,7 +118,7 @@
                         });
                     });
                 }
-            });
+            });*/
         });
 
         function goPage(url, text) {
@@ -260,8 +259,8 @@
     <div data-options="region:'north',border:false" style="overflow: hidden;">
         <div id="header">
 				<span style="float: right; padding-right: 20px;">
-					欢迎， <b>${sessionInfo.username}</b>&nbsp;&nbsp;
-					<a href="javascript:void(0)" onclick="editUserPwd()" style="color: #fff">修改密码</a>
+					欢迎， <b>${loginUserInfo.name}</b>&nbsp;&nbsp;
+					<%--<a href="javascript:void(0)" onclick="editUserPwd()" style="color: #fff">修改密码</a>--%>
 					&nbsp;&nbsp;
 					<a href="javascript:void(0)" onclick="logout()" style="color: #fff">安全退出</a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
@@ -274,14 +273,17 @@
              <ul id="layout_west_tree"></ul>
          </div>--%>
         <div class="easyui-accordion" id="menu_accordion" style="width:160px;">
-            <%--<div title="Help" data-options="" style="padding:0;">
-                <div class="accordion-item">asdfasdfsa</div>
-                <div class="accordion-item">asdfasdfsa</div>
-                <div class="accordion-item">asdfasdfsa</div>
-                <div class="accordion-item">asdfasdfsa</div>
-                <div class="accordion-item">asdfasdfsa</div>
+            <div title="系统管理" data-options="" style="padding:0;">
+                <div class="accordion-item" onclick="goPage('','用户管理')">用户管理</div>
+                <div class="accordion-item">账户管理</div>
+                <div class="accordion-item">用途管理</div>
+                <div class="accordion-item">使用者管理</div>
+                <div class="accordion-item">账单明细管理</div>
             </div>
-            <div title="Help" data-options="iconCls:'icon-company'" style="overflow:auto;padding:10px;">
+            <div title="系统管理" data-options="" style="padding:0;">
+                <div class="accordion-item">报表查看</div>
+            </div>
+            <%-- <div title="Help" data-options="iconCls:'icon-company'" style="overflow:auto;padding:10px;">
                 asdfasdf
             </div>
             <div title="TreeMenu" data-options="iconCls:'icon-company'" style="padding:10px;">

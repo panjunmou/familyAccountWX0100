@@ -51,6 +51,7 @@
 </script>
 
 <script>
+	console.log('${loginUserInfo.id}');
 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {//如果登录,直接跳转到index页面
 		window.location.href = '${ctx}/console/index';
@@ -68,49 +69,17 @@
 			top : ($(window).height() - 45) / 2
 		});
 	}
-	// 	$(function() {
-	// 		$('#loginform')
-	// 				.form(
-	// 						{
-	// 							url : '${ctx}/console/login',
-	// 							onSubmit : function() {
-	// 								progressLoad();
-	// 								var isValid = $(this).form('validate');
-	// 								if (!isValid) {
-	// 									progressClose();
-	// 								}
-	// 								return isValid;
-	// 							},
-	// 							success : function(data) {
-	// 								var result = $.parseJSON("[" + data + "]")[0];
-	// 								// var result = $.parseJSON(data);
-	// 								progressClose();
-	// 								if (result.success) {
-	// 									window.location.href = '${ctx}/console/index';
-	// 									save();
-	// 								} else {
-	// 									$.messager
-	// 											.show({
-	// 												title : '提示',
-	// 												msg : '<div class="light-info"><div class="light-tip icon-tip"></div><div>'
-	// 														+ result.msg
-	// 														+ '</div></div>',
-	// 												showType : 'show'
-	// 											});
-	// 								}
-	// 							}
-	// 						});
-	// 	});
 
 	function submitForm() {
 		//$('#loginform').submit();
 		if ($('#loginform').form('validate')) {
 			progressLoad();
-			$.post('${ctx}/console/login', $('#loginform').serialize(), function(data) {
+			$.post('${ctx}/login/login', $('#loginform').serialize(), function(data) {
 				progressClose();
 				var result = $.parseJSON(data);
+                console.log(result);
 				if (result.success) {
-					window.location.href = '${ctx}/console/index';
+					window.location.href = '${ctx}/index/index';
 					save();
 				} else {
 					$.messager.show({
@@ -137,6 +106,16 @@
 		}
 	}
 </script>
+	<style type="text/css">
+		html, body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+			font-family: 'microsoft yahei';
+			background-image: url(${ctx}/style/images/login_bg.jpg);
+		}
+	</style>
 </head>
 <body onkeydown="enterlogin();">
 	<div class="container">
@@ -150,10 +129,10 @@
 						<fieldset>
 							<form role="form" id="loginform" method="post">
 								<div class="form-group">
-									<input class="form-control" id="loginname" placeholder="用户名" name="loginname" type="text" autofocus>
+									<input class="form-control" id="loginname" placeholder="用户名" name="userName" type="text" autofocus>
 								</div>
 								<div class="form-group">
-									<input class="form-control" id="password" placeholder="密码" name="password" type="password">
+									<input class="form-control" id="password" placeholder="密码" name="passWord" type="password">
 								</div>
 								<div class="checkbox">
 									<label> <input id="rememberMe" name="remember" type="checkbox" value="Remember">记住密码
