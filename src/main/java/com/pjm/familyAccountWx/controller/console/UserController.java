@@ -54,14 +54,14 @@ public class UserController extends BaseController {
         Json j = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            userVo.setCreateUser(loginUserInfo.getName());// ´´½¨ÓÃ»§
+            userVo.setCreateUser(loginUserInfo.getName());// ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
             userVo.setLoginUserInfo(loginUserInfo);
             userService.save(userVo);
-            j.setMsg("±£´æ³É¹¦");
+            j.setMsg("ä¿å­˜æˆåŠŸ");
             j.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            j.setMsg("±£´æÊ§°Ü");
+            j.setMsg("ä¿å­˜å¤±è´¥");
         }
         return j;
     }
@@ -82,10 +82,10 @@ public class UserController extends BaseController {
             userVo.setUpdateUser(loginUserInfo.getName());
             userVo.setUpdateDate(new Date());
             userService.update(userVo);
-            j.setMsg("ĞŞ¸Ä³É¹¦");
+            j.setMsg("ï¿½Ş¸Ä³É¹ï¿½");
             j.setSuccess(true);
         } catch (Exception e) {
-            j.setMsg("ĞŞ¸ÄÊ§°Ü");
+            j.setMsg("ï¿½Ş¸ï¿½Ê§ï¿½ï¿½");
             e.printStackTrace();
         }
         return j;
@@ -97,10 +97,10 @@ public class UserController extends BaseController {
         Json j = new Json();
         try {
             userService.delete(userVo.getId());
-            j.setMsg("É¾³ı³É¹¦");
+            j.setMsg("É¾ï¿½ï¿½ï¿½É¹ï¿½");
             j.setSuccess(true);
         } catch (Exception e) {
-            j.setMsg("É¾³ıÊ§°Ü");
+            j.setMsg("É¾ï¿½ï¿½Ê§ï¿½ï¿½");
             e.printStackTrace();
         }
         return j;

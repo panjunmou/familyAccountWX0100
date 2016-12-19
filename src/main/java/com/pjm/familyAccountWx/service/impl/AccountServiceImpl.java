@@ -69,7 +69,9 @@ public class AccountServiceImpl implements Accountservice {
     }
 
     private void fillCondition(AccountVo accountVo, List<Condition> conList) {
-
+        LoginUserInfo loginUserInfo = accountVo.getLoginUserInfo();
+        Long id = loginUserInfo.getId();
+        conList.add(new Condition("tUser.id", id, Condition.EQUAL_TO));
     }
 
     @Override

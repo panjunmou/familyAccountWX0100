@@ -10,7 +10,7 @@
     <script type="text/javascript">
         String.prototype.startWith = function (str) {
             if (str == null || str == "" || this.length == 0
-                    || str.length > this.length)
+                || str.length > this.length)
                 return false;
             if (this.substr(0, str.length) == str)
                 return true;
@@ -33,29 +33,29 @@
 
         function loadTree() {
             layout_west_tree = $('#layout_west_tree').tree(
-                    {
-                        url: layout_west_tree_url,
-                        parentField: 'pid',
-                        lines: false,
-                        onClick: function (node) {
-                            if (node.attributes && node.attributes.url) {
-                                var uri = node.attributes.url;
-                                var url = "";
-                                /*临时处理，访问报表链接处理*/
-                                if (uri.startWith("http://")) {
-                                    url = node.attributes.url + "?title="
-                                            + node.text;
-                                } else {
-                                    url = ' ${ctx}' + node.attributes.url + "?title=" + node.text;
-                                }
-                                addTab({
-                                    url: url,
-                                    title: node.text,
-                                    iconCls: node.iconCls
-                                });
+                {
+                    url: layout_west_tree_url,
+                    parentField: 'pid',
+                    lines: false,
+                    onClick: function (node) {
+                        if (node.attributes && node.attributes.url) {
+                            var uri = node.attributes.url;
+                            var url = "";
+                            /*临时处理，访问报表链接处理*/
+                            if (uri.startWith("http://")) {
+                                url = node.attributes.url + "?title="
+                                    + node.text;
+                            } else {
+                                url = ' ${ctx}' + node.attributes.url + "?title=" + node.text;
                             }
+                            addTab({
+                                url: url,
+                                title: node.text,
+                                iconCls: node.iconCls
+                            });
                         }
-                    });
+                    }
+                });
         }
 
         $(function () {
@@ -63,62 +63,62 @@
                 fit: true
             });
             index_tabs = $('#index_tabs').tabs(
-                    {
-                        fit: true,
-                        border: false,
-                        tools: [
-                            {
-                                iconCls: 'icon-home',
-                                handler: function () {
-                                    index_tabs.tabs('select', 0);
+                {
+                    fit: true,
+                    border: false,
+                    tools: [
+                        {
+                            iconCls: 'icon-home',
+                            handler: function () {
+                                index_tabs.tabs('select', 0);
+                            }
+                        },
+                        {
+                            iconCls: 'icon-refresh',
+                            handler: function () {
+                                var index = index_tabs.tabs('getTabIndex',
+                                    index_tabs.tabs('getSelected'));
+                                index_tabs.tabs('getTab', index).panel(
+                                    'open').panel('refresh');
+                            }
+                        },
+                        {
+                            iconCls: 'icon-del',
+                            handler: function () {
+                                var index = index_tabs.tabs('getTabIndex',
+                                    index_tabs.tabs('getSelected'));
+                                var tab = index_tabs.tabs('getTab', index);
+                                if (tab.panel('options').closable) {
+                                    index_tabs.tabs('close', index);
                                 }
-                            },
-                            {
-                                iconCls: 'icon-refresh',
-                                handler: function () {
-                                    var index = index_tabs.tabs('getTabIndex',
-                                            index_tabs.tabs('getSelected'));
-                                    index_tabs.tabs('getTab', index).panel(
-                                            'open').panel('refresh');
-                                }
-                            },
-                            {
-                                iconCls: 'icon-del',
-                                handler: function () {
-                                    var index = index_tabs.tabs('getTabIndex',
-                                            index_tabs.tabs('getSelected'));
-                                    var tab = index_tabs.tabs('getTab', index);
-                                    if (tab.panel('options').closable) {
-                                        index_tabs.tabs('close', index);
-                                    }
-                                }
-                            }]
-                    });
+                            }
+                        }]
+                });
 
             /*$.ajax({
-                type: "post",
-                url: layout_west_tree_url,
-                dataType: "JSON",
-                success: function (data) {
-                    var menu_accordion = $('#menu_accordion');
-                    $.each(data, function (i, v) {
-                        var content = "";
-                        var children = v.children;
-                        if (children != null && children.length > 0) {
-                            $.each(children, function (l, m) {
-                                var url = m.attributes.url + "?title=" + m.text;
-                                content += ' <div class="accordion-item" onclick="goPage(\'' + url + '\',\'' + m.text + '\')">' + m.text + '</div>';
-                            });
-                        }
-                        menu_accordion.accordion('add', {
-                            title: v.text,
-//                            iconCls: v.iconCls,
-                            content: content,
-                            selected: false
-                        });
-                    });
-                }
-            });*/
+             type: "post",
+             url: layout_west_tree_url,
+             dataType: "JSON",
+             success: function (data) {
+             var menu_accordion = $('#menu_accordion');
+             $.each(data, function (i, v) {
+             var content = "";
+             var children = v.children;
+             if (children != null && children.length > 0) {
+             $.each(children, function (l, m) {
+             var url = m.attributes.url + "?title=" + m.text;
+             content += ' <div class="accordion-item" onclick="goPage(\'' + url + '\',\'' + m.text + '\')">' + m.text + '</div>';
+             });
+             }
+             menu_accordion.accordion('add', {
+             title: v.text,
+             //                            iconCls: v.iconCls,
+             content: content,
+             selected: false
+             });
+             });
+             }
+             });*/
         });
 
         function goPage(url, text) {
@@ -133,16 +133,16 @@
             var currTab = $('#index_tabs').tabs('getTab', refreshTabName);
             var url = $(currTab.panel('options').content).attr('src');
             $('#index_tabs')
-                    .tabs(
-                            'update',
-                            {
-                                tab: currTab,
-                                options: {
-                                    content: '<iframe src="'
-                                    + url
-                                    + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>'
-                                }
-                            });
+                .tabs(
+                    'update',
+                    {
+                        tab: currTab,
+                        options: {
+                            content: '<iframe src="'
+                            + url
+                            + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>'
+                        }
+                    });
             $("#index_tabs").tabs('close', closeTabName);
             $("#index_tabs").tabs('select', refreshTabName);
         }
@@ -152,14 +152,14 @@
             var currTab = $('#index_tabs').tabs('getTab', refreshTabName);
             var url = $(currTab.panel('options').content).attr('src');
             $('#index_tabs').tabs('update',
-                    {
-                        tab: currTab,
-                        options: {
-                            content: '<iframe src="'
-                            + url
-                            + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>'
-                        }
-                    });
+                {
+                    tab: currTab,
+                    options: {
+                        content: '<iframe src="'
+                        + url
+                        + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>'
+                    }
+                });
             //             $("#index_tabs").tabs('close', closeTabName);
             //             $("#index_tabs").tabs('select', refreshTabName);
         }
@@ -176,8 +176,8 @@
 
         function addTab(params) {
             var iframe = '<iframe src="'
-                    + params.url
-                    + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
+                + params.url
+                + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
             var t = $('#index_tabs');
             var opts = {
                 title: params.title,
@@ -221,7 +221,7 @@
                     text: '修改',
                     handler: function () {
                         var f = parent.$.modalDialog.handler
-                                .find('#editUserPwdForm');
+                            .find('#editUserPwdForm');
                         f.submit();
                     }
                 }]
@@ -279,8 +279,6 @@
                 <div class="accordion-item" onclick="goPage('/console/purpose/manager','账户管理')">用途管理</div>
                 <div class="accordion-item" onclick="goPage('/console/payuser/manager','账户管理')">使用者管理</div>
                 <div class="accordion-item" onclick="goPage('/console/tally/manager','账户管理')">账单明细管理</div>
-            </div>
-            <div title="系统管理" data-options="" style="padding:0;">
                 <div class="accordion-item">报表查看</div>
             </div>
             <%-- <div title="Help" data-options="iconCls:'icon-company'" style="overflow:auto;padding:10px;">

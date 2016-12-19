@@ -95,6 +95,7 @@
                     $.post('${ctx}/console/account/delete', {
                         id: id
                     }, function (result) {
+                        console.log(result);
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
                             dataGrid.datagrid('reload');
@@ -105,17 +106,31 @@
             });
         }
 
-        function addFun(id) {
-            self.parent.addTab({
-                url: '${ctx}/console/account/addPage?id=' + id + "&title=${param.title}",
-                title: "新增任务",
-                iconCls: "icon-add"
+        function addFun() {
+            parent.$.modalDialog({
+                title: '新建账户',
+                width: 500,
+                height: 300,
+                href: '${ctx}/console/account/addPage',
+                buttons: [{
+                    text: '保存',
+                    handler: function () {
+                        parent.$.modalDialog.openner_treeGrid = dataGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+                        var f = parent.$.modalDialog.handler.find('#addForm');
+                        f.submit();
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        parent.$.modalDialog.handler.dialog('close');
+                    }
+                }]
             });
         }
         function updateFun(id) {
             self.parent.addTab({
                 url: '${ctx}/console/account/editPage?id=' + id + "&title=${param.title}",
-                title: "修改任务",
+                title: "修改账户",
                 iconCls: "icon-edit"
             });
         }

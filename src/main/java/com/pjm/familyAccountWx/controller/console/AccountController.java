@@ -33,7 +33,9 @@ public class AccountController extends BaseController {
 
     @RequestMapping("/dataGrid")
     @ResponseBody
-    public PageModel dataGrid(AccountVo accountVo, PageModel ph) {
+    public PageModel dataGrid(AccountVo accountVo, PageModel ph, HttpServletRequest request) {
+        LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+        accountVo.setLoginUserInfo(loginUserInfo);
         try {
             PageModel pageModel = accountservice.dataGrid(accountVo, ph);
             return pageModel;
@@ -44,9 +46,9 @@ public class AccountController extends BaseController {
     }
 
     @RequestMapping("/addPage")
-    public String addPage(HttpServletRequest request) throws Exception {
+    public String addPage(Model model) throws Exception {
         String accountNo = this.getBizSeqCode(BizSeqType.ACCOUNT.getSeqType());
-        request.setAttribute("accountNo", accountNo);
+        model.addAttribute("accountNo", accountNo);
         return "/console/account/accountAdd";
     }
 
@@ -56,14 +58,14 @@ public class AccountController extends BaseController {
         Json j = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            accountVo.setCreateUser(loginUserInfo.getName());// ¥¥Ω®”√ªß
+            accountVo.setCreateUser(loginUserInfo.getName());// ÔøΩÔøΩÔøΩÔøΩÔøΩ√ªÔøΩ
             accountVo.setLoginUserInfo(loginUserInfo);
             accountservice.save(accountVo);
-            j.setMsg("±£¥Ê≥…π¶");
+            j.setMsg("‰øùÂ≠òÊàêÂäü");
             j.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            j.setMsg("±£¥Ê ß∞‹");
+            j.setMsg("‰øùÂ≠òÂ§±Ë¥•");
         }
         return j;
     }
@@ -84,10 +86,10 @@ public class AccountController extends BaseController {
             accountVo.setUpdateUser(loginUserInfo.getName());
             accountVo.setUpdateDate(new Date());
             accountservice.update(accountVo);
-            j.setMsg("–ﬁ∏ƒ≥…π¶");
+            j.setMsg("‰øÆÊîπÊàêÂäü");
             j.setSuccess(true);
         } catch (Exception e) {
-            j.setMsg("–ﬁ∏ƒ ß∞‹");
+            j.setMsg("‰øÆÊîπÂ§±Ë¥•");
             e.printStackTrace();
         }
         return j;
@@ -99,10 +101,10 @@ public class AccountController extends BaseController {
         Json j = new Json();
         try {
             accountservice.delete(accountVo.getId());
-            j.setMsg("…æ≥˝≥…π¶");
+            j.setMsg("Âà†Èô§ÊàêÂäü");
             j.setSuccess(true);
         } catch (Exception e) {
-            j.setMsg("…æ≥˝ ß∞‹");
+            j.setMsg("Âà†Èô§Â§±Ë¥•");
             e.printStackTrace();
         }
         return j;
