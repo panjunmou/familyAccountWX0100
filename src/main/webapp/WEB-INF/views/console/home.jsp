@@ -274,11 +274,11 @@
          </div>--%>
         <div class="easyui-accordion" id="menu_accordion" style="width:160px;">
             <div title="系统管理" data-options="" style="padding:0;">
-                <div class="accordion-item" onclick="goPage('','用户管理')">用户管理</div>
-                <div class="accordion-item">账户管理</div>
-                <div class="accordion-item">用途管理</div>
-                <div class="accordion-item">使用者管理</div>
-                <div class="accordion-item">账单明细管理</div>
+                <%--<div class="accordion-item" onclick="goPage('${ctx}/console/user/manager','用户管理')">用户管理</div>--%>
+                <div class="accordion-item" onclick="goPage('/console/account/manager','账户管理')">账户管理</div>
+                <div class="accordion-item" onclick="goPage('/console/purpose/manager','账户管理')">用途管理</div>
+                <div class="accordion-item" onclick="goPage('/console/payuser/manager','账户管理')">使用者管理</div>
+                <div class="accordion-item" onclick="goPage('/console/tally/manager','账户管理')">账单明细管理</div>
             </div>
             <div title="系统管理" data-options="" style="padding:0;">
                 <div class="accordion-item">报表查看</div>
@@ -298,7 +298,7 @@
                     <h2>系统介绍</h2>
                     <div class="light-info">
                         <div class="light-tip icon-tip"></div>
-                        <div>美好家管理系统。</div>
+                        <div>家庭记账管理系统。</div>
                         <ul>
                             <li style="margin: 5px;">
                                 <a onclick="downloadfile('weixin')" href="javascript:void(0);">微信使用说明书</a>
@@ -314,14 +314,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div data-options="region:'south',border:false"
-         style="height: 30px; line-height: 30px; text-align: center; overflow: hidden; background-color: #eee">
-        <span>万科企业股份有限公司  版权所有 &nbsp;&nbsp;&nbsp;&nbsp; </span>
-        <img style="vertical-align:middle;" src="../style/images/beian.png"/> &nbsp;
-        <span>
-            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011202001574" target="_blank">沪ICP备05098314</a>
-        </span>
     </div>
 </div>
 <!--[if lte IE 8]>

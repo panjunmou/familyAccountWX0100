@@ -11,10 +11,10 @@
 <script type="text/javascript" src="${ctx}/js/jquery/jquery.min.js"></script>
 
 <!-- [EasyUI] -->
-<link id="easyuiTheme" rel="stylesheet" href="${ctx}/js/easyui/easyui.css" type="text/css">
-<link id="easyuiTheme" rel="stylesheet" href="${ctx}/js/easyui/icon.css" type="text/css">
+<link id="easyuiTheme" rel="stylesheet" href="${ctx}/js/easyui/themes/gray/easyui.css" type="text/css">
+<link id="easyuiTheme" rel="stylesheet" href="${ctx}/js/easyui/themes/icon.css" type="text/css">
 <script type="text/javascript" src="${ctx}/js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="${ctx}/js/easyui/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="${ctx}/js/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <!-- [扩展JS] -->
 <script type="text/javascript" src="${ctx}/js/extJs.js" charset="utf-8"></script>
 <script type="text/javascript" src="${ctx}/js/common.js" charset="utf-8"></script>

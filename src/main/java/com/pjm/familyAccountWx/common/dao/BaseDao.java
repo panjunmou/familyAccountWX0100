@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.common.dao;
 
+import com.alibaba.fastjson.JSON;
 import com.pjm.familyAccountWx.common.constants.DBConstants;
 import com.pjm.familyAccountWx.common.vo.*;
 import org.slf4j.Logger;
@@ -269,6 +270,8 @@ public class BaseDao {
         builder.where();
         builder.orderBy(page);
 
+        logger.info(builder.toString());
+        logger.info(JSON.toJSONString(conditions));
         return getPageResult(clazz, builder.toString(), page, builder.getParameters());
     }
 

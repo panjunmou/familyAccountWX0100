@@ -3,7 +3,10 @@ package com.pjm.familyAccountWx.common.enu;
 public enum BizSeqType {
 
     TALLY("tally", "账目明细"),
-    USER("USER", "用户");
+    ACCOUNT("account", "账户"),
+    PURPOSE("purpose", "用途"),
+    PAYUSER("payuser", "使用者"),
+    USER("user", "用户");
 
     private String seqType;
     private String description;

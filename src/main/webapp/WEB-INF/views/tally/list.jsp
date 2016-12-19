@@ -194,14 +194,15 @@
     <form class="weui_search_outer">
         <div class="weui_search_inner">
             <i class="weui_icon_search"></i>
-            <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required/>
+            <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required
+            onkeyup="searchList('remark',$(this).val())"/>
             <a href="javascript:void(0);" class="weui_icon_clear" id="search_clear"></a>
         </div>
         <label for="search_input" class="weui_search_text" id="search_text"> <i class="weui_icon_search"></i>
             <span>搜索</span>
         </label>
     </form>
-    <a href="javascript:void(0);" class="weui_icon_search" id="search_ok" style="margin-left: 20px;margin-right: 10px" onclick="searchList('remark', $('#search_input').val())"></a>
+    <%--<a href="javascript:void(0);" class="weui_icon_search" id="search_ok" style="margin-left: 20px;margin-right: 10px" onclick="searchList('remark', $('#search_input').val())"></a>--%>
     <a href="javascript:void(0);" class="weui_search_cancel" id="search_cancel">取消</a>
 </div>
 <div class="assets outer" id="outer">
