@@ -201,10 +201,10 @@
             $.messager.confirm('提示', '确定要退出?', function (r) {
                 if (r) {
                     progressLoad();
-                    $.post('${ctx}/console/logout', function (result) {
+                    $.post('${ctx}/login/logout', function (result) {
                         if (result.success) {
                             progressClose();
-                            window.location.href = '${ctx}/console/index';
+                            window.location.href = '${ctx}/index/index';
                         }
                     }, 'json');
                 }

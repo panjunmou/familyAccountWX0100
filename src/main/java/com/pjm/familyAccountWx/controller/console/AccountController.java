@@ -85,6 +85,7 @@ public class AccountController extends BaseController {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
             accountVo.setUpdateUser(loginUserInfo.getName());
             accountVo.setUpdateDate(new Date());
+            accountVo.setLoginUserInfo(loginUserInfo);
             accountservice.update(accountVo);
             j.setMsg("修改成功");
             j.setSuccess(true);

@@ -65,4 +65,14 @@ public class LoginCountroller {
         }
         return json;
     }
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @ResponseBody
+    public Json logout(HttpServletRequest request) throws Exception {
+        Json json = new Json();
+        request.getSession().removeAttribute(GlobalConstant.LOGIN_USER_INFO);
+        json.setSuccess(true);
+        json.setMsg("登录成功");
+        return json;
+    }
 }

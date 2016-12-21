@@ -51,6 +51,8 @@ public class AccountServiceImpl implements Accountservice {
         List<AccountVo> list = new ArrayList<AccountVo>();
         List<Condition> conList = new ArrayList<>();
         this.fillCondition(accountVo, conList);
+        ph.setSort("seq");
+        ph.setOrder("asc");
         QueryResult<TAccount> pageResult = accountDao.getPageResult(TAccount.class, conList, ph);
         for (TAccount tAccount : pageResult.getReultList()) {
             AccountVo account = new AccountVo();
