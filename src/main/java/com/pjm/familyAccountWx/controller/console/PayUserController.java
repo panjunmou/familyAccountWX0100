@@ -4,9 +4,9 @@ import com.pjm.familyAccountWx.common.controller.BaseController;
 import com.pjm.familyAccountWx.common.enu.BizSeqType;
 import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.common.vo.PageModel;
-import com.pjm.familyAccountWx.service.Accountservice;
-import com.pjm.familyAccountWx.vo.AccountVo;
+import com.pjm.familyAccountWx.service.PayUserService;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
+import com.pjm.familyAccountWx.vo.PayUserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,24 +20,24 @@ import java.util.Date;
  * Created by PanJM_Levono on 2016/12/14.
  */
 @Controller
-@RequestMapping("/console/account")
-public class AccountController extends BaseController {
+@RequestMapping("/console/payUser")
+public class PayUserController extends BaseController {
 
     @Resource
-    private Accountservice accountservice;
+    private PayUserService payUserService;
 
     @RequestMapping("/manager")
     public String manager() throws Exception {
-        return "/console/account/accountList";
+        return "/console/payUser/PayUserList";
     }
 
     @RequestMapping("/dataGrid")
     @ResponseBody
-    public PageModel dataGrid(AccountVo accountVo, PageModel ph, HttpServletRequest request) {
+    public PageModel dataGrid(PayUserVo payUserVo, PageModel ph, HttpServletRequest request) {
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-        accountVo.setLoginUserInfo(loginUserInfo);
+        payUserVo.setLoginUserInfo(loginUserInfo);
         try {
-            PageModel pageModel = accountservice.dataGrid(accountVo, ph);
+            PageModel pageModel = payUserService.dataGrid(payUserVo, ph);
             return pageModel;
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,20 +47,20 @@ public class AccountController extends BaseController {
 
     @RequestMapping("/addPage")
     public String addPage(Model model) throws Exception {
-        String accountNo = this.getBizSeqCode(BizSeqType.ACCOUNT.getSeqType());
-        model.addAttribute("accountNo", accountNo);
-        return "/console/account/accountAdd";
+        String payUserNo = this.getBizSeqCode(BizSeqType.PAYUSER.getSeqType());
+        model.addAttribute("payUserNo", payUserNo);
+        return "/console/payUser/payUserAdd";
     }
 
     @RequestMapping("/save")
     @ResponseBody
-    public Json save(HttpServletRequest request, AccountVo accountVo) {
+    public Json save(HttpServletRequest request, PayUserVo payUserVo) {
         Json j = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            accountVo.setCreateUser(loginUserInfo.getName());
-            accountVo.setLoginUserInfo(loginUserInfo);
-            accountservice.save(accountVo);
+            payUserVo.setCreateUser(loginUserInfo.getName());
+            payUserVo.setLoginUserInfo(loginUserInfo);
+            payUserService.save(payUserVo);
             j.setMsg("保存成功");
             j.setSuccess(true);
         } catch (Exception e) {
@@ -72,21 +72,21 @@ public class AccountController extends BaseController {
 
     @RequestMapping("/editPage")
     public String updatePage(Model model, Long id) throws Exception {
-        AccountVo accountVo = accountservice.get(id);
-        model.addAttribute("account", accountVo);
-        return "/console/account/accountEdit";
+        PayUserVo payUserVo = payUserService.get(id);
+        model.addAttribute("payUser", payUserVo);
+        return "/console/payUser/payUserEdit";
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public Json update(HttpServletRequest request, AccountVo accountVo) {
+    public Json update(HttpServletRequest request, PayUserVo payUserVo) {
         Json j = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            accountVo.setUpdateUser(loginUserInfo.getName());
-            accountVo.setUpdateDate(new Date());
-            accountVo.setLoginUserInfo(loginUserInfo);
-            accountservice.update(accountVo);
+            payUserVo.setUpdateUser(loginUserInfo.getName());
+            payUserVo.setUpdateDate(new Date());
+            payUserVo.setLoginUserInfo(loginUserInfo);
+            payUserService.update(payUserVo);
             j.setMsg("修改成功");
             j.setSuccess(true);
         } catch (Exception e) {
@@ -98,10 +98,10 @@ public class AccountController extends BaseController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Json delete(AccountVo accountVo) {
+    public Json delete(PayUserVo payUserVo) {
         Json j = new Json();
         try {
-            accountservice.delete(accountVo.getId());
+            payUserService.delete(payUserVo.getId());
             j.setMsg("删除成功");
             j.setSuccess(true);
         } catch (Exception e) {
