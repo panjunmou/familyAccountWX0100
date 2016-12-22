@@ -1,17 +1,22 @@
 package com.pjm.familyAccountWx.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.pjm.familyAccountWx.common.vo.Condition;
+import com.pjm.familyAccountWx.common.vo.PageModel;
+import com.pjm.familyAccountWx.common.vo.QueryResult;
 import com.pjm.familyAccountWx.dao.PurposeDao;
 import com.pjm.familyAccountWx.model.TPurpose;
+import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.PurposeService;
+import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import com.pjm.familyAccountWx.vo.PurposePicker;
+import com.pjm.familyAccountWx.vo.PurposeVo;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by PanJM on 2016/11/26.
@@ -77,5 +82,100 @@ public class PurposeServiceImpl implements PurposeService {
         if (parent == null) {
             purposePicker.setType("0");
         }
+    }
+
+    @Override
+    public PageModel dataGrid(PurposeVo purposeVo, PageModel ph, String pId) throws Exception {
+        List<PurposeVo> list = new ArrayList<PurposeVo>();
+        List<Condition> conList = new ArrayList<>();
+        this.fillCondition(purposeVo, conList, pId);
+        ph.setSort("purposeType");
+        ph.setOrder("asc");
+        QueryResult<TPurpose> pageResult = purposeDao.getPageResult(TPurpose.class, conList, ph);
+        for (TPurpose tPayUser : pageResult.getReultList()) {
+            PurposeVo userVo = new PurposeVo();
+            this.copyEntityToVo(tPayUser, userVo);
+            list.add(userVo);
+        }
+        ph.setTotal(pageResult.getTotalCount());
+        ph.setRows(list);
+        return ph;
+    }
+
+    private void copyEntityToVo(TPurpose tPurpose, PurposeVo userVo) {
+        BeanUtils.copyProperties(tPurpose, userVo);
+        userVo.setUserName(tPurpose.gettUser().getUserName());
+        userVo.setUserNo(tPurpose.gettUser().getUserNo());
+        TPurpose parent = tPurpose.getParent();
+        if (parent != null) {
+            userVo.setHasParent(true);
+        } else {
+            userVo.setHasParent(false);
+        }
+    }
+
+    private void fillCondition(PurposeVo purposeVo, List<Condition> conList, String pId) {
+        LoginUserInfo loginUserInfo = purposeVo.getLoginUserInfo();
+        Long id = loginUserInfo.getId();
+        conList.add(new Condition("tUser.id", id, Condition.EQUAL_TO));
+        if (StringUtils.isEmpty(pId)) {
+            conList.add(new Condition("parent", null, Condition.NULL));
+        } else {
+            conList.add(new Condition("parent.id", Long.parseLong(pId), Condition.EQUAL_TO));
+        }
+    }
+
+    @Override
+    public void save(PurposeVo purposeVo) throws Exception {
+        TPurpose tPayUser = new TPurpose();
+        this.copyVoToEntity(tPayUser, purposeVo);
+        purposeDao.save(tPayUser);
+    }
+
+    private void copyVoToEntity(TPurpose tPayUser, PurposeVo purposeVo) throws Exception {
+        BeanUtils.copyProperties(purposeVo, tPayUser);
+        LoginUserInfo loginUserInfo = purposeVo.getLoginUserInfo();
+        Long id = loginUserInfo.getId();
+        TUser tUser = purposeDao.find(id, TUser.class);
+        tPayUser.settUser(tUser);
+        String pId = purposeVo.getpId();
+        if (!StringUtils.isEmpty(pId)) {
+            TPurpose tPurpose = purposeDao.find(Long.parseLong(pId), TPurpose.class);
+            tPayUser.setParent(tPurpose);
+        }
+        tPayUser.setVisible(true);
+    }
+
+    @Override
+    public PurposeVo get(Long id) throws Exception {
+        TPurpose tPayUser = purposeDao.find(id, TPurpose.class);
+        PurposeVo purposeVo = new PurposeVo();
+        this.copyEntityToVo(tPayUser, purposeVo);
+        return purposeVo;
+    }
+
+    @Override
+    public void update(PurposeVo purposeVo) throws Exception {
+        Long id = purposeVo.getId();
+        TPurpose tPayUser = purposeDao.find(id, TPurpose.class);
+        this.copyVoToEntity(tPayUser, purposeVo);
+        purposeDao.update(tPayUser);
+    }
+
+    @Override
+    public void delete(Long id) throws Exception {
+        TPurpose tPayUser = purposeDao.find(id, TPurpose.class);
+        purposeDao.delete(tPayUser);
+    }
+
+    @Override
+    public void changeStatus(Long id, String status) throws Exception {
+        TPurpose tPurpose = purposeDao.find(id, TPurpose.class);
+        if (status.equals("-1")) {
+            tPurpose.setVisible(false);
+        } else {
+            tPurpose.setVisible(true);
+        }
+        purposeDao.update(tPurpose);
     }
 }

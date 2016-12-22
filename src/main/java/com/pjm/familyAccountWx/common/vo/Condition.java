@@ -64,6 +64,10 @@ public class Condition implements DBConstants {
         return this.operate != null && (this.operate.equals(IN) || this.operate.equals(NOT_IN));
     }
 
+    public boolean hasNULLOperate() {
+        return this.operate != null && (this.operate.equals(NULL) || this.operate.equals(NOT_NULL));
+    }
+
     public boolean hasFindInSet() {
         return this.operate != null && (this.operate.equals(FIND_IN_SET));
     }

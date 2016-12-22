@@ -276,9 +276,9 @@
             <div title="系统管理" data-options="" style="padding:0;">
                 <%--<div class="accordion-item" onclick="goPage('${ctx}/console/user/manager','用户管理')">用户管理</div>--%>
                 <div class="accordion-item" onclick="goPage('/console/account/manager','账户管理')">账户管理</div>
-                <div class="accordion-item" onclick="goPage('/console/purpose/manager','账户管理')">用途管理</div>
-                <div class="accordion-item" onclick="goPage('/console/payUser/manager','账户管理')">使用者管理</div>
-                <div class="accordion-item" onclick="goPage('/console/tally/manager','账户管理')">账单明细管理</div>
+                <div class="accordion-item" onclick="goPage('/console/purpose/manager','用途管理')">用途管理</div>
+                <div class="accordion-item" onclick="goPage('/console/payUser/manager','使用者管理')">使用者管理</div>
+                <div class="accordion-item" onclick="goPage('/console/tally/manager','账单明细管理')">账单明细管理</div>
                 <div class="accordion-item">报表查看</div>
             </div>
             <%-- <div title="Help" data-options="iconCls:'icon-company'" style="overflow:auto;padding:10px;">

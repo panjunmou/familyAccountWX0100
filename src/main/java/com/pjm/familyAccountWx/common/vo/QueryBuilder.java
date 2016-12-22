@@ -86,6 +86,8 @@ public class QueryBuilder {
                         .append(condition.getName() + suffix).append(",").append(alias).append(DBConstants.DOT)
                         .append(condition.getName()).append(") >0");
                 parameters.put(condition.getName() + suffix, condition.getValue());
+            } else if (condition.hasNULLOperate()) {
+                builder.append(DBConstants.AND).append(condition.getName()).append(condition.getOperate());
             } else {
                 if (condition.hasLikeOperate()) {
                     builder.append(DBConstants.AND).append("lower(").append(alias).append(DBConstants.DOT)
@@ -151,7 +153,9 @@ public class QueryBuilder {
             int suffix = 1;
             for (Condition condition : conditions) {
                 assembleQuery(builder, parameters, suffix, condition);
-                if (condition.getValue() instanceof List<?>) {
+                if (condition.getValue() == null) {
+                    suffix++;
+                }else if (condition.getValue() instanceof List<?>) {
                     List<?> list = (List<?>) condition.getValue();
                     suffix = suffix + list.size();
                 } else if (condition.getValue().getClass().isArray()) {

@@ -14,6 +14,10 @@ public interface DBConstants
 
 	public static final String EQUAL_TO = " = ";
 
+	public static final String NULL = " is null ";
+
+	public static final String NOT_NULL = " is not null ";
+
 	public static final String GREAT_THAN = " > ";
 
 	public static final String GREAT_THAN_EQUAL = " >= ";
