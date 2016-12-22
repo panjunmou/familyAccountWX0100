@@ -31,6 +31,10 @@ public class TallyVo extends BaseVo{
 
     private Integer purposeType;
 
+    private String tallyNo;
+
+    private Boolean visible;
+
     public Long getId() {
         return id;
     }
@@ -133,5 +137,21 @@ public class TallyVo extends BaseVo{
 
     public void setPayUserId(String payUserId) {
         this.payUserId = payUserId;
+    }
+
+    public String getTallyNo() {
+        return tallyNo;
+    }
+
+    public void setTallyNo(String tallyNo) {
+        this.tallyNo = tallyNo;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
     }
 }
