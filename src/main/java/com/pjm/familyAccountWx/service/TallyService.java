@@ -17,4 +17,6 @@ public interface TallyService {
     void updateTally(TallyVo TallyVo, String name) throws Exception;
 
     void delete(Long id) throws Exception;
+
+    void changeStatus(Long id, String status) throws Exception;
 }

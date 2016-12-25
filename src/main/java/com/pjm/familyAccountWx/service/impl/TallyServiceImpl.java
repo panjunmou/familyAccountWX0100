@@ -147,4 +147,15 @@ public class TallyServiceImpl implements TallyService {
         tTally.setVisible(false);
         tallyDao.update(tTally);
     }
+
+    @Override
+    public void changeStatus(Long id, String status) throws Exception {
+        TTally tTally = tallyDao.find(id, TTally.class);
+        if (status.equals("-1")) {
+            tTally.setVisible(false);
+        }else {
+            tTally.setVisible(true);
+        }
+        tallyDao.update(tTally);
+    }
 }

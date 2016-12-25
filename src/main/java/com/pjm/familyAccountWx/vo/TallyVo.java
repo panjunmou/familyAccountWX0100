@@ -33,7 +33,7 @@ public class TallyVo extends BaseVo{
 
     private String tallyNo;
 
-    private Boolean visible;
+    private Boolean visible = true;
 
     public Long getId() {
         return id;

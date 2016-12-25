@@ -54,7 +54,13 @@ public class TallyDao extends BaseDao {
             conditions.add(new Condition("remark", "%" + remark + "%", Condition.LIKE));
         }
 
-        conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
+        if (!StringUtils.isEmpty(tallyParam.getVisible())) {
+            if (tallyParam.getVisible()) {
+                conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
+            }
+        } else {
+            conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
+        }
         conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
 
         ph.setSort("payDate");

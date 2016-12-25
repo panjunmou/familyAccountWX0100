@@ -14,10 +14,27 @@ import java.util.List;
 public class PurposeDao extends BaseDao {
 
     public List<TPurpose> queryPurpose(String userName, Integer purposeType) {
-        StringBuffer sqlString = new StringBuffer("select t from TPurpose t where t.tUser.userName =:userName and t.purposeType =:purposeType");
+        StringBuffer sqlString = new StringBuffer("select t from TPurpose t where t.tUser.userName =:userName and t.purposeType =:purposeType and t.visible=true");
         Query query = em.createQuery(sqlString.toString());
         query.setParameter("userName", userName);
         query.setParameter("purposeType", purposeType);
+        List resultList = query.getResultList();
+        return resultList;
+    }
+
+    public List<TPurpose> queryPurposeByPId(String userName, Integer purposeType, Integer parentId) {
+        StringBuffer sqlString = new StringBuffer("select t from TPurpose t where t.tUser.userName =:userName and t.purposeType =:purposeType");
+        if (parentId != null) {
+            sqlString.append(" and t.parent.id=:parentId");
+        } else {
+            sqlString.append(" and t.parent is null");
+        }
+        Query query = em.createQuery(sqlString.toString());
+        query.setParameter("userName", userName);
+        query.setParameter("purposeType", purposeType);
+        if (parentId != null) {
+            query.setParameter("parentId", parentId);
+        }
         List resultList = query.getResultList();
         return resultList;
     }

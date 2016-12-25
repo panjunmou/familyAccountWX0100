@@ -1,7 +1,6 @@
 package com.pjm.familyAccountWx.vo;
 
 import com.pjm.familyAccountWx.common.vo.BaseVo;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by PanJM_Levono on 2016/12/21.

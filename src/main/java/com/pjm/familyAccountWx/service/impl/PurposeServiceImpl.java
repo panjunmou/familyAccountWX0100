@@ -11,12 +11,16 @@ import com.pjm.familyAccountWx.service.PurposeService;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import com.pjm.familyAccountWx.vo.PurposePicker;
 import com.pjm.familyAccountWx.vo.PurposeVo;
+import com.pjm.familyAccountWx.vo.SelectVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by PanJM on 2016/11/26.
@@ -50,19 +54,22 @@ public class PurposeServiceImpl implements PurposeService {
                     if (parent == null) {
                         purposePickerMap.put(id, purposePicker);
                     } else {
-                        Long parentId = parent.getId();
-                        PurposePicker parentPurposePicker = purposePickerMap.get(parentId);
-                        if (parentPurposePicker == null) {
-                            parentPurposePicker = new PurposePicker();
-                            copyPurposeToPicker(parent, parentPurposePicker);
+                        boolean visible = parent.isVisible();
+                        if (visible) {
+                            Long parentId = parent.getId();
+                            PurposePicker parentPurposePicker = purposePickerMap.get(parentId);
+                            if (parentPurposePicker == null) {
+                                parentPurposePicker = new PurposePicker();
+                                copyPurposeToPicker(parent, parentPurposePicker);
+                            }
+                            List<PurposePicker> sub = parentPurposePicker.getSub();
+                            if (sub == null) {
+                                sub = new ArrayList<PurposePicker>();
+                            }
+                            sub.add(purposePicker);
+                            parentPurposePicker.setSub(sub);
+                            purposePickerMap.put(parentId, parentPurposePicker);
                         }
-                        List<PurposePicker> sub = parentPurposePicker.getSub();
-                        if (sub == null) {
-                            sub = new ArrayList<PurposePicker>();
-                        }
-                        sub.add(purposePicker);
-                        parentPurposePicker.setSub(sub);
-                        purposePickerMap.put(parentId, parentPurposePicker);
                     }
                 }
             }
@@ -73,6 +80,21 @@ public class PurposeServiceImpl implements PurposeService {
         }
         String jsonString = JSON.toJSONString(purposePickerList);
         return jsonString;
+    }
+
+    @Override
+    public List<SelectVo> queryPurposeByPid(String userName, Integer purposeType, Integer parentId) throws Exception {
+        List<TPurpose> tPurposeList = purposeDao.queryPurposeByPId(userName, purposeType, parentId);
+        List<SelectVo> selectVoList = new ArrayList<>();
+        if (tPurposeList != null && tPurposeList.size() > 0) {
+            for (int i = 0; i < tPurposeList.size(); i++) {
+                TPurpose tPurpose = tPurposeList.get(i);
+                SelectVo selectVo = new SelectVo();
+                selectVo.setTitle(tPurpose.getName());
+                selectVo.setValue(tPurpose.getId().toString());
+            }
+        }
+        return selectVoList;
     }
 
     private void copyPurposeToPicker(TPurpose tPurpose, PurposePicker purposePicker) {

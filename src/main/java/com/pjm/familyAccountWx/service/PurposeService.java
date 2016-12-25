@@ -2,6 +2,9 @@ package com.pjm.familyAccountWx.service;
 
 import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.vo.PurposeVo;
+import com.pjm.familyAccountWx.vo.SelectVo;
+
+import java.util.List;
 
 /**
  * Created by PanJM on 2016/11/26.
@@ -9,6 +12,8 @@ import com.pjm.familyAccountWx.vo.PurposeVo;
 public interface PurposeService {
 
     String queryPurpose(String userName, Integer purposeType) throws Exception;
+
+    List<SelectVo> queryPurposeByPid(String userName, Integer purposeType, Integer parentId) throws Exception;
 
     PageModel dataGrid(PurposeVo purposeVo, PageModel ph, String pId) throws Exception;
 

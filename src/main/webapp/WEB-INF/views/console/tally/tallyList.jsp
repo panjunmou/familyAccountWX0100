@@ -90,7 +90,7 @@
                                     field: 'visible',
                                     align: "center",
                                     formatter: function (value, row, index) {
-                                        if(visible){
+                                        if(value){
                                             return "<span style='color: green;'>启用</span>";
                                         }else{
                                             return "<span style='color: red;'>禁用</span>";
@@ -119,11 +119,17 @@
                                         str += $.formatString(
                                             '<a href="javascript:void(0)" onclick="updateFun(\'{0}\');" >修改</a>',
                                             row.id);
-                                        str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                                        str += $
-                                            .formatString(
-                                                '<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>',
-                                                row.id);
+                                        if(row.visible){
+                                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                                            str += $
+                                                .formatString(
+                                                    '<a href="javascript:void(0)" onclick="changeFun(\'{0}\',-1);" >禁用</a>', row.id);
+                                        }else{
+                                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                                            str += $
+                                                .formatString(
+                                                    '<a href="javascript:void(0)" onclick="changeFun(\'{0}\',1);" >启用</a>', row.id);
+                                        }
                                         return str;
                                     }
                                 }
@@ -132,14 +138,14 @@
                     });
         });
 
-        function deleteFun(id) {
-            parent.$.messager.confirm('询问', '您是否要删除当前数据？', function (b) {
+        function changeFun(id,status) {
+            parent.$.messager.confirm('询问', '您是否要变更当前状态？', function (b) {
                 if (b) {
                     progressLoad();
-                    $.post('${ctx}/console/payUser/delete', {
-                        id: id
+                    $.post('${ctx}/console/tally/changeStatus', {
+                        id: id,
+                        status:status
                     }, function (result) {
-                        console.log(result);
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
                             dataGrid.datagrid('reload');
@@ -151,46 +157,13 @@
         }
 
         function addFun() {
-            parent.$.modalDialog({
-                title: '新建使用者',
-                width: 500,
-                height: 300,
-                href: '${ctx}/console/payUser/addPage',
-                buttons: [{
-                    text: '保存',
-                    handler: function () {
-                        parent.$.modalDialog.openner_treeGrid = dataGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
-                        var f = parent.$.modalDialog.handler.find('#addForm');
-                        f.submit();
-                    }
-                }, {
-                    text: '取消',
-                    handler: function () {
-                        parent.$.modalDialog.handler.dialog('close');
-                    }
-                }]
+            self.parent.addTab({
+                url: '${ctx}/console/tally/addPage?title=${param.title}',
+                title: "新增账单",
+                iconCls: "icon-add"
             });
         }
         function updateFun(id) {
-            parent.$.modalDialog({
-                title: '新建使用者',
-                width: 500,
-                height: 300,
-                href: '${ctx}/console/payUser/editPage?id=' + id,
-                buttons: [{
-                    text: '修改',
-                    handler: function () {
-                        parent.$.modalDialog.openner_treeGrid = dataGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
-                        var f = parent.$.modalDialog.handler.find('#editForm');
-                        f.submit();
-                    }
-                }, {
-                    text: '取消',
-                    handler: function () {
-                        parent.$.modalDialog.handler.dialog('close');
-                    }
-                }]
-            });
         }
     </script>
 </head>
