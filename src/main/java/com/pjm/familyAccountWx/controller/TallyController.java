@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.pjm.familyAccountWx.common.controller.BaseController;
 import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.common.vo.PageModel;
@@ -39,6 +40,7 @@ public class TallyController extends BaseController {
     @ResponseBody
     public Json saveTally(TallyVo tallyParam, HttpServletRequest request) throws Exception {
         Json json = new Json();
+//        System.out.println(JSON.toJSONString(tallyParam));
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
             tallyService.addTally(tallyParam, loginUserInfo.getName(),loginUserInfo.getId());

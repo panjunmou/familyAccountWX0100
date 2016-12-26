@@ -31,7 +31,7 @@
         var purposeOutMap = {};
         function save() {
             var f = $('#addForm');
-            f.attr("action", "${ctx}/console/tally/add");
+            f.attr("action", "${ctx}/tally/saveTally");
             f.submit();
         }
         $(function () {
@@ -129,7 +129,7 @@
                         data.push(
                             {
                                 "text": v.name,
-                                "id": v.id
+                                "value": v.id
                             });
                     });
                     $("#subPurposeIn").combobox("loadData", data);
@@ -147,13 +147,28 @@
                         data.push(
                             {
                                 "text": v.name,
-                                "id": v.id
+                                "value": v.id
                             });
                     });
                     $("#subPurposeOut").combobox("loadData", data);
                 }
             });
 
+            $("#subPurposeIn").combobox({
+                onChange: function () {
+                    var changeVal = $("#subPurposeIn").combobox('getValue');
+                    console.log(changeVal);
+                    $("[name='purposeId']").val(changeVal);
+                }
+            });
+
+            $("#subPurposeOut").combobox({
+                onChange: function () {
+                    var changeVal = $("#subPurposeOut").combobox('getValue');
+                    console.log(changeVal);
+                    $("[name='purposeId']").val(changeVal);
+                }
+            });
         });
     </script>
 </head>
@@ -183,7 +198,7 @@
                     </td>
                     <td class="tdTitle">账户：</td>
                     <td class="tdContent2">
-                        <select name="" class="easyui-combobox"
+                        <select name="accountId" class="easyui-combobox"
                                 data-options="width:150,height:20,editable:false,panelHeight:'auto'">
                             <c:forEach items="${accountList}" var="account">
                                 <option value="${account.value}">${account.title}</option>
@@ -222,7 +237,7 @@
                 <tr>
                     <td class="tdTitle">消费者：</td>
                     <td class="tdTitle2" colspan="3">
-                        <select name="" class="easyui-combobox"
+                        <select name="payUserIds" class="easyui-combobox"
                                 data-options="width:400,height:20,editable:false,multiple:true,panelHeight:'auto'">
                             <c:forEach items="${payUserList}" var="payUser">
                                 <option value="${payUser.value}">${payUser.title}</option>
@@ -233,10 +248,11 @@
                 <tr>
                     <td class="tdTitle">备注：</td>
                     <td class="tdContent2" colspan="5">
-                        <textarea name="content" rows="5" cols="100" maxlength="100" style="width: 500px;"></textarea>
+                        <textarea name="remark" rows="5" cols="100" maxlength="100" style="width: 500px;"></textarea>
                     </td>
                 </tr>
             </table>
+            <input type="hidden" name="purposeId"/>
         </form>
         <div class="divBtn">
             <a onclick="save()" href="javascript:void(0);" class="easyui-linkbutton"

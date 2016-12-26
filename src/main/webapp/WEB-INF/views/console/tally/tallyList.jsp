@@ -157,6 +157,7 @@
         }
 
         function addFun() {
+            console.log('${param.title}');
             self.parent.addTab({
                 url: '${ctx}/console/tally/addPage?title=${param.title}',
                 title: "新增账单",
