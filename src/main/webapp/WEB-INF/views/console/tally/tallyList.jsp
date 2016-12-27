@@ -22,7 +22,7 @@
                         pagination: true,
                         singleSelect: true,
                         idField: 'id',
-                        sortName: 'createDate',
+                        sortName: 'payDate',
                         sortOrder: 'desc',
                         pageSize: 10,
                         pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
@@ -107,7 +107,6 @@
                                         var unixTimestamp = new Date(value);
                                         return unixTimestamp.toLocaleString("yyyy-MM-dd");
                                     }
-
                                 },
                                 {
                                     field: 'action',

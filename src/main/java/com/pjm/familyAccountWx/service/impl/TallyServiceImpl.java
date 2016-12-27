@@ -49,7 +49,6 @@ public class TallyServiceImpl implements TallyService {
     @Override
     public PageModel getTallyList(TallyVo vo, PageModel ph, Long userId) throws Exception {
         List<TallyVo> list = new ArrayList<TallyVo>();
-
         QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph,userId);
         for (TTally tally : pageResult.getReultList()) {
             TallyVo tallyVo = new TallyVo();
@@ -76,7 +75,11 @@ public class TallyServiceImpl implements TallyService {
     public void updateTally(TallyVo tallyVo, String name) throws Exception {
         Long id = tallyVo.getId();
         TTally tTally = tallyDao.find(id, TTally.class);
+        Date createDate = tTally.getCreateDate();
+        String createUser = tTally.getCreateUser();
         this.copyVoToEntity(tallyVo, tTally);
+        tTally.setCreateUser(createUser);
+        tTally.setCreateDate(createDate);
         tallyDao.update(tTally);
     }
 

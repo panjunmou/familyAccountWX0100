@@ -35,6 +35,9 @@
             f.submit();
         }
         $(function () {
+
+            $("#payUserIds").combobox('setValues', '${tally.payUserIds}'.split(','));
+
             var onLoad = true;
             $('#editForm').form({
                 onSubmit: function () {
@@ -256,7 +259,7 @@
                 <tr>
                     <td class="tdTitle">消费者：</td>
                     <td class="tdTitle2" colspan="3">
-                        <select name="payUserIds" class="easyui-combobox"
+                        <select name="payUserIds" class="easyui-combobox" id="payUserIds"
                                 data-options="width:400,height:20,editable:false,multiple:true,panelHeight:'auto'">
                             <c:forEach items="${payUserList}" var="payUser">
                                 <option value="${payUser.value}">${payUser.title}</option>
