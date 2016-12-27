@@ -157,7 +157,6 @@
         }
 
         function addFun() {
-            console.log('${param.title}');
             self.parent.addTab({
                 url: '${ctx}/console/tally/addPage?title=${param.title}',
                 title: "新增账单",
@@ -165,6 +164,11 @@
             });
         }
         function updateFun(id) {
+            self.parent.addTab({
+                url: '${ctx}/console/tally/editPage?id='+id+'&title=${param.title}',
+                title: "修改账单",
+                iconCls: "icon-edit"
+            });
         }
     </script>
 </head>

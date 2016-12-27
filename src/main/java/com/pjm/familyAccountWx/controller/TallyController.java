@@ -40,7 +40,6 @@ public class TallyController extends BaseController {
     @ResponseBody
     public Json saveTally(TallyVo tallyParam, HttpServletRequest request) throws Exception {
         Json json = new Json();
-//        System.out.println(JSON.toJSONString(tallyParam));
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
             tallyService.addTally(tallyParam, loginUserInfo.getName(),loginUserInfo.getId());

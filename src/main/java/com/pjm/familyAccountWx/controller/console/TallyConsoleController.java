@@ -14,7 +14,6 @@ import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import com.pjm.familyAccountWx.vo.PurposePicker;
 import com.pjm.familyAccountWx.vo.SelectVo;
 import com.pjm.familyAccountWx.vo.TallyVo;
-import org.apache.tools.ant.taskdefs.condition.Http;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +68,6 @@ public class TallyConsoleController extends BaseController {
     public String addPage(Model model, HttpServletRequest request) throws Exception {
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
         Long userId = loginUserInfo.getId();
-        String userName = loginUserInfo.getName();
         String tallyNo = this.getBizSeqCode(BizSeqType.TALLY.getSeqType());
         model.addAttribute("tallyNo", tallyNo);
         Date todayDate = new Date();
@@ -88,9 +86,19 @@ public class TallyConsoleController extends BaseController {
     }
 
     @RequestMapping("/editPage")
-    public String updatePage(Model model, Long id) throws Exception {
+    public String updatePage(Model model, Long id, HttpServletRequest request) throws Exception {
+        LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+        Long userId = loginUserInfo.getId();
         TallyVo tallyVo = tallyService.getTally(id);
         model.addAttribute("tally", tallyVo);
+        String accountStr = accountservice.queryAccountListByUserId(userId);
+        List<SelectVo> accountList = JSON.parseObject(accountStr, new TypeReference<ArrayList<SelectVo>>() {
+        });
+        model.addAttribute("accountList", accountList);
+        String payUserStr = payUserService.queryPayUserListByUserId(userId);
+        List<SelectVo> payUserList = JSON.parseObject(payUserStr, new TypeReference<ArrayList<SelectVo>>() {
+        });
+        model.addAttribute("payUserList", payUserList);
         return "/console/tally/tallyEdit";
     }
 
@@ -116,7 +124,8 @@ public class TallyConsoleController extends BaseController {
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
         try {
             String purposeInStr = purposeService.queryPurpose(loginUserInfo.getName(), -1);
-            List<PurposePicker> purposeInList = JSON.parseObject(purposeInStr, new TypeReference<ArrayList<PurposePicker>>() { });
+            List<PurposePicker> purposeInList = JSON.parseObject(purposeInStr, new TypeReference<ArrayList<PurposePicker>>() {
+            });
             json.setMsg("操作成功");
             json.setObj(purposeInList);
             json.setSuccess(true);
@@ -137,7 +146,8 @@ public class TallyConsoleController extends BaseController {
         try {
 
             String purposeOutStr = purposeService.queryPurpose(loginUserInfo.getName(), 1);
-            List<PurposePicker> purposeOutList = JSON.parseObject(purposeOutStr, new TypeReference<ArrayList<PurposePicker>>() { });
+            List<PurposePicker> purposeOutList = JSON.parseObject(purposeOutStr, new TypeReference<ArrayList<PurposePicker>>() {
+            });
             json.setObj(purposeOutList);
             json.setSuccess(true);
         } catch (ServiceException e) {

@@ -21,6 +21,7 @@ public class TallyVo extends BaseVo{
     private String accountName;
 
     private Long purposeId;
+    private Long parentPurposeId;
     private String purposeName;
 
     private String payUserId;
@@ -153,5 +154,13 @@ public class TallyVo extends BaseVo{
 
     public void setVisible(Boolean visible) {
         this.visible = visible;
+    }
+
+    public Long getParentPurposeId() {
+        return parentPurposeId;
+    }
+
+    public void setParentPurposeId(Long parentPurposeId) {
+        this.parentPurposeId = parentPurposeId;
     }
 }

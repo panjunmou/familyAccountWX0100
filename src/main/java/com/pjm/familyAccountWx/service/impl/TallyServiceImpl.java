@@ -122,6 +122,7 @@ public class TallyServiceImpl implements TallyService {
         if (parent != null) {
             String name = parent.getName();
             purposeName += name + " ";
+            tallyVo.setParentPurposeId(parent.getId());
         }
         purposeName += tPurpose.getName();
         tallyVo.setPurposeName(purposeName);
