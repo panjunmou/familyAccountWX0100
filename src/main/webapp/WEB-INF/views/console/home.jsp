@@ -279,14 +279,11 @@
                 <div class="accordion-item" onclick="goPage('/console/purpose/manager?title=用途管理','用途管理')">用途管理</div>
                 <div class="accordion-item" onclick="goPage('/console/payUser/manager?title=使用者管理','使用者管理')">使用者管理</div>
                 <div class="accordion-item" onclick="goPage('/console/tally/manager?title=账单明细管理','账单明细管理')">账单明细管理</div>
-                <div class="accordion-item">报表查看</div>
             </div>
-            <%-- <div title="Help" data-options="iconCls:'icon-company'" style="overflow:auto;padding:10px;">
-                asdfasdf
+            <div title="报表管理" data-options="" style="padding:0;">
+                <div class="accordion-item" onclick="goPage('/console/report/monthManager?title=月度统计','月度统计')">月度统计</div>
+                <div class="accordion-item" onclick="goPage('/console/purpose/manager?title=用途管理','用途管理')">年度统计</div>
             </div>
-            <div title="TreeMenu" data-options="iconCls:'icon-company'" style="padding:10px;">
-                sadfasdf
-            </div>--%>
         </div>
     </div>
     <div data-options="region:'center'" style="overflow: hidden;">

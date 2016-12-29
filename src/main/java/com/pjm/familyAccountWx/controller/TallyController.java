@@ -1,6 +1,5 @@
 package com.pjm.familyAccountWx.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.pjm.familyAccountWx.common.controller.BaseController;
 import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.common.vo.PageModel;
@@ -42,7 +41,7 @@ public class TallyController extends BaseController {
         Json json = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
-            tallyService.addTally(tallyParam, loginUserInfo.getName(),loginUserInfo.getId());
+            tallyService.addTally(tallyParam, loginUserInfo.getName(), loginUserInfo.getId());
             json.setSuccess(true);
             json.setMsg("保存成功");
         } catch (ServiceException e) {
@@ -74,13 +73,13 @@ public class TallyController extends BaseController {
 
     @RequestMapping(value = "tallyList", method = RequestMethod.GET)
     @ResponseBody
-    public Json tallyList(TallyVo tallyParam, PageModel ph,HttpServletRequest request) throws Exception {
+    public Json tallyList(TallyVo tallyParam, PageModel ph, HttpServletRequest request) throws Exception {
         Json json = new Json();
         json.setSuccess(true);
         json.setMsg(null);
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
         Long userId = loginUserInfo.getId();
-        PageModel pageModel = tallyService.getTallyList(tallyParam, ph,userId);
+        PageModel pageModel = tallyService.getTallyList(tallyParam, ph, userId);
         json.setObj(pageModel);
         return json;
     }
