@@ -89,7 +89,7 @@ public class BaseVo implements Serializable {
 
     public Date getCreateDateStart() {
         if (!StringUtils.isEmpty(createDateStart)) {
-            return DateUtil.stringToDate(createDateStart + " 00:00:00");
+            return DateUtil.stringToDate(createDateStart + " 00:00:00",DateUtil.FORMAT_DATE_TIME);
         }
         return null;
     }
@@ -100,7 +100,7 @@ public class BaseVo implements Serializable {
 
     public Date getCreateDateEnd() {
         if (!StringUtils.isEmpty(createDateEnd)) {
-            return DateUtil.stringToDate(createDateEnd + " 23:59:59");
+            return DateUtil.stringToDate(createDateEnd + " 23:59:59",DateUtil.FORMAT_DATE_TIME);
         }
         return null;
     }

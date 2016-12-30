@@ -11,7 +11,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <jsp:include page="../../wechat.jsp"></jsp:include>
+    <%--<jsp:include page="../../wechat.jsp"></jsp:include>--%>
+    <jsp:include page="../../inc.jsp"></jsp:include>
     <title>月度统计</title>
     <script type="text/javascript" src="${ctx}/js/echart/echarts.js"></script>
     <script type="text/javascript">
@@ -19,12 +20,11 @@
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('main'));
 
-            ajaxJS(
-                '${ctx}/console/report/MonthBar',
-                {},
-                'true',
-                'get',
-                function (result) {
+            $.ajax({
+                type: "get",
+                url: '${ctx}/console/report/MonthBar',
+                dataType: "json",
+                success: function (result) {
                     console.log(result);
                     console.log(result.obj.seriesDatas);
                     // 指定图表的配置项和数据
@@ -56,12 +56,12 @@
                                         shadowOffsetX: 0,
                                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                                     },
-                                    normal:{
-                                        label:{
+                                    normal: {
+                                        label: {
                                             show: true,
                                             formatter: '{b} : {c} ({d}%)'
                                         },
-                                        labelLine :{show:true}
+                                        labelLine: {show: true}
                                     }
                                 }
                             }
@@ -70,7 +70,7 @@
                     // 使用刚指定的配置项和数据显示图表。
                     myChart.setOption(option);
                 }
-            );
+            });
         });
     </script>
 </head>
@@ -81,14 +81,26 @@
             <tr>
                 <th width="10%" align="right">类型：</th>
                 <td width="20%" align="left">
-                    <input name="purposeType" type="radio" value="-1"/>支出
+                    <input name="purposeType" type="radio" value="-1" checked/>支出
                     <input name="purposeType" type="radio" value="1"/>收入
                 </td>
                 <th width="10%" align="right">类型：</th>
                 <td width="20%" align="left">
-                    <input name="tallyType" type="radio" value="purpose"/>用途
+                    <input name="tallyType" type="radio" value="purpose" checked/>用途
                     <input name="tallyType" type="radio" value="account"/>账户
                     <input name="tallyType" type="radio" value="payuser"/>使用者
+                </td>
+            </tr>
+            <tr>
+                <th width="10%" align="right">日期从：</th>
+                <td width="20%" align="left">
+                    <input id="dateStart" name="dateStart" placeholder="点击选择日期" class="easyui-datebox"
+                           data-options="required:true,editable:false" value="${dateStart}"/>
+                </td>
+                <th width="10%" align="right">日期到：</th>
+                <td width="20%" align="left">
+                    <input id="dateEnd" name="dateEnd" placeholder="点击选择日期" class="easyui-datebox"
+                           data-options="required:true,editable:false" value="${dateEnd}"/>
                 </td>
             </tr>
         </table>

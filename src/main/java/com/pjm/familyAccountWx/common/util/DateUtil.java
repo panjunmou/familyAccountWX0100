@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class DateUtil {
 
@@ -22,30 +21,7 @@ public class DateUtil {
      */
     public static final String FORMAT_DATE = "yyyy-MM-dd";
 
-    /**
-     * 格式：时:分钟:秒
-     */
-    public static final String FORMAT_TIME = "HH:mm:ss";
-
     public static Logger log = LoggerFactory.getLogger(DateUtil.class);
-
-    /**
-     * 获取当前时间的指定格式
-     */
-    public static String getCurrentDateStr() {
-        return dateToString(Calendar.getInstance().getTime(), FORMAT_DATE_TIME);
-    }
-
-    /**
-     * 获取当前时间
-     *
-     * @return
-     */
-    public static Date getCurrentDate() {
-        Calendar c = Calendar.getInstance(Locale.getDefault());
-
-        return c.getTime();
-    }
 
     /**
      * 把日期转换为字符串
@@ -65,21 +41,7 @@ public class DateUtil {
     }
 
     /**
-     * 把日期转换为字符串 如果为空返回当前时间
-     */
-    public static String dateToString(Date date) {
-        return dateToString(date, FORMAT_DATE_TIME);
-    }
-
-    /**
-     * 把日期转换为字符串 如果为空返回当前时间
-     */
-    public static String dateToShortString(Date date) {
-        return dateToString(date, FORMAT_DATE);
-    }
-
-    /**
-     * 把字符串转换为日期 如果为空返回当前时间
+     * 把字符串转换为日期
      */
     public static Date stringToDate(String dateStr, String format) {
         if (dateStr == null) {
@@ -91,22 +53,16 @@ public class DateUtil {
             date = formater.parse(dateStr);
         } catch (ParseException e) {
             log.error("The specified string cannot be parsed. " + e.getMessage());
-            date = getCurrentDate();
         }
-
         return date;
-
     }
 
     /**
-     *
-     * @param dateStr
+     * 获取两个日期之间的天数
+     * @param date1
+     * @param date2
      * @return
      */
-    public static Date stringToDate(String dateStr) {
-        return stringToDate(dateStr, FORMAT_DATE_TIME);
-    }
-
     public static int getBetweenDay(Date date1, Date date2) {
         Calendar d1 = new GregorianCalendar();
         d1.setTime(date1);
@@ -123,13 +79,121 @@ public class DateUtil {
         return days;
     }
 
-    public static int getBetweenYear(Date date) {
-        Calendar d1 = new GregorianCalendar();
-        d1.setTime(date);
-        Calendar d2 = new GregorianCalendar();
-        d2.setTime(new Date());
+    /**
+     * 获取两个日期之间的年数
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static int getBetweenYear(Date date1,Date date2) {
+        Calendar d1 = Calendar.getInstance();
+        d1.setTime(date1);
+        Calendar d2 = Calendar.getInstance();
+        d2.setTime(date2);
         int nowYear = d2.get(Calendar.YEAR);
         int dateYear = d1.get(Calendar.YEAR);
         return nowYear - dateYear;
+    }
+
+    /**
+     *获取年
+     * @param date
+     * @return
+     */
+    public static int getYear(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        return year;
+    }
+
+    /**
+     *获取月
+     * @param date
+     * @return
+     */
+    public static int getMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int month = calendar.get(Calendar.MONTH);
+        return month + 1;
+    }
+
+    /**
+     *获取日
+     * @param date
+     * @return
+     */
+    public static int getDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return day;
+    }
+
+    /**
+     *获取月份天数
+     * @param date
+     * @return
+     */
+    public static int getMonthDay(Date date) throws ParseException {
+        //方法1利用getActualMaximum
+        Calendar calendar = Calendar.getInstance();
+        //calendar设置时间
+        calendar.setTime(date);
+        int actualMaximum = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return actualMaximum;
+    }
+
+    /**
+     *获取某月第一天
+     * @param date
+     * @return
+     */
+    public static String getMonthFirstStr(Date date) throws ParseException {
+        int year = DateUtil.getYear(date);
+        int month = DateUtil.getMonth(date);
+        String dateStr = year + "-" + month + "-" + "01";
+        return dateStr;
+    }
+
+    /**
+     *获取某月第一天
+     * @param date
+     * @return
+     */
+    public static Date getMonthFirstDate(Date date) throws ParseException {
+        int year = DateUtil.getYear(date);
+        int month = DateUtil.getMonth(date);
+        String dateStr = year + "-" + month + "-" + "01";
+        Date toDate = DateUtil.stringToDate(dateStr, DateUtil.FORMAT_DATE);
+        return toDate;
+    }
+
+    /**
+     *获取某月最后一天
+     * @param date
+     * @return
+     */
+    public static String getMonthLastStr(Date date) throws ParseException {
+        int year = DateUtil.getYear(date);
+        int month = DateUtil.getMonth(date);
+        int day = DateUtil.getMonthDay(date);
+        String dateStr = year + "-" + month + "-" + day;
+        return dateStr;
+    }
+
+    /**
+     *获取某月最后一天
+     * @param date
+     * @return
+     */
+    public static Date getMonthLastDate(Date date) throws ParseException {
+        int year = DateUtil.getYear(date);
+        int month = DateUtil.getMonth(date);
+        int day = DateUtil.getMonthDay(date);
+        String dateStr = year + "-" + month + "-" + day;
+        Date toDate = DateUtil.stringToDate(dateStr, DateUtil.FORMAT_DATE);
+        return toDate;
     }
 }

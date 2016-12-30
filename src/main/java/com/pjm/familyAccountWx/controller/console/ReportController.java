@@ -1,17 +1,20 @@
 package com.pjm.familyAccountWx.controller.console;
 
 import com.pjm.familyAccountWx.common.controller.BaseController;
+import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.common.vo.Json;
 import com.pjm.familyAccountWx.service.ReportService;
 import com.pjm.familyAccountWx.vo.BarVo;
 import com.pjm.familyAccountWx.vo.LoginUserInfo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created by PanJM_Levono on 2016/12/28.
@@ -24,7 +27,11 @@ public class ReportController extends BaseController {
     private ReportService reportService;
 
     @RequestMapping("/monthManager")
-    public String monthManager() throws Exception {
+    public String monthManager(Model model) throws Exception {
+        String monthFirstStr = DateUtil.getMonthFirstStr(new Date());
+        String monthLastStr = DateUtil.getMonthLastStr(new Date());
+        model.addAttribute("dateStart", monthFirstStr);
+        model.addAttribute("dateEnd", monthLastStr);
         return "/console/report/monthList";
     }
 
