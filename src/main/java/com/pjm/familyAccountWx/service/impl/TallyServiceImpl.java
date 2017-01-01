@@ -1,7 +1,6 @@
 package com.pjm.familyAccountWx.service.impl;
 
 import com.pjm.familyAccountWx.common.enu.BizSeqType;
-import com.pjm.familyAccountWx.common.util.CalendarUtil;
 import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.common.vo.QueryResult;
 import com.pjm.familyAccountWx.dao.AccountDao;
@@ -49,7 +48,7 @@ public class TallyServiceImpl implements TallyService {
     @Override
     public PageModel getTallyList(TallyVo vo, PageModel ph, Long userId) throws Exception {
         List<TallyVo> list = new ArrayList<TallyVo>();
-        QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph,userId);
+        QueryResult<TTally> pageResult = tallyDao.getTallyList(vo, ph, userId);
         for (TTally tally : pageResult.getReultList()) {
             TallyVo tallyVo = new TallyVo();
             this.copyEntityToVo(tally, tallyVo);
@@ -157,7 +156,7 @@ public class TallyServiceImpl implements TallyService {
         TTally tTally = tallyDao.find(id, TTally.class);
         if (status.equals("-1")) {
             tTally.setVisible(false);
-        }else {
+        } else {
             tTally.setVisible(true);
         }
         tallyDao.update(tTally);
