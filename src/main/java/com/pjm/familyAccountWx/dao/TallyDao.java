@@ -63,10 +63,10 @@ public class TallyDao extends BaseDao {
         }
         conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
 
-//        ph.setSort("payDate");
-//        ph.setOrder(PageModel.desc);
-//        ph.setSecondSort("createDate");
-//        ph.setSecondOrder(PageModel.desc);
+        ph.setSort("payDate");
+        ph.setOrder(PageModel.desc);
+        ph.setSecondSort("createDate");
+        ph.setSecondOrder(PageModel.desc);
 
         QueryResult<TTally> pageResult = this.getPageResult(TTally.class, conditions, ph);
         return pageResult;
