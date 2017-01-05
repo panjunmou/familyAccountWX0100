@@ -50,16 +50,6 @@ public class PageModel implements Serializable {
     private String order;
 
     /**
-     * 第二排序字段
-     */
-    private String secondSort;
-
-    /**
-     * asc/desc
-     */
-    private String secondOrder;
-
-    /**
      * 查询结果集
      */
     private List<?> rows;
@@ -143,22 +133,6 @@ public class PageModel implements Serializable {
     public void orderBy(String sortField, String orderType) {
         this.sort = sortField;
         this.order = orderType;
-    }
-
-    public String getSecondSort() {
-        return secondSort;
-    }
-
-    public void setSecondSort(String secondSort) {
-        this.secondSort = secondSort;
-    }
-
-    public String getSecondOrder() {
-        return secondOrder;
-    }
-
-    public void setSecondOrder(String secondOrder) {
-        this.secondOrder = secondOrder;
     }
 
     public List<?> getFooter() {

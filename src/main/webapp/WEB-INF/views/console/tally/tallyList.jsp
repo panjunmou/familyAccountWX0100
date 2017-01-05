@@ -24,7 +24,7 @@
                         idField: 'id',
                         sortName: 'payDate',
                         sortOrder: 'desc',
-                        pageSize: 10,
+                        pageSize: 50,
                         pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                         columns: [
                             [
@@ -39,7 +39,8 @@
                                     width: '150 ',
                                     title: '账单编号',
                                     field: 'tallyNo',
-                                    align: "center"
+                                    align: "center",
+                                    hidden: true
                                 },
                                 {
                                     width: '200 ',
@@ -48,13 +49,13 @@
                                     align: "center"
                                 },
                                 {
-                                    width: '100',
+                                    width: '80',
                                     title: '金额',
                                     field: 'money',
                                     align: "center"
                                 },
                                 {
-                                    width: '100',
+                                    width: '80',
                                     title: '账户',
                                     field: 'accountName',
                                     align: "center"
@@ -72,7 +73,7 @@
                                     align: "center"
                                 },
                                 {
-                                    width: '100',
+                                    width: '50',
                                     title: '类型',
                                     field: 'purposeType',
                                     align: "center",
@@ -85,7 +86,7 @@
                                     }
                                 },
                                 {
-                                    width: '100',
+                                    width: '50',
                                     title: '状态',
                                     field: 'visible',
                                     align: "center",
@@ -105,7 +106,7 @@
                                     sortable: true,
                                     formatter: function (value, row, index) {
                                         var unixTimestamp = new Date(value);
-                                        return unixTimestamp.toLocaleString("yyyy-MM-dd");
+                                        return unixTimestamp.toLocaleString("yyyy-MM-dd hh:mm:ss");
                                     }
                                 },
                                 {
@@ -129,6 +130,10 @@
                                                 .formatString(
                                                     '<a href="javascript:void(0)" onclick="changeFun(\'{0}\',1);" >启用</a>', row.id);
                                         }
+                                        str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                                        str += $
+                                            .formatString(
+                                                '<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
                                         return str;
                                     }
                                 }
@@ -136,6 +141,23 @@
                         toolbar: '#toolbar'
                     });
         });
+
+        function deleteFun(id) {
+            parent.$.messager.confirm('询问', '您是否要删除当前数据？', function (b) {
+                if (b) {
+                    progressLoad();
+                    $.post('${ctx}/console/tally/delete', {
+                        id: id
+                    }, function (result) {
+                        if (result.success) {
+                            parent.$.messager.alert('提示', result.msg, 'info');
+                            dataGrid.datagrid('reload');
+                        }
+                        progressClose();
+                    }, 'JSON');
+                }
+            });
+        }
 
         function changeFun(id,status) {
             parent.$.messager.confirm('询问', '您是否要变更当前状态？', function (b) {
@@ -169,9 +191,96 @@
                 iconCls: "icon-edit"
             });
         }
+        function searchFun() {
+            dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
+        }
+        function cleanFun() {
+            $('#searchForm input').val('');
+            dataGrid.datagrid('load', {});
+        }
     </script>
 </head>
 <body class="easyui-layout" data-options="fit:true,border:false">
+<div data-options="region:'north',border:false" class="divContent0">
+    <form id="searchForm">
+        <table class="tabContent0">
+            <tr>
+                <th width="10%" align="right">账单编号：</th>
+                <td width="20%" align="left">
+                    <input name="tallyNo" placeholder="请输入账单编号"/>
+                </td>
+                <th width="10%" align="right">说明：</th>
+                <td width="20%" align="left">
+                    <input name="remark" placeholder="请输入说明"/>
+                </td>
+                <th width="10%" align="right">账户：</th>
+                <td width="20%" align="left">
+                    <select name="accountId" class="easyui-combobox"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                        <option value="">请选择账户...</option>
+                        <c:forEach items="${accountList}" var="account">
+                            <option value="${account.value}">${account.title}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th width="10%" align="right">使用者：</th>
+                <td width="20%" align="left">
+                    <select name="payUserId" class="easyui-combobox"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                        <option value="">请选择使用者...</option>
+                        <c:forEach items="${payUserList}" var="payUser">
+                            <option value="${payUser.value}">${payUser.title}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+                <th width="10%" align="right">用途(父级)：</th>
+                <td width="20%" align="left">
+                </td>
+                <th width="10%" align="right">用途(子级)：</th>
+                <td width="20%" align="left">
+                </td>
+            </tr>
+            <tr>
+                <th width="10%" align="right">类型：</th>
+                <td width="20%" align="left">
+                </td>
+                <th width="10%" align="right">状态：</th>
+                <td width="20%" align="left">
+                </td>
+                <th width="10%" align="right">金额：</th>
+                <td width="20%" align="left">
+                    <input name="" type="text" style="width: 80px"/>
+                    至
+                    <input name="" type="text" style="width: 80px"/>
+                </td>
+            </tr>
+            <tr>
+                <th width="10%" align="right">创建日期：</th>
+                <td width="60%" align="left" colspan="4">
+                    <input name="" type="text"/>
+                    至
+                    <input name="" type="text"/>
+                </td>
+                <td width="20%" align="left">
+                    <a href="javascript:void(0);" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-search',plain:true" onclick="searchFun('searchProductForm');">
+                        查询 </a>
+                    <a href="javascript:void(0);" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun('searchProductForm');">
+                        清空 </a>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <input id="page" name="page" type="hidden"/>
+            <input id="pageSize" name="pageSize" type="hidden"/>
+            <input id="sort" name="sort" type="hidden"/>
+            <input id="order" name="order" type="hidden"/>
+        </div>
+    </form>
+</div>
 <div data-options="region:'center',border:true">
     <table id="dataGrid" data-options="fit:true,border:false"></table>
 </div>

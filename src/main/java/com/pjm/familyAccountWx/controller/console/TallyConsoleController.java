@@ -45,7 +45,17 @@ public class TallyConsoleController extends BaseController {
     private PurposeService purposeService;
 
     @RequestMapping("/manager")
-    public String manager() throws Exception {
+    public String manager(Model model,HttpServletRequest request) throws Exception {
+        LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+        Long userId = loginUserInfo.getId();
+        String accountStr = accountservice.queryAccountListByUserId(userId);
+        List<SelectVo> accountList = JSON.parseObject(accountStr, new TypeReference<ArrayList<SelectVo>>() {
+        });
+        model.addAttribute("accountList", accountList);
+        String payUserStr = payUserService.queryPayUserListByUserId(userId);
+        List<SelectVo> payUserList = JSON.parseObject(payUserStr, new TypeReference<ArrayList<SelectVo>>() {
+        });
+        model.addAttribute("payUserList", payUserList);
         return "/console/tally/tallyList";
     }
 
@@ -112,6 +122,21 @@ public class TallyConsoleController extends BaseController {
             j.setSuccess(true);
         } catch (Exception e) {
             j.setMsg("变更失败");
+            e.printStackTrace();
+        }
+        return j;
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Json delete(Long id) {
+        Json j = new Json();
+        try {
+            tallyService.realDelete(id);
+            j.setMsg("删除成功");
+            j.setSuccess(true);
+        } catch (Exception e) {
+            j.setMsg("删除失败");
             e.printStackTrace();
         }
         return j;

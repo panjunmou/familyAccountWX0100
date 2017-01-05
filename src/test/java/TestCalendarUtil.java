@@ -71,6 +71,30 @@ public class TestCalendarUtil {
     }
 
     @Test
+    public void testHour() {
+        int hour = DateUtil.getHour(new Date());
+        System.out.println("hour = " + hour);
+    }
+
+    @Test
+    public void testMinute() {
+        int hour = DateUtil.getMinute(new Date());
+        System.out.println("hour = " + hour);
+    }
+
+    @Test
+    public void testSecond() {
+        int hour = DateUtil.getSecond(new Date());
+        System.out.println("hour = " + hour);
+    }
+
+    @Test
+    public void testHMS() {
+        String hms = DateUtil.getHMS(new Date());
+        System.out.println("hms = " + hms);
+    }
+
+    @Test
     public void testGetMonthDay() throws ParseException {
         Date date1 = DateUtil.stringToDate("2012-02-25 23:00:00", DateUtil.FORMAT_DATE_TIME);
         int day = DateUtil.getMonthDay(date1);

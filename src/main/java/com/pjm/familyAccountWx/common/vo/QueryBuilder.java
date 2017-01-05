@@ -155,7 +155,7 @@ public class QueryBuilder {
                 assembleQuery(builder, parameters, suffix, condition);
                 if (condition.getValue() == null) {
                     suffix++;
-                }else if (condition.getValue() instanceof List<?>) {
+                } else if (condition.getValue() instanceof List<?>) {
                     List<?> list = (List<?>) condition.getValue();
                     suffix = suffix + list.size();
                 } else if (condition.getValue().getClass().isArray()) {
@@ -170,16 +170,30 @@ public class QueryBuilder {
     }
 
     public void orderBy(PageModel page) {
-
-        if (page != null && (!StringUtils.isEmpty(page.getSort())) && (!StringUtils.isEmpty(page.getOrder()))) {
-            builder.append(DBConstants.ORDER_BY).append(alias).append(DBConstants.DOT).append(page.getSort())
-                    .append(" ").append(page.getOrder());
-            if (page.getSecondSort() != null) {
-                builder.append(",").append(alias).append(DBConstants.DOT).append(page.getSecondSort());
-                if (page.getSecondOrder() != null) {
-                    builder.append(" ").append(page.getSecondOrder());
+        String sort = page.getSort();
+        String order = page.getOrder();
+        if (page != null && (!StringUtils.isEmpty(sort)) && (!StringUtils.isEmpty(order))) {
+            String[] sortStrArr = sort.split(",");
+            String[] orderStrArr = order.split(",");
+            builder
+                    .append(DBConstants.ORDER_BY)
+                    .append(alias)
+                    .append(DBConstants.DOT);
+            for (int i = 0; i < sortStrArr.length; i++) {
+                String sortStr = sortStrArr[i];
+                String orderStr = orderStrArr[i];
+                builder
+                    .append(sortStr)
+                    .append(" ");
+                if (!StringUtils.isEmpty(orderStr)) {
+                    builder
+                            .append(orderStr);
+                }else{
+                    builder.append(PageModel.asc);
                 }
+                builder.append(",");
             }
+            builder = builder.deleteCharAt(builder.length() - 1);
         }
     }
 

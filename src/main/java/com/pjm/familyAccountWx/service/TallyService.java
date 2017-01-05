@@ -19,4 +19,6 @@ public interface TallyService {
     void delete(Long id) throws Exception;
 
     void changeStatus(Long id, String status) throws Exception;
+
+    void realDelete(Long id) throws Exception;
 }

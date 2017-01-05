@@ -1,6 +1,7 @@
 package com.pjm.familyAccountWx.service.impl;
 
 import com.pjm.familyAccountWx.common.enu.BizSeqType;
+import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.common.vo.QueryResult;
 import com.pjm.familyAccountWx.dao.AccountDao;
@@ -84,11 +85,10 @@ public class TallyServiceImpl implements TallyService {
 
     private void copyVoToEntity(TallyVo tallyVo, TTally tTally) throws Exception {
         BeanUtils.copyProperties(tallyVo, tTally);
-        String payDate = tallyVo.getPayDate();
+        String payDate = tallyVo.getPayDate() + " " + DateUtil.getHMS(new Date());
         Long accountId = tallyVo.getAccountId();
         Long purposeId = tallyVo.getPurposeId();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parseDate = simpleDateFormat.parse(payDate);
+        Date parseDate = DateUtil.stringToDate(payDate, DateUtil.FORMAT_DATE_TIME);
         TAccount tAccount = accountDao.find(accountId, TAccount.class);
         TPurpose tPurpose = purposeDao.find(purposeId, TPurpose.class);
         tTally.settAccount(tAccount);
@@ -111,11 +111,10 @@ public class TallyServiceImpl implements TallyService {
         BeanUtils.copyProperties(tally, tallyVo);
         TAccount tAccount = tally.gettAccount();
         Date payDate = tally.getPayDate();
+        String date = DateUtil.dateToString(payDate, DateUtil.FORMAT_DATE_TIME);
         TPurpose tPurpose = tally.gettPurpose();
         Integer purposeType = tPurpose.getPurposeType();
         Set<TPayUser> tPayUsers = tally.gettPayUserSet();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = simpleDateFormat.format(payDate);
         tallyVo.setAccountId(tAccount.getId());
         tallyVo.setAccountName(tAccount.getName());
         tallyVo.setPurposeId(tPurpose.getId());
@@ -128,6 +127,10 @@ public class TallyServiceImpl implements TallyService {
         }
         purposeName += tPurpose.getName();
         tallyVo.setPurposeName(purposeName);
+        String remark = tally.getRemark();
+        if (StringUtils.isEmpty(remark)) {
+            tallyVo.setRemark(purposeName);
+        }
         tallyVo.setPayDate(date);
         tallyVo.setPurposeType(purposeType);
         if (tPayUsers != null && tPayUsers.size() > 0) {
@@ -160,5 +163,11 @@ public class TallyServiceImpl implements TallyService {
             tTally.setVisible(true);
         }
         tallyDao.update(tTally);
+    }
+
+    @Override
+    public void realDelete(Long id) throws Exception {
+        TTally tTally = tallyDao.find(id, TTally.class);
+        tallyDao.delete(tTally);
     }
 }

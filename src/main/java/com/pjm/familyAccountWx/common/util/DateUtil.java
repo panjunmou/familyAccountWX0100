@@ -59,6 +59,7 @@ public class DateUtil {
 
     /**
      * 获取两个日期之间的天数
+     *
      * @param date1
      * @param date2
      * @return
@@ -81,11 +82,12 @@ public class DateUtil {
 
     /**
      * 获取两个日期之间的年数
+     *
      * @param date1
      * @param date2
      * @return
      */
-    public static int getBetweenYear(Date date1,Date date2) {
+    public static int getBetweenYear(Date date1, Date date2) {
         Calendar d1 = Calendar.getInstance();
         d1.setTime(date1);
         Calendar d2 = Calendar.getInstance();
@@ -96,7 +98,8 @@ public class DateUtil {
     }
 
     /**
-     *获取年
+     * 获取年
+     *
      * @param date
      * @return
      */
@@ -108,7 +111,8 @@ public class DateUtil {
     }
 
     /**
-     *获取月
+     * 获取月
+     *
      * @param date
      * @return
      */
@@ -120,7 +124,8 @@ public class DateUtil {
     }
 
     /**
-     *获取日
+     * 获取日
+     *
      * @param date
      * @return
      */
@@ -132,7 +137,60 @@ public class DateUtil {
     }
 
     /**
-     *获取月份天数
+     * 获取时(24小时制)
+     *
+     * @param date
+     * @return
+     */
+    public static int getHour(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        return hour;
+    }
+
+    /**
+     * 获取分
+     *
+     * @param date
+     * @return
+     */
+    public static int getMinute(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int minute = calendar.get(Calendar.MINUTE);
+        return minute;
+    }
+
+    /**
+     * 获取秒
+     *
+     * @param date
+     * @return
+     */
+    public static int getSecond(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int second = calendar.get(Calendar.SECOND);
+        return second;
+    }
+
+    /**
+     * 获取时分秒
+     *
+     * @return
+     */
+    public static String getHMS(Date date) {
+        String hour = getHour(date) < 10 ? "0" + getHour(date) : getHour(date) + "";
+        String minute = getMinute(date) < 10 ? "0" + getMinute(date) : getMinute(date) + "";
+        String second = getSecond(date) < 10 ? "0" + getSecond(date) : getSecond(date) + "";
+        String hms = hour + ":" + minute + ":" + second;
+        return hms;
+    }
+
+    /**
+     * 获取月份天数
+     *
      * @param date
      * @return
      */
@@ -146,7 +204,8 @@ public class DateUtil {
     }
 
     /**
-     *获取某月第一天
+     * 获取某月第一天
+     *
      * @param date
      * @return
      */
@@ -158,7 +217,8 @@ public class DateUtil {
     }
 
     /**
-     *获取某月第一天
+     * 获取某月第一天
+     *
      * @param date
      * @return
      */
@@ -171,7 +231,8 @@ public class DateUtil {
     }
 
     /**
-     *获取某月最后一天
+     * 获取某月最后一天
+     *
      * @param date
      * @return
      */
@@ -184,7 +245,8 @@ public class DateUtil {
     }
 
     /**
-     *获取某月最后一天
+     * 获取某月最后一天
+     *
      * @param date
      * @return
      */

@@ -53,9 +53,13 @@ public class TallyDao extends BaseDao {
         if (!StringUtils.isEmpty(remark)) {
             conditions.add(new Condition("remark", "%" + remark + "%", Condition.LIKE));
         }
-
-        if (!StringUtils.isEmpty(tallyParam.getVisible())) {
-            if (tallyParam.getVisible()) {
+        String tallyNo = tallyParam.getTallyNo();
+        if (!StringUtils.isEmpty(tallyNo)) {
+            conditions.add(new Condition("tallyNo", "%" + tallyNo + "%", Condition.LIKE));
+        }
+        Boolean visible = tallyParam.getVisible();
+        if (!StringUtils.isEmpty(visible)) {
+            if (visible) {
                 conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
             }
         } else {
@@ -63,10 +67,8 @@ public class TallyDao extends BaseDao {
         }
         conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
 
-        ph.setSort("payDate");
-        ph.setOrder(PageModel.desc);
-        ph.setSecondSort("createDate");
-        ph.setSecondOrder(PageModel.desc);
+        ph.setSort("payDate,createDate");
+        ph.setOrder(PageModel.desc + "," + PageModel.desc);
 
         QueryResult<TTally> pageResult = this.getPageResult(TTally.class, conditions, ph);
         return pageResult;
