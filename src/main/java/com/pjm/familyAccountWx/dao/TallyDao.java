@@ -2,6 +2,7 @@ package com.pjm.familyAccountWx.dao;
 
 import com.pjm.familyAccountWx.common.dao.BaseDao;
 import com.pjm.familyAccountWx.common.util.CollectionsUtil;
+import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.common.vo.Condition;
 import com.pjm.familyAccountWx.common.vo.PageModel;
 import com.pjm.familyAccountWx.common.vo.QueryResult;
@@ -11,7 +12,9 @@ import com.pjm.familyAccountWx.vo.TallyVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -67,7 +70,22 @@ public class TallyDao extends BaseDao {
             }
         }
         conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
-
+        BigDecimal moneyFrom = tallyParam.getMoneyFrom();
+        BigDecimal moneyTo = tallyParam.getMoneyTo();
+        if (!StringUtils.isEmpty(moneyFrom)) {
+            conditions.add(new Condition("money", moneyFrom, Condition.GREAT_THAN_EQUAL));
+        }
+        if (!StringUtils.isEmpty(moneyTo)) {
+            conditions.add(new Condition("money", moneyTo, Condition.LESS_THAN_EQUAL));
+        }
+        Date createDateEnd = tallyParam.getCreateDateEnd();
+        Date createDateStart = tallyParam.getCreateDateStart();
+        if (createDateEnd != null) {
+            conditions.add(new Condition("payDate", createDateEnd, Condition.LESS_THAN_EQUAL));
+        }
+        if (createDateStart != null) {
+            conditions.add(new Condition("payDate", createDateStart, Condition.GREAT_THAN_EQUAL));
+        }
         ph.setSort("payDate,createDate");
         ph.setOrder(PageModel.desc + "," + PageModel.desc);
 

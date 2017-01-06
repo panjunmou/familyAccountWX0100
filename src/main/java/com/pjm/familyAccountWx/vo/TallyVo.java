@@ -38,6 +38,10 @@ public class TallyVo extends BaseVo{
 
     private Boolean status;
 
+    private BigDecimal moneyFrom;
+
+    private BigDecimal moneyTo;
+
     public Long getId() {
         return id;
     }
@@ -172,5 +176,21 @@ public class TallyVo extends BaseVo{
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public BigDecimal getMoneyFrom() {
+        return moneyFrom;
+    }
+
+    public void setMoneyFrom(BigDecimal moneyFrom) {
+        this.moneyFrom = moneyFrom;
+    }
+
+    public BigDecimal getMoneyTo() {
+        return moneyTo;
+    }
+
+    public void setMoneyTo(BigDecimal moneyTo) {
+        this.moneyTo = moneyTo;
     }
 }

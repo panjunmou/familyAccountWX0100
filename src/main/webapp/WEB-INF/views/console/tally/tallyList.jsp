@@ -78,9 +78,9 @@
                                     field: 'purposeType',
                                     align: "center",
                                     formatter: function (value, row, index) {
-                                        if(value == "-1"){
+                                        if (value == "-1") {
                                             return "<span style='color: green;'>支出</span>";
-                                        }else{
+                                        } else {
                                             return "<span style='color: orange;'>收入</span>";
                                         }
                                     }
@@ -91,9 +91,9 @@
                                     field: 'visible',
                                     align: "center",
                                     formatter: function (value, row, index) {
-                                        if(value){
+                                        if (value) {
                                             return "<span style='color: green;'>启用</span>";
-                                        }else{
+                                        } else {
                                             return "<span style='color: red;'>禁用</span>";
                                         }
                                     }
@@ -119,12 +119,12 @@
                                         str += $.formatString(
                                             '<a href="javascript:void(0)" onclick="updateFun(\'{0}\');" >修改</a>',
                                             row.id);
-                                        if(row.visible){
+                                        if (row.visible) {
                                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                                             str += $
                                                 .formatString(
                                                     '<a href="javascript:void(0)" onclick="changeFun(\'{0}\',-1);" >禁用</a>', row.id);
-                                        }else{
+                                        } else {
                                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                                             str += $
                                                 .formatString(
@@ -159,13 +159,13 @@
             });
         }
 
-        function changeFun(id,status) {
+        function changeFun(id, status) {
             parent.$.messager.confirm('询问', '您是否要变更当前状态？', function (b) {
                 if (b) {
                     progressLoad();
                     $.post('${ctx}/console/tally/changeStatus', {
                         id: id,
-                        status:status
+                        status: status
                     }, function (result) {
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
@@ -186,15 +186,25 @@
         }
         function updateFun(id) {
             self.parent.addTab({
-                url: '${ctx}/console/tally/editPage?id='+id+'&title=${param.title}',
+                url: '${ctx}/console/tally/editPage?id=' + id + '&title=${param.title}',
                 title: "修改账单",
                 iconCls: "icon-edit"
             });
         }
         function searchFun() {
+           /* var createDateStart = $('#createDateStart').val();
+            var createDateEnd = $("#createDateEnd").val();
+            var paramMap = {};
+            if(!isEmpty(createDateStart)){
+                createDateStart = createDateStart + " 00:00:00";
+                paramMap['createDateStart'] = createDateStart;
+            }
+            if(!isEmpty(createDateEnd)){
+                createDateEnd = createDateEnd + " 23:59:59";
+                paramMap['createDateEnd'] = createDateEnd;
+            }*/
             var visible = $("#visible").combobox('getValue');
-            console.log(visible);
-            if(visible != null || visible != "" || visible != undefined) {
+            if (visible != null || visible != "" || visible != undefined) {
                 $("[name='status']").val('true');
             }
             dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
@@ -270,17 +280,31 @@
 
                 <th width="10%" align="right">金额：</th>
                 <td width="20%" align="left">
-                    <input name="" type="text" style="width: 80px"/>
+                    <input name="moneyFrom" type="text" placeholder="请输入金额从"
+                           class="easyui-numberbox" data-options="required:false,min:0,precision:0"
+                           style="width: 80px"/>
                     至
-                    <input name="" type="text" style="width: 80px"/>
+                    <input name="moneyTo" type="text" placeholder="请输入金额到"
+                           class="easyui-numberbox" data-options="required:false,min:0,precision:0"
+                           style="width: 80px"/>
                 </td>
             </tr>
             <tr>
-                <th width="10%" align="right">创建日期：</th>
+                <th width="10%" align="right">账单日期：</th>
                 <td width="60%" align="left" colspan="4">
-                    <input name="" type="text"/>
+                    <input name="createDateStart"
+                           class="easyui-datebox"
+                           placeholder="点击选择日期"
+                           editable="false"
+                           type="text"
+                    />
                     至
-                    <input name="" type="text"/>
+                    <input name="createDateEnd"
+                           class="easyui-datebox"
+                           placeholder="点击选择日期"
+                           editable="false"
+                           type="text"
+                    />
                 </td>
                 <td width="20%" align="left">
                     <a href="javascript:void(0);" class="easyui-linkbutton"
