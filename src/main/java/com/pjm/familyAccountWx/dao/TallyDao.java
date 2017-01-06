@@ -60,14 +60,11 @@ public class TallyDao extends BaseDao {
             conditions.add(new Condition("tallyNo", "%" + tallyNo + "%", Condition.LIKE));
         }
         Boolean visible = tallyParam.getVisible();
-        if (!StringUtils.isEmpty(visible)) {
-            if (visible) {
-                conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
-            }else{
-                conditions.add(new Condition("visible", false, Condition.EQUAL_TO));
+        Boolean all = tallyParam.getStatus();
+        if (all != null && all) {
+            if (!StringUtils.isEmpty(visible)) {
+                conditions.add(new Condition("visible", visible, Condition.EQUAL_TO));
             }
-        } else {
-            conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
         }
         conditions.add(new Condition("tUser.id", userId, Condition.EQUAL_TO));
 

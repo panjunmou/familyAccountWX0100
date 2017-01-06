@@ -36,6 +36,8 @@ public class TallyVo extends BaseVo{
 
     private Boolean visible = true;
 
+    private Boolean status;
+
     public Long getId() {
         return id;
     }
@@ -162,5 +164,13 @@ public class TallyVo extends BaseVo{
 
     public void setParentPurposeId(Long parentPurposeId) {
         this.parentPurposeId = parentPurposeId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

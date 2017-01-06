@@ -201,6 +201,7 @@
         <label for="search_input" class="weui_search_text" id="search_text"> <i class="weui_icon_search"></i>
             <span>搜索</span>
         </label>
+        <input type="hidden" value="true" name="status"/>
     </form>
     <%--<a href="javascript:void(0);" class="weui_icon_search" id="search_ok" style="margin-left: 20px;margin-right: 10px" onclick="searchList('remark', $('#search_input').val())"></a>--%>
     <a href="javascript:void(0);" class="weui_search_cancel" id="search_cancel">取消</a>

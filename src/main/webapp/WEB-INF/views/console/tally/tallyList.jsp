@@ -192,6 +192,11 @@
             });
         }
         function searchFun() {
+            var visible = $("#visible").combobox('getValue');
+            console.log(visible);
+            if(visible != null || visible != "" || visible != undefined) {
+                $("[name='status']").val('true');
+            }
             dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
         }
         function cleanFun() {
@@ -215,7 +220,7 @@
                 </td>
                 <th width="10%" align="right">状态：</th>
                 <td width="20%" align="left">
-                    <select name="visible" class="easyui-combobox"
+                    <select id="visible" name="visible" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
                         <option value="">请选择状态...</option>
                         <option value="false">禁用</option>
@@ -292,6 +297,7 @@
             <input id="pageSize" name="pageSize" type="hidden"/>
             <input id="sort" name="sort" type="hidden"/>
             <input id="order" name="order" type="hidden"/>
+            <input name="status" type="hidden"/>
         </div>
     </form>
 </div>
