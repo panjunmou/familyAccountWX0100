@@ -64,9 +64,11 @@
             if (typeClick == "-1") {
                 $("[type='out']").hide();
                 $("[type='in']").show();
+                $("[type='payUser']").show();
             } else {
                 $("[type='out']").show();
                 $("[type='in']").hide();
+                $("[type='payUser']").hide();
             }
 
             $("[name='purposeType']").click(function () {
@@ -74,9 +76,11 @@
                 if (click == "-1") {
                     $("[type='out']").hide();
                     $("[type='in']").show();
+                    $("[type='payUser']").show();
                 } else {
                     $("[type='out']").show();
                     $("[type='in']").hide();
+                    $("[type='payUser']").hide();
                 }
             });
 

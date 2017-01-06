@@ -65,7 +65,6 @@ public class TallyConsoleController extends BaseController {
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
         try {
             Long userId = loginUserInfo.getId();
-            tallyVo.setVisible(false);
             PageModel pageModel = tallyService.getTallyList(tallyVo, ph, userId);
             return pageModel;
         } catch (Exception e) {

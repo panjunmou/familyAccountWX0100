@@ -105,6 +105,10 @@ public class TallyServiceImpl implements TallyService {
             }
             tTally.settPayUserSet(tPayUserSet);
         }
+        Integer purposeType = tallyVo.getPurposeType();
+        if (purposeType == 1) {
+            tTally.settPayUserSet(null);
+        }
     }
 
     private void copyEntityToVo(TTally tally, TallyVo tallyVo) {

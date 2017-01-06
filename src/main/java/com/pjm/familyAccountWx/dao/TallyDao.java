@@ -41,11 +41,13 @@ public class TallyDao extends BaseDao {
             Set<TTally> tTallySet = tPayUser.gettTallySet();
             List<Long> longList = new ArrayList<Long>();
             if (tTallySet != null && tTallySet.size() > 0) {
-                for (TTally tTally : tTallySet) {
-                    Long id = tTally.getId();
-                    longList.add(id);
+                if (!StringUtils.isEmpty(purposeType) && purposeType == -1) {
+                    for (TTally tTally : tTallySet) {
+                        Long id = tTally.getId();
+                        longList.add(id);
+                    }
+                    conditions.add(new Condition("id", longList, Condition.IN));
                 }
-                conditions.add(new Condition("id", longList, Condition.IN));
             } else {
                 return new QueryResult<TTally>();
             }
@@ -61,6 +63,8 @@ public class TallyDao extends BaseDao {
         if (!StringUtils.isEmpty(visible)) {
             if (visible) {
                 conditions.add(new Condition("visible", true, Condition.EQUAL_TO));
+            }else{
+                conditions.add(new Condition("visible", false, Condition.EQUAL_TO));
             }
         } else {
             conditions.add(new Condition("visible", true, Condition.EQUAL_TO));

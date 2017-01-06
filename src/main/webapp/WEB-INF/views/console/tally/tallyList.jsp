@@ -213,26 +213,25 @@
                 <td width="20%" align="left">
                     <input name="remark" placeholder="请输入说明"/>
                 </td>
-                <th width="10%" align="right">账户：</th>
+                <th width="10%" align="right">状态：</th>
                 <td width="20%" align="left">
-                    <select name="accountId" class="easyui-combobox"
+                    <select name="visible" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择账户...</option>
-                        <c:forEach items="${accountList}" var="account">
-                            <option value="${account.value}">${account.title}</option>
-                        </c:forEach>
+                        <option value="">请选择状态...</option>
+                        <option value="false">禁用</option>
+                        <option value="true">启用</option>
                     </select>
                 </td>
+
             </tr>
             <tr>
-                <th width="10%" align="right">使用者：</th>
+                <th width="10%" align="right">类型：</th>
                 <td width="20%" align="left">
-                    <select name="payUserId" class="easyui-combobox"
+                    <select name="purposeType" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择使用者...</option>
-                        <c:forEach items="${payUserList}" var="payUser">
-                            <option value="${payUser.value}">${payUser.title}</option>
-                        </c:forEach>
+                        <option value="">请选择类型...</option>
+                        <option value="-1">支出</option>
+                        <option value="1">收入</option>
                     </select>
                 </td>
                 <th width="10%" align="right">用途(父级)：</th>
@@ -243,12 +242,27 @@
                 </td>
             </tr>
             <tr>
-                <th width="10%" align="right">类型：</th>
+                <th width="10%" align="right">账户：</th>
                 <td width="20%" align="left">
+                    <select name="accountId" class="easyui-combobox"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                        <option value="">请选择账户...</option>
+                        <c:forEach items="${accountList}" var="account">
+                            <option value="${account.value}">${account.title}</option>
+                        </c:forEach>
+                    </select>
                 </td>
-                <th width="10%" align="right">状态：</th>
+                <th width="10%" align="right">使用者：</th>
                 <td width="20%" align="left">
+                    <select name="payUserId" class="easyui-combobox"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                        <option value="">请选择使用者...</option>
+                        <c:forEach items="${payUserList}" var="payUser">
+                            <option value="${payUser.value}">${payUser.title}</option>
+                        </c:forEach>
+                    </select>
                 </td>
+
                 <th width="10%" align="right">金额：</th>
                 <td width="20%" align="left">
                     <input name="" type="text" style="width: 80px"/>

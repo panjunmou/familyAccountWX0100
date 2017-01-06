@@ -60,9 +60,11 @@
             if (typeClick == "-1") {
                 $("[type='out']").hide();
                 $("[type='in']").show();
+                $("[type='payUser']").show();
             } else {
                 $("[type='out']").show();
                 $("[type='in']").hide();
+                $("[type='payUser']").hide();
             }
 
             $("[name='purposeType']").click(function () {
@@ -70,9 +72,11 @@
                 if (click == "-1") {
                     $("[type='out']").hide();
                     $("[type='in']").show();
+                    $("[type='payUser']").show();
                 } else {
                     $("[type='out']").show();
                     $("[type='in']").hide();
+                    $("[type='payUser']").hide();
                 }
             });
 
@@ -234,7 +238,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
+                <tr type="payUser">
                     <td class="tdTitle">消费者：</td>
                     <td class="tdTitle2" colspan="3">
                         <select name="payUserIds" class="easyui-combobox"
