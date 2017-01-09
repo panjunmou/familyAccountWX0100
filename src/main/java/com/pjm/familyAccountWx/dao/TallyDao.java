@@ -30,9 +30,12 @@ public class TallyDao extends BaseDao {
 
         Long accountId = tallyParam.getAccountId();
         Integer purposeType = tallyParam.getPurposeType();
+        Long purposeId = tallyParam.getPurposeId();
         String payUserId = tallyParam.getPayUserId();
         String remark = tallyParam.getRemark();
-
+        if (!StringUtils.isEmpty(purposeId)) {
+            conditions.add(new Condition("tPurpose.id", purposeId, Condition.EQUAL_TO));
+        }
         if (!StringUtils.isEmpty(accountId)) {
             conditions.add(new Condition("tAccount.id", accountId, Condition.EQUAL_TO));
         }

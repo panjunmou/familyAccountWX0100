@@ -11,6 +11,10 @@
     <title>账单列表</title>
     <script type="text/javascript">
         var dataGrid;
+        var purposeInList;
+        var purposeInMap = {};
+        var purposeOutList;
+        var purposeOutMap = {};
         $(function () {
             dataGrid = $('#dataGrid')
                 .datagrid(
@@ -140,6 +144,134 @@
                             ]],
                         toolbar: '#toolbar'
                     });
+
+            $.ajax({
+                type: "get",
+                url: "${ctx}/console/tally/purposeInList",
+                dataType: "json",
+                success: function (result) {
+                    purposeInList = result.obj;
+                    console.log(purposeInList);
+                    var data = [];
+                    $.each(purposeInList, function (i, v) {
+                        data.push(
+                            {
+                                "text": v.name,
+                                "value": v.id
+                            });
+                        purposeInMap[v.id] = v;
+                    });
+                    $("#parentPurposeIn").combobox("loadData", data);
+                    console.log(purposeInMap);
+                }
+            });
+
+            $.ajax({
+                type: "get",
+                url: "${ctx}/console/tally/purposeOutList",
+                dataType: "json",
+                success: function (result) {
+                    purposeOutList = result.obj;
+                    console.log(purposeOutList);
+                    var data = [];
+                    $.each(purposeOutList, function (i, v) {
+                        data.push(
+                            {
+                                "text": v.name,
+                                "value": v.id
+                            });
+                        purposeOutMap[v.id] = v;
+                    });
+                    $("#parentPurposeOut").combobox("loadData", data);
+                    console.log(purposeOutMap);
+                }
+            });
+
+            $("#parentPurposeIn").combobox({
+                onChange: function () {
+                    var changeVal = $("#parentPurposeIn").combobox('getValue');
+                    var obj = purposeInMap[changeVal];
+                    console.log(obj);
+                    var data = [];
+                    var subList = obj.sub;
+                    $.each(subList, function (i, v) {
+                        data.push(
+                            {
+                                "text": v.name,
+                                "value": v.id
+                            });
+                    });
+                    $("#subPurposeIn").combobox("loadData", data);
+                }
+            });
+
+            $("#parentPurposeOut").combobox({
+                onChange: function () {
+                    var changeVal = $("#parentPurposeOut").combobox('getValue');
+                    var obj = purposeOutMap[changeVal];
+                    console.log(obj);
+                    var data = [];
+                    var subList = obj.sub;
+                    $.each(subList, function (i, v) {
+                        data.push(
+                            {
+                                "text": v.name,
+                                "value": v.id
+                            });
+                    });
+                    $("#subPurposeOut").combobox("loadData", data);
+                }
+            });
+
+            $("#subPurposeIn").combobox({
+                onChange: function () {
+                    var changeVal = $("#subPurposeIn").combobox('getValue');
+                    console.log(changeVal);
+                    $("[name='purposeId']").val(changeVal);
+                }
+            });
+
+            $("#subPurposeOut").combobox({
+                onChange: function () {
+                    var changeVal = $("#subPurposeOut").combobox('getValue');
+                    console.log(changeVal);
+                    $("[name='purposeId']").val(changeVal);
+                }
+            });
+
+            $("[type='out']").css("display", "none");
+            $("[type='in']").css("display", "none");
+
+            var typeClick = $("#purposeType").combobox("getValue");
+            if (typeClick == "-1") {
+                $("[type='out']").hide();
+                $("[type='in']").show();
+                $("[type='payUser']").show();
+            } else if (typeClick == "1") {
+                $("[type='out']").show();
+                $("[type='in']").hide();
+                $("[type='payUser']").hide();
+            } else {
+                $("[type='out']").hide();
+                $("[type='in']").show();
+                $("[type='payUser']").show();
+            }
+
+            $("#purposeType").combobox({
+                onChange: function () {
+                    var click = $("#purposeType").combobox("getValue");
+                    console.log("click=" + click);
+                    if (click == "-1") {
+                        $("[type='out']").hide();
+                        $("[type='in']").show();
+                        $("[type='payUser']").show();
+                    } else {
+                        $("[type='out']").show();
+                        $("[type='in']").hide();
+                        $("[type='payUser']").hide();
+                    }
+                }
+            });
         });
 
         function deleteFun(id) {
@@ -192,17 +324,17 @@
             });
         }
         function searchFun() {
-           /* var createDateStart = $('#createDateStart').val();
-            var createDateEnd = $("#createDateEnd").val();
-            var paramMap = {};
-            if(!isEmpty(createDateStart)){
-                createDateStart = createDateStart + " 00:00:00";
-                paramMap['createDateStart'] = createDateStart;
-            }
-            if(!isEmpty(createDateEnd)){
-                createDateEnd = createDateEnd + " 23:59:59";
-                paramMap['createDateEnd'] = createDateEnd;
-            }*/
+            /* var createDateStart = $('#createDateStart').val();
+             var createDateEnd = $("#createDateEnd").val();
+             var paramMap = {};
+             if(!isEmpty(createDateStart)){
+             createDateStart = createDateStart + " 00:00:00";
+             paramMap['createDateStart'] = createDateStart;
+             }
+             if(!isEmpty(createDateEnd)){
+             createDateEnd = createDateEnd + " 23:59:59";
+             paramMap['createDateEnd'] = createDateEnd;
+             }*/
             var visible = $("#visible").combobox('getValue');
             if (visible != null || visible != "" || visible != undefined) {
                 $("[name='status']").val('true');
@@ -232,7 +364,7 @@
                 <td width="20%" align="left">
                     <select id="visible" name="visible" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择状态...</option>
+                        <option value="">全部</option>
                         <option value="false">禁用</option>
                         <option value="true">启用</option>
                     </select>
@@ -242,18 +374,36 @@
             <tr>
                 <th width="10%" align="right">类型：</th>
                 <td width="20%" align="left">
-                    <select name="purposeType" class="easyui-combobox"
+                    <select name="purposeType" class="easyui-combobox" id="purposeType"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择类型...</option>
+                        <option value="">全部</option>
                         <option value="-1">支出</option>
                         <option value="1">收入</option>
                     </select>
                 </td>
-                <th width="10%" align="right">用途(父级)：</th>
-                <td width="20%" align="left">
+                <th width="10%" align="right" type="in">用途(父级)：</th>
+                <td width="20%" align="left" type="in">
+                    <select name="parentPurposeIn" class="easyui-combobox" id="parentPurposeIn"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                    </select>
                 </td>
-                <th width="10%" align="right">用途(子级)：</th>
-                <td width="20%" align="left">
+                <th width="10%" align="right" type="in">用途(子级)：</th>
+                <td width="20%" align="left" type="in">
+                    <select name="subPurposeIn" class="easyui-combobox" id="subPurposeIn"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                    </select>
+                </td>
+                <th width="10%" align="right" type="out">用途(父级)：</th>
+                <td width="20%" align="left" type="out">
+                    <select name="parentPurposeOut" class="easyui-combobox" id="parentPurposeOut"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                    </select>
+                </td>
+                <th width="10%" align="right" type="out">用途(子级)：</th>
+                <td width="20%" align="left" type="out">
+                    <select name="subPurposeOut" class="easyui-combobox" id="subPurposeOut"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -261,23 +411,22 @@
                 <td width="20%" align="left">
                     <select name="accountId" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择账户...</option>
+                        <option value="">全部</option>
                         <c:forEach items="${accountList}" var="account">
                             <option value="${account.value}">${account.title}</option>
                         </c:forEach>
                     </select>
                 </td>
-                <th width="10%" align="right">使用者：</th>
-                <td width="20%" align="left">
+                <th width="10%" align="right" type="payUser">使用者：</th>
+                <td width="20%" align="left" type="payUser">
                     <select name="payUserId" class="easyui-combobox"
                             data-options="width:150,height:20,editable:false,panelHeight:'auto'">
-                        <option value="">请选择使用者...</option>
+                        <option value="">全部</option>
                         <c:forEach items="${payUserList}" var="payUser">
                             <option value="${payUser.value}">${payUser.title}</option>
                         </c:forEach>
                     </select>
                 </td>
-
                 <th width="10%" align="right">金额：</th>
                 <td width="20%" align="left">
                     <input name="moneyFrom" type="text" placeholder="请输入金额从"
@@ -322,6 +471,7 @@
             <input id="sort" name="sort" type="hidden"/>
             <input id="order" name="order" type="hidden"/>
             <input name="status" type="hidden"/>
+            <input type="hidden" name="purposeId"/>
         </div>
     </form>
 </div>
