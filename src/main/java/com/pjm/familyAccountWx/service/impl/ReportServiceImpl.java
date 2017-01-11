@@ -22,10 +22,10 @@ public class ReportServiceImpl implements ReportService {
     private ReportDao reportDao;
 
     @Override
-    public BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType) throws Exception{
+    public BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType, String tallyType) throws Exception{
         TUser tUser = reportDao.find(userId, TUser.class);
         String userNo = tUser.getUserNo();
-        List monthBarList = reportDao.getMonthBar(userNo, dateStart, dateEnd, purposeType);
+        List monthBarList = reportDao.getMonthBar(userNo, dateStart, dateEnd, purposeType,tallyType);
         List<String> legendDatas = new ArrayList<>();
         List<ReportDataVo> reportDataVoList = new ArrayList<>();
         BarVo barVo = new BarVo();

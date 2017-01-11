@@ -25,7 +25,7 @@ public class TestReport {
     @Test
     public void testMonthBar() {
         try {
-            BarVo barVo = reportService.getMonthBar(1l, "2016-12-01", "2016-12-31", -1);
+            BarVo barVo = reportService.getMonthBar(1l, "2016-12-01", "2016-12-31", -1, tallyType);
             System.out.println("barVo.getLegendDatas() = " + JSON.toJSONString(barVo.getLegendDatas()));
             System.out.println("barVo.getSeriesDatas() = " + JSON.toJSONString(barVo.getSeriesDatas()));
         } catch (Exception e) {

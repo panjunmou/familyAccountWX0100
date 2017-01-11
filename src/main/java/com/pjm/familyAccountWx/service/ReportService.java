@@ -7,5 +7,5 @@ import com.pjm.familyAccountWx.vo.BarVo;
  */
 public interface ReportService {
 
-    BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType) throws Exception;
+    BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType, String tallyType) throws Exception;
 }

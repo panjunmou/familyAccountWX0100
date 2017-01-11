@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class ReportDao extends BaseDao {
 
-    public List getMonthBar(String userNo,String dateStart,String dateEnd,Integer purposeType) {
+    public List getMonthBar(String userNo, String dateStart, String dateEnd, Integer purposeType, String tallyType) {
         String sql =
                 "SELECT" +
                 "  concat(parent.NAME,'-',p.NAME) as name," +

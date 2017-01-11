@@ -20,10 +20,21 @@
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('main'));
 
+            var purposeType = $("[name='purposeType']:checked").val();
+            var tallyType = $("[name='tallyType']:checked").val();
+            var dateStart = $("#dateStart").val();
+            var dateEnd = $("#dateEnd").val();
+
             $.ajax({
                 type: "get",
                 url: '${ctx}/console/report/MonthBar',
                 dataType: "json",
+                data:{
+                    tallyType:tallyType,
+                    purposeType:purposeType,
+                    dateStart:dateStart,
+                    dateEnd:dateEnd
+                },
                 success: function (result) {
                     console.log(result);
                     console.log(result.obj.seriesDatas);
