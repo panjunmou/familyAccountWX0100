@@ -121,8 +121,14 @@
                         return;
                     }
                 }
+                var purposeType = "";
+                if(tabId == "tabIn"){
+                    purposeType = "-1";
+                }else{
+                    purposeType = "1";
+                }
                 ajaxJS('${ctx}/tally/saveTally', {
-                    tabId: tabId,
+                    purposeType: purposeType,
                     money: money,
                     payDate: date,
                     accountId: account,
