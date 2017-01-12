@@ -42,14 +42,14 @@ public class ReportController extends BaseController {
 
     @RequestMapping(value = "/MonthBar", method = RequestMethod.GET)
     @ResponseBody
-    public Json MonthBar(HttpServletRequest request,String dateStart,String dateEnd,String purposeType,String tallyType) {
+    public Json MonthBar(HttpServletRequest request, String dateStart, String dateEnd, String purposeType, String tallyType) {
         LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
         Long userId = loginUserInfo.getId();
         Json json = new Json();
         json.setSuccess(false);
         json.setMsg("获取数据出错");
         try {
-            BarVo monthBar = reportService.getMonthBar(userId, dateStart, dateEnd, Integer.parseInt(purposeType),tallyType);
+            BarVo monthBar = reportService.getMonthBar(userId, dateStart, dateEnd, Integer.parseInt(purposeType), tallyType);
             json.setMsg("获取数据成功");
             json.setObj(monthBar);
             json.setSuccess(true);

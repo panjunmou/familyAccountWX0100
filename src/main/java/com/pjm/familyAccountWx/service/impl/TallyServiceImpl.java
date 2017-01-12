@@ -99,9 +99,11 @@ public class TallyServiceImpl implements TallyService {
             String[] split = payUserIds.split(",");
             Set<TPayUser> tPayUserSet = new HashSet<TPayUser>();
             for (String idStr : split) {
-                Long payUserId = Long.parseLong(idStr);
-                TPayUser tPayUser = payUserDao.find(payUserId, TPayUser.class);
-                tPayUserSet.add(tPayUser);
+                if (!StringUtils.isEmpty(idStr)) {
+                    Long payUserId = Long.parseLong(idStr);
+                    TPayUser tPayUser = payUserDao.find(payUserId, TPayUser.class);
+                    tPayUserSet.add(tPayUser);
+                }
             }
             tTally.settPayUserSet(tPayUserSet);
         }

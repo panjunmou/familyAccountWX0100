@@ -16,15 +16,19 @@
     <title>月度统计</title>
     <script type="text/javascript" src="${ctx}/js/echart/echarts.js"></script>
     <script type="text/javascript">
+        var myChart;
         $(function () {
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('main'));
+            myChart = echarts.init(document.getElementById('main'));
 
+            loadChart();
+        });
+
+        function loadChart() {
             var purposeType = $("[name='purposeType']:checked").val();
             var tallyType = $("[name='tallyType']:checked").val();
-            var dateStart = $("#dateStart").val();
-            var dateEnd = $("#dateEnd").val();
-
+            var dateStart = $("#dateStart").datebox('getValue');
+            var dateEnd = $("#dateEnd").datebox('getValue');
             $.ajax({
                 type: "get",
                 url: '${ctx}/console/report/MonthBar',
@@ -36,8 +40,8 @@
                     dateEnd:dateEnd
                 },
                 success: function (result) {
-                    console.log(result);
-                    console.log(result.obj.seriesDatas);
+//                    console.log(result);
+//                    console.log(result.obj.seriesDatas);
                     // 指定图表的配置项和数据
                     var option = option = {
                         title: {
@@ -82,7 +86,7 @@
                     myChart.setOption(option);
                 }
             });
-        });
+        }
     </script>
 </head>
 <body>
@@ -112,6 +116,18 @@
                 <td width="20%" align="left">
                     <input id="dateEnd" name="dateEnd" placeholder="点击选择日期" class="easyui-datebox"
                            data-options="required:true,editable:false" value="${dateEnd}"/>
+                </td>
+            </tr>
+            <tr>
+                <th width="10%" align="right">&nbsp;</th>
+                <td width="20%" align="left">
+                    &nbsp;
+                </td>
+                <th width="10%" align="right">&nbsp;</th>
+                <td width="20%" align="left">
+                    <a href="javascript:void(0);" class="easyui-linkbutton"
+                       data-options="iconCls:'icon-search',plain:true" onclick="loadChart();">
+                        查询 </a>
                 </td>
             </tr>
         </table>
