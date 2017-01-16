@@ -40,13 +40,16 @@
                     dateEnd:dateEnd
                 },
                 success: function (result) {
-//                    console.log(result);
-//                    console.log(result.obj.seriesDatas);
+                    console.log(result);
+                    console.log(result.obj.seriesDatas);
+                    if(result.obj.seriesDatas == undefined) {
+                        $("#main").html('<span style="font-size: 20px;font-weight: bold">暂无数据!!!</span>');
+                    }
                     // 指定图表的配置项和数据
                     var option = option = {
                         title: {
                             text: '消费比例',
-                            subtext: '用途',
+                            subtext: '共计支出:${out}元;共计收入:${in}元',
                             x: 'center'
                         },
                         tooltip: {
@@ -139,6 +142,6 @@
         </div>
     </form>
 </div>
-<div id="main" style="width: 95%;height:500px;margin: 0 auto;"></div>
+<div id="main" style="width: 95%;height:500px;margin: 0 auto;text-align: center"></div>
 </body>
 </html>

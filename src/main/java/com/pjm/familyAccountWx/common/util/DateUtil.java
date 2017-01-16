@@ -212,7 +212,7 @@ public class DateUtil {
     public static String getMonthFirstStr(Date date) throws ParseException {
         int year = DateUtil.getYear(date);
         int month = DateUtil.getMonth(date);
-        String dateStr = year + "-" + month + "-" + "01";
+        String dateStr = year + "-" + (month < 10 ? "0" + month : month) + "-" + "01";
         return dateStr;
     }
 
@@ -240,7 +240,7 @@ public class DateUtil {
         int year = DateUtil.getYear(date);
         int month = DateUtil.getMonth(date);
         int day = DateUtil.getMonthDay(date);
-        String dateStr = year + "-" + month + "-" + day;
+        String dateStr = year + "-" + (month < 10 ? "0" + month : month) + "-" + day;
         return dateStr;
     }
 

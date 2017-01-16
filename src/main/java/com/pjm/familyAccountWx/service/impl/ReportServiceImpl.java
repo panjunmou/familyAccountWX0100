@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by PanJM_Levono on 2016/12/29.
@@ -44,5 +43,30 @@ public class ReportServiceImpl implements ReportService {
             barVo.setSeriesDatas(reportDataVoList);
         }
         return barVo;
+    }
+
+    @Override
+    public BigDecimal[] getInAndOut(Long userId, String monthFirstStr, String monthLastStr) throws Exception {
+        //查询总收入和支出,数组长度总共为2,第一个为总收入,第二个为总支出
+        TUser tUser = reportDao.find(userId, TUser.class);
+        String userNo = tUser.getUserNo();
+        List<Object[]> objects = reportDao.getInAndOut(userNo, monthFirstStr, monthLastStr);
+        BigDecimal[] bigDecimals = new BigDecimal[2];
+        if (objects != null && objects.size() > 0) {
+            for (int i = 0; i < objects.size(); i++) {
+                Object[] object = (Object[]) objects.get(i);
+                Integer purposeType = (Integer) object[0];
+                BigDecimal money = (BigDecimal) object[1];
+                if (purposeType == -1) {
+                    bigDecimals[1] = money;
+                }else{
+                    bigDecimals[0] = money;
+                }
+            }
+        }else{
+            bigDecimals[0] = new BigDecimal(0);
+            bigDecimals[1] = new BigDecimal(0);
+        }
+        return bigDecimals;
     }
 }
