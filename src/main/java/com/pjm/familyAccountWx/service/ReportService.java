@@ -1,8 +1,11 @@
 package com.pjm.familyAccountWx.service;
 
 import com.pjm.familyAccountWx.vo.BarVo;
+import com.pjm.familyAccountWx.vo.ReportTableVo;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by PanJM on 2016/11/19.
@@ -13,5 +16,5 @@ public interface ReportService {
 
     BigDecimal[] getInAndOut(Long userId, String monthFirstStr, String monthLastStr) throws Exception;
 
-    void getReportTableList(Long userId, String year) throws Exception;
+    Map<String, List<ReportTableVo>> getReportTableList(Long userId, String year) throws Exception;
 }

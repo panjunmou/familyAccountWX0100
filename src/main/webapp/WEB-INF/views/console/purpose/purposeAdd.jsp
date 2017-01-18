@@ -68,6 +68,15 @@
                     <input name="name" style="width: 300px;" maxlength="80" />
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span class="require-star">*</span>
+                    排序
+                </td>
+                <td>
+                    <input name="seq" style="width: 300px;"/>
+                </td>
+            </tr>
         </table>
         <input type="hidden" value="${pId}" name="pId"/>
     </form>

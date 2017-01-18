@@ -282,7 +282,7 @@
             </div>
             <div title="报表管理" data-options="" style="padding:0;">
                 <div class="accordion-item" onclick="goPage('/console/report/monthManager?title=月度统计','月度统计')">月度统计</div>
-                <div class="accordion-item" onclick="goPage('/console/purpose/manager?title=用途管理','用途管理')">年度统计</div>
+                <div class="accordion-item" onclick="goPage('/console/report/yearTableManager?title=年度统计','年度图表统计')">年度图表统计</div>
             </div>
         </div>
     </div>

@@ -126,7 +126,8 @@ public class ReportDao extends BaseDao {
                 "  sum(t.MONEY)," +
                 "  p.PURPOSE_TYPE," +
                 "  parent.NAME," +
-                "  parent.PURPOSE_NO" +
+                "  parent.PURPOSE_NO," +
+                "  parent.seq" +
                 "  from biz_tally t" +
                 "  LEFT JOIN biz_purpose p ON t.PURPOSE_NO = p.PURPOSE_NO" +
                 "  LEFT JOIN biz_purpose parent on p.PARENT_NO = parent.PURPOSE_NO" +

@@ -8,6 +8,7 @@ import com.pjm.familyAccountWx.vo.BarVo;
 import com.pjm.familyAccountWx.vo.ReportDataVo;
 import com.pjm.familyAccountWx.vo.ReportTableVo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -73,8 +74,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void getReportTableList(Long userId, String year) throws Exception {
+    public Map<String, List<ReportTableVo>> getReportTableList(Long userId, String year) throws Exception {
         TUser tUser = reportDao.find(userId, TUser.class);
+        if (StringUtils.isEmpty(year)) {
+//            year = String.valueOf(DateUtil.getYear(new Date()));
+            year = "2016";
+        }
         List<Object[]> reportTableList = reportDao.getReportTableList(tUser.getUserNo(), year);
         Map<String, ReportTableVo> inMap = new HashMap<>();
         Map<String, ReportTableVo> outMap = new HashMap<>();
@@ -86,6 +91,7 @@ public class ReportServiceImpl implements ReportService {
                 Integer purposeType = (Integer) objects[2];
                 String purposeName = (String) objects[3];
                 String purposeNo = (String) objects[4];
+                Integer seq = (Integer) objects[5];
                 Integer month = Integer.parseInt(monthStr);
                 ReportTableVo reportTableVo = null;
                 if (purposeType == -1) {
@@ -97,9 +103,10 @@ public class ReportServiceImpl implements ReportService {
                 }
                 if (reportTableVo == null) {
                     reportTableVo = new ReportTableVo();
+                    reportTableVo.setPurposeNo(purposeNo);
+                    reportTableVo.setPurposeName(purposeName);
+                    reportTableVo.setSeq(seq);
                 }
-                reportTableVo.setPurposeNo(purposeNo);
-                reportTableVo.setPurposeName(purposeName);
                 BigDecimal[] moneyArr = reportTableVo.getMoney();
                 if (moneyArr == null) {
                     moneyArr = new BigDecimal[12];
@@ -150,6 +157,25 @@ public class ReportServiceImpl implements ReportService {
                 }
             }
         }
-        System.out.println("ReportServiceImpl.getReportTableList");
+        List<ReportTableVo> outList = new ArrayList<>();
+        if (outMap != null && outMap.size() > 0) {
+            for (String key : outMap.keySet()) {
+                ReportTableVo reportTableVo = outMap.get(key);
+                outList.add(reportTableVo);
+            }
+        }
+        List<ReportTableVo> inList = new ArrayList<>();
+        if (inMap != null && inMap.size() > 0) {
+            for (String key : inMap.keySet()) {
+                ReportTableVo reportTableVo = inMap.get(key);
+                inList.add(reportTableVo);
+            }
+        }
+        Collections.sort(outList);
+        Collections.sort(inList);
+        Map<String, List<ReportTableVo>> stringListMap = new HashMap<>();
+        stringListMap.put("outList", outList);
+        stringListMap.put("inList", inList);
+        return stringListMap;
     }
 }
