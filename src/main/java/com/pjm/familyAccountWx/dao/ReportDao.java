@@ -2,6 +2,7 @@ package com.pjm.familyAccountWx.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.pjm.familyAccountWx.common.dao.BaseDao;
+import com.pjm.familyAccountWx.vo.ReportTableVo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -109,6 +110,36 @@ public class ReportDao extends BaseDao {
         objectMap.put("userNo", userNo);
         objectMap.put("dateStart", dateStart);
         objectMap.put("dateEnd", dateEnd);
+        for (String key : objectMap.keySet()) {
+            nativeQuery.setParameter(key, objectMap.get(key));
+        }
+        String jsonString = JSON.toJSONString(objectMap);
+        System.out.println("jsonString = " + jsonString);
+        List resultList = nativeQuery.getResultList();
+        return resultList;
+    }
+
+    public List<Object[]> getReportTableList(String userNo,String year) {
+        String sql =
+                "SELECT" +
+                "  date_format(t.PAYDATE, '%m')," +
+                "  sum(t.MONEY)," +
+                "  p.PURPOSE_TYPE," +
+                "  parent.NAME," +
+                "  parent.PURPOSE_NO" +
+                "  from biz_tally t" +
+                "  LEFT JOIN biz_purpose p ON t.PURPOSE_NO = p.PURPOSE_NO" +
+                "  LEFT JOIN biz_purpose parent on p.PARENT_NO = parent.PURPOSE_NO" +
+                " WHERE 1 = 1" +
+                "      AND t.visible = TRUE" +
+                "      AND t.USER_NO =:userNo" +
+                "      AND date_format(t.PAYDATE, '%Y') =:year" +
+                " GROUP BY date_format(t.PAYDATE, '%m'), p.PURPOSE_TYPE,p.PARENT_NO";
+        System.out.println("sql = " + sql);
+        Query nativeQuery = em.createNativeQuery(sql);
+        Map<String, Object> objectMap = new HashMap<String, Object>();
+        objectMap.put("userNo", userNo);
+        objectMap.put("year", year);
         for (String key : objectMap.keySet()) {
             nativeQuery.setParameter(key, objectMap.get(key));
         }

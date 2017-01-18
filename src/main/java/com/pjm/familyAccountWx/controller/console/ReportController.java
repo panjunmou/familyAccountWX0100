@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by PanJM_Levono on 2016/12/28.
@@ -40,14 +37,18 @@ public class ReportController extends BaseController {
         Long userId = loginUserInfo.getId();
         BigDecimal[] inAndOut = reportService.getInAndOut(userId, monthFirstStr, monthLastStr);
         BigDecimal in = inAndOut[0] == null ? new BigDecimal(0) : inAndOut[0];
-        BigDecimal out = inAndOut[1] == null ? new BigDecimal(0) : inAndOut[1];;
+        BigDecimal out = inAndOut[1] == null ? new BigDecimal(0) : inAndOut[1];
+        ;
         model.addAttribute("in", in);
         model.addAttribute("out", out);
         return "/console/report/monthList";
     }
 
     @RequestMapping("/yearManager")
-    public String yearManager() throws Exception {
+    public String yearManager(HttpServletRequest request,String year) throws Exception {
+        LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+        Long userId = loginUserInfo.getId();
+        reportService.getReportTableList(userId,year);
         return "/console/report/yearList";
     }
 
