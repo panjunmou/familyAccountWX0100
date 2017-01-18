@@ -22,6 +22,8 @@ public class PurposeVo extends BaseVo {
 
     private Boolean hasParent;
 
+    private Integer seq;
+
     public String getPurposeNo() {
         return purposeNo;
     }
@@ -84,5 +86,13 @@ public class PurposeVo extends BaseVo {
 
     public void setHasParent(Boolean hasParent) {
         this.hasParent = hasParent;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 }

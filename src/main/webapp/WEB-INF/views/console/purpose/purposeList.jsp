@@ -49,6 +49,12 @@
                                     align: "center"
                                 },
                                 {
+                                    width: '50',
+                                    title: '排序',
+                                    field: 'seq',
+                                    align: "center"
+                                },
+                                {
                                     width: '100',
                                     title: '是否启用',
                                     field: 'visible',

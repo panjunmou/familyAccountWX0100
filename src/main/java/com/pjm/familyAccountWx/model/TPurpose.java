@@ -36,6 +36,9 @@ public class TPurpose extends IdEntity {
     @Column(name = "PURPOSE_TYPE", length = 2)
     private Integer purposeType;
 
+    @Column(name = "SEQ",length = 4)
+    private Integer seq;
+
     public String getName() {
         return name;
     }
@@ -90,5 +93,13 @@ public class TPurpose extends IdEntity {
 
     public void setPurposeNo(String purposeNo) {
         this.purposeNo = purposeNo;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
     }
 }

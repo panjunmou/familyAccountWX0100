@@ -17,10 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by PanJM on 2016/11/26.
@@ -111,8 +108,8 @@ public class PurposeServiceImpl implements PurposeService {
         List<PurposeVo> list = new ArrayList<PurposeVo>();
         List<Condition> conList = new ArrayList<>();
         this.fillCondition(purposeVo, conList, pId);
-        ph.setSort("purposeType");
-        ph.setOrder("asc");
+        ph.setSort("purposeType,seq");
+        ph.setOrder("asc,asc");
         QueryResult<TPurpose> pageResult = purposeDao.getPageResult(TPurpose.class, conList, ph);
         for (TPurpose tPayUser : pageResult.getReultList()) {
             PurposeVo userVo = new PurposeVo();
@@ -179,9 +176,13 @@ public class PurposeServiceImpl implements PurposeService {
     @Override
     public void update(PurposeVo purposeVo) throws Exception {
         Long id = purposeVo.getId();
-        TPurpose tPayUser = purposeDao.find(id, TPurpose.class);
-        this.copyVoToEntity(tPayUser, purposeVo);
-        purposeDao.update(tPayUser);
+        TPurpose tPurpose = purposeDao.find(id, TPurpose.class);
+        Date createDate = tPurpose.getCreateDate();
+        String createUser = tPurpose.getCreateUser();
+        this.copyVoToEntity(tPurpose, purposeVo);
+        tPurpose.setCreateDate(createDate);
+        tPurpose.setCreateUser(createUser);
+        purposeDao.update(tPurpose);
     }
 
     @Override

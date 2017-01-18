@@ -68,8 +68,18 @@
                     <input name="name" style="width: 300px;" maxlength="80" value="${purpose.name}"/>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span class="require-star">*</span>
+                    排序
+                </td>
+                <td>
+                    <input name="seq" style="width: 300px;" value="${purpose.seq}"/>
+                </td>
+            </tr>
         </table>
         <input type="hidden" value="${purpose.pId}" name="pId"/>
         <input type="hidden" value="${purpose.id}" name="id"/>
+        <input type="hidden" value="${purpose.purposeType}" name="purposeType"/>
     </form>
 </div>
