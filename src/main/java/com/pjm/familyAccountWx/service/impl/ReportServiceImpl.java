@@ -1,6 +1,5 @@
 package com.pjm.familyAccountWx.service.impl;
 
-import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.dao.ReportDao;
 import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.ReportService;
@@ -24,10 +23,10 @@ public class ReportServiceImpl implements ReportService {
     private ReportDao reportDao;
 
     @Override
-    public BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType, String tallyType) throws Exception{
+    public BarVo getMonthBar(Long userId, String dateStart, String dateEnd, Integer purposeType, String tallyType) throws Exception {
         TUser tUser = reportDao.find(userId, TUser.class);
         String userNo = tUser.getUserNo();
-        List monthBarList = reportDao.getMonthBar(userNo, dateStart, dateEnd, purposeType,tallyType);
+        List monthBarList = reportDao.getMonthBar(userNo, dateStart, dateEnd, purposeType, tallyType);
         List<String> legendDatas = new ArrayList<>();
         List<ReportDataVo> reportDataVoList = new ArrayList<>();
         BarVo barVo = new BarVo();
@@ -62,11 +61,11 @@ public class ReportServiceImpl implements ReportService {
                 BigDecimal money = (BigDecimal) object[1];
                 if (purposeType == -1) {
                     bigDecimals[1] = money;
-                }else{
+                } else {
                     bigDecimals[0] = money;
                 }
             }
-        }else{
+        } else {
             bigDecimals[0] = new BigDecimal(0);
             bigDecimals[1] = new BigDecimal(0);
         }
@@ -97,7 +96,7 @@ public class ReportServiceImpl implements ReportService {
                 if (purposeType == -1) {
                     //支出
                     reportTableVo = outMap.get(purposeNo);
-                }else {
+                } else {
                     //收入
                     reportTableVo = inMap.get(purposeNo);
                 }
@@ -114,14 +113,14 @@ public class ReportServiceImpl implements ReportService {
                 if (money == null) {
                     money = new BigDecimal(0);
                 }
-                moneyArr[month-1] = money;
+                moneyArr[month - 1] = money;
                 reportTableVo.setMoney(moneyArr);
                 if (purposeType == -1) {
                     //支出
-                    outMap.put(purposeNo,reportTableVo);
-                }else {
+                    outMap.put(purposeNo, reportTableVo);
+                } else {
                     //收入
-                    inMap.put(purposeNo,reportTableVo);
+                    inMap.put(purposeNo, reportTableVo);
                 }
             }
         }
@@ -177,5 +176,69 @@ public class ReportServiceImpl implements ReportService {
         stringListMap.put("outList", outList);
         stringListMap.put("inList", inList);
         return stringListMap;
+    }
+
+    @Override
+    public List<ReportTableVo> getChildrenTableList(Long userId, String year, String parentPurposeNo) throws Exception {
+        TUser tUser = reportDao.find(userId, TUser.class);
+        if (StringUtils.isEmpty(year)) {
+//            year = String.valueOf(DateUtil.getYear(new Date()));
+            year = "2016";
+        }
+        List<Object[]> reportTableList = reportDao.getChildrenTableList(tUser.getUserNo(), year, parentPurposeNo);
+        Map<String, ReportTableVo> childMap = new HashMap<>();
+        if (reportTableList != null && reportTableList.size() > 0) {
+            for (int i = 0; i < reportTableList.size(); i++) {
+                Object[] objects = reportTableList.get(i);
+                String monthStr = (String) objects[0];
+                BigDecimal money = (BigDecimal) objects[1];
+                String purposeName = (String) objects[2];
+                String purposeNo = (String) objects[3];
+                Integer seq = (Integer) objects[4];
+                Integer month = Integer.parseInt(monthStr);
+                ReportTableVo reportTableVo = childMap.get(purposeNo);
+                if (reportTableVo == null) {
+                    reportTableVo = new ReportTableVo();
+                    reportTableVo.setPurposeNo(purposeNo);
+                    reportTableVo.setPurposeName(purposeName);
+                    reportTableVo.setSeq(seq);
+                }
+                BigDecimal[] moneyArr = reportTableVo.getMoney();
+                if (moneyArr == null) {
+                    moneyArr = new BigDecimal[12];
+                }
+                if (money == null) {
+                    money = new BigDecimal(0);
+                }
+                moneyArr[month - 1] = money;
+                reportTableVo.setMoney(moneyArr);
+                childMap.put(purposeNo, reportTableVo);
+            }
+        }
+        if (childMap != null && childMap.size() > 0) {
+            for (String key : childMap.keySet()) {
+                ReportTableVo reportTableVo = childMap.get(key);
+                BigDecimal[] moneyArr = reportTableVo.getMoney();
+                if (moneyArr != null && moneyArr.length > 0) {
+                    for (int i = 0; i < moneyArr.length; i++) {
+                        BigDecimal money = moneyArr[i];
+                        if (money == null) {
+                            moneyArr[i] = new BigDecimal(0);
+                        }
+                    }
+                    reportTableVo.setMoney(moneyArr);
+                    childMap.put(reportTableVo.getPurposeNo(), reportTableVo);
+                }
+            }
+        }
+        List<ReportTableVo> childList = new ArrayList<>();
+        if (childMap != null && childMap.size() > 0) {
+            for (String key : childMap.keySet()) {
+                ReportTableVo reportTableVo = childMap.get(key);
+                childList.add(reportTableVo);
+            }
+        }
+        Collections.sort(childList);
+        return childList;
     }
 }

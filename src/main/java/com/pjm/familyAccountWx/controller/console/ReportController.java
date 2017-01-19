@@ -32,7 +32,7 @@ public class ReportController extends BaseController {
     private ReportService reportService;
 
     @RequestMapping("/monthManager")
-    public String monthManager(HttpServletRequest request, Model model){
+    public String monthManager(HttpServletRequest request, Model model) {
         try {
             String monthFirstStr = DateUtil.getMonthFirstStr(new Date());
             String monthLastStr = DateUtil.getMonthLastStr(new Date());
@@ -53,21 +53,37 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping("/yearTableManager")
-    public String yearTableManager(){
+    public String yearTableManager() {
         return "/console/report/yearList";
     }
 
     @RequestMapping("/inAndOutList")
     @ResponseBody
-    public Json inAndOutList(HttpServletRequest request,String year,Model model) {
+    public Json inAndOutList(HttpServletRequest request, String year) {
         Json json = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
             Long userId = loginUserInfo.getId();
             Map<String, List<ReportTableVo>> reportTableList = null;
             reportTableList = reportService.getReportTableList(userId, year);
-            model.addAttribute("map", reportTableList);
             json.setObj(reportTableList);
+            json.setSuccess(true);
+            json.setMsg("获取数据成功!!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @RequestMapping("/childrenTableList")
+    @ResponseBody
+    public Json childrenTableList(HttpServletRequest request, String year, String parentPurposeNo) {
+        Json json = new Json();
+        try {
+            LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
+            Long userId = loginUserInfo.getId();
+            List<ReportTableVo> childrenTableList = reportService.getChildrenTableList(userId, year, parentPurposeNo);
+            json.setObj(childrenTableList);
             json.setSuccess(true);
             json.setMsg("获取数据成功!!!");
         } catch (Exception e) {

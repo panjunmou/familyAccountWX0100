@@ -149,4 +149,35 @@ public class ReportDao extends BaseDao {
         List resultList = nativeQuery.getResultList();
         return resultList;
     }
+
+    public List<Object[]> getChildrenTableList(String userNo, String year, String parentPurposeNo) {
+        String sql =
+                " SELECT" +
+                "  date_format(t.PAYDATE, '%m')," +
+                "  sum(t.MONEY)," +
+                "  p.NAME," +
+                "  p.PURPOSE_NO," +
+                "  p.seq" +
+                " from biz_tally t" +
+                "  LEFT JOIN biz_purpose p ON t.PURPOSE_NO = p.PURPOSE_NO" +
+                " WHERE 1 = 1" +
+                "      AND t.visible = TRUE" +
+                "      AND t.USER_NO =:userNo" +
+                "      AND date_format(t.PAYDATE, '%Y') =:year" +
+                "      AND p.PARENT_NO =:parentPurposeNo" +
+                " GROUP BY date_format(t.PAYDATE, '%m'),p.PURPOSE_NO";
+        System.out.println("sql = " + sql);
+        Query nativeQuery = em.createNativeQuery(sql);
+        Map<String, Object> objectMap = new HashMap<String, Object>();
+        objectMap.put("userNo", userNo);
+        objectMap.put("year", year);
+        objectMap.put("parentPurposeNo",parentPurposeNo );
+        for (String key : objectMap.keySet()) {
+            nativeQuery.setParameter(key, objectMap.get(key));
+        }
+        String jsonString = JSON.toJSONString(objectMap);
+        System.out.println("jsonString = " + jsonString);
+        List resultList = nativeQuery.getResultList();
+        return resultList;
+    }
 }

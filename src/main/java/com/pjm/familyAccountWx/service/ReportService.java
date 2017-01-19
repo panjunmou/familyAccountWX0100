@@ -17,4 +17,6 @@ public interface ReportService {
     BigDecimal[] getInAndOut(Long userId, String monthFirstStr, String monthLastStr) throws Exception;
 
     Map<String, List<ReportTableVo>> getReportTableList(Long userId, String year) throws Exception;
+
+    List<ReportTableVo> getChildrenTableList(Long userId, String year, String parentPurposeNo) throws Exception;
 }

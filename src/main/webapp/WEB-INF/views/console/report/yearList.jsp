@@ -80,6 +80,19 @@
                             td.html(sum);
                             tr.append(td);
                             $("#inTable tr:eq(" + i + ")").after(tr);
+                            tr.on("click", function () {
+                                $.ajax({
+                                    type: "get",
+                                    url: "${ctx}/console/report/childrenTableList",
+                                    dataType: "json",
+                                    data:{
+                                        parentPurposeNo:v.purposeNo
+                                    },
+                                    success: function (result) {
+                                        console.log(resutl);
+                                    }
+                                });
+                            });
                             sumInArr[12] = sumInArr[12] + parseFloat(sum);
                         });
                         $.each(outList, function (i, v) {
