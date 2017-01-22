@@ -151,12 +151,12 @@
                                                     } else if (parseFloat(nC) == parseFloat(sortMoneyArrC[2])) {
                                                         tdC.css("color", "green");
                                                     }
-                                                    tdC.html(nC);
+                                                    tdC.html(parseFloat(nC).toFixed(2));
                                                     trC.append(tdC);
                                                     sumC = sumC + parseFloat(nC);
                                                 });
                                                 tdC = $('<td class="imageTD"/>');
-                                                tdC.html(sumC);
+                                                tdC.html(parseFloat(sumC).toFixed(2));
                                                 trC.append(tdC);
                                                 trP.after(trC);
                                             });
@@ -241,7 +241,7 @@
                                                     } else if (parseFloat(nC) == parseFloat(sortMoneyArrC[2])) {
                                                         tdC.css("color", "green");
                                                     }
-                                                    tdC.html(nC);
+                                                    tdC.html(parseFloat(nC).toFixed(2));
                                                     trC.append(tdC);
                                                     sumC = sumC + parseFloat(nC);
                                                 });
@@ -292,6 +292,8 @@
                             tdInArr.eq(i + 1).html(sumIn);
                             tdOutArr.eq(i + 1).html(sumOut);
                         }
+
+                        var tds = $("#inTable tr td:nth-child(13)");
                     }
                 }
             });
