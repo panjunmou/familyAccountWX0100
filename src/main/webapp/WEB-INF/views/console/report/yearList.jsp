@@ -39,6 +39,9 @@
             border-style: solid;
             border-color: #999999;
         }
+        .imageTd{
+            border-color: red;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -51,20 +54,28 @@
                 url: "${ctx}/console/report/inAndOutList",
                 dataType: "json",
                 success: function (result) {
-                    console.log(result);
+//                    console.log(result);
                     if (result.success) {
                         var inList = result.obj.inList;
                         var outList = result.obj.outList;
-                        console.log(outList);
+//                        console.log(outList);
                         var sumInArr = new Array();
                         var sumOutArr = new Array();
                         for (var i = 0; i < 13; i++) {
                             sumInArr[i] = 0;
                             sumOutArr[i] = 0;
                         }
+                        var tdInArr = $("#inTable tr:last").find('td');
+                        var tdOutArr = $("#outTable tr:last").find('td');
+                        var colsTdInArr = new Array();
+                        var colsTdOutArr = new Array();
+                        for (var i = 0; i < 6; i++) {
+                            colsTdInArr[i] = 0;
+                            colsTdOutArr[i] = 0;
+                        }
                         $.each(inList, function (i, v) {
                             var moneyArr = v.money;
-                            var tr = $('<tr/>');
+                            var tr = $('<tr style="cursor: pointer"/>');
                             var td = $('<td/>');
                             td.html(v.purposeName);
                             tr.append(td);
@@ -81,17 +92,61 @@
                             tr.append(td);
                             $("#inTable tr:eq(" + i + ")").after(tr);
                             tr.on("click", function () {
-                                $.ajax({
-                                    type: "get",
-                                    url: "${ctx}/console/report/childrenTableList",
-                                    dataType: "json",
-                                    data:{
-                                        parentPurposeNo:v.purposeNo
-                                    },
-                                    success: function (result) {
-                                        console.log(resutl);
+                                var trP = $(this);
+                                var hasChildren = $(this).attr("hasChildren");
+                                if(hasChildren == undefined) {
+                                    $(this).attr("hasChildren", "1");
+                                    hasChildren = "1";
+                                }else {
+                                    if(hasChildren == "1") {
+                                        hasChildren = "-1";
+                                        $(this).attr("hasChildren", "-1");
+                                    }else{
+                                        hasChildren = "1";
+                                        $(this).attr("hasChildren", "1");
                                     }
-                                });
+                                }
+                                console.log(hasChildren);
+                                if(hasChildren == "1") {
+                                    $.ajax({
+                                        type: "get",
+                                        url: "${ctx}/console/report/childrenTableList",
+                                        dataType: "json",
+                                        data:{
+                                            parentPurposeNo:v.purposeNo
+                                        },
+                                        success: function (result2) {
+                                            var objs = result2.obj;
+                                            $.each(objs, function (childI, childV) {
+                                                var moneyArrC = childV.money;
+                                                var trC = $('<tr type="'+v.purposeNo+'"/>');
+                                                var tdC = $('<td style="padding-left: 50px;"/>');
+                                                tdC.html(childV.purposeName);
+                                                trC.append(tdC);
+                                                var sumC = parseFloat(0);
+                                                $.each(moneyArrC, function (mC, nC) {
+                                                    tdC = $('<td/>');
+                                                    if((mC + 2) == colsTdInArr[3]){
+                                                        tdC.css("color", "red");
+                                                    }else if((mC + 2) == colsTdInArr[4]) {
+                                                        tdC.css("color", "blue");
+                                                    }else if((mC + 2) == colsTdInArr[5]) {
+                                                        tdC.css("color", "green");
+                                                    }
+                                                    tdC.html(nC);
+                                                    trC.append(tdC);
+                                                    sumC = sumC + parseFloat(nC);
+                                                });
+                                                tdC = $('<td/>');
+                                                tdC.html(sumC);
+                                                trC.append(tdC);
+                                                trP.after(trC);
+                                            });
+                                        }
+                                    });
+                                }else{
+                                    $("[type='" + v.purposeNo + "']").remove();
+                                }
                             });
                             sumInArr[12] = sumInArr[12] + parseFloat(sum);
                         });
@@ -115,14 +170,6 @@
                             $("#outTable tr:eq(" + i + ")").after(tr);
                             sumOutArr[12] = sumOutArr[12] + parseFloat(sum);
                         });
-                        var tdInArr = $("#inTable tr:last").find('td');
-                        var tdOutArr = $("#outTable tr:last").find('td');
-                        var colsTdInArr = new Array();
-                        var colsTdOutArr = new Array();
-                        for (var i = 0; i < 6; i++) {
-                            colsTdInArr[i] = 0;
-                            colsTdOutArr[i] = 0;
-                        }
                         for (var i = 0; i < 13; i++) {
                             var sumIn = parseFloat(sumInArr[i]).toFixed(2);
                             var sumOut = parseFloat(sumOutArr[i]).toFixed(2);
