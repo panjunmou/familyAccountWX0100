@@ -33,16 +33,16 @@
                 type: "get",
                 url: '${ctx}/console/report/MonthBar',
                 dataType: "json",
-                data:{
-                    tallyType:tallyType,
-                    purposeType:purposeType,
-                    dateStart:dateStart,
-                    dateEnd:dateEnd
+                data: {
+                    tallyType: tallyType,
+                    purposeType: purposeType,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd
                 },
                 success: function (result) {
                     console.log(result);
                     console.log(result.obj.seriesDatas);
-                    if(result.obj.seriesDatas == undefined) {
+                    if (result.obj.seriesDatas == undefined) {
                         $("#main").html('<span style="font-size: 20px;font-weight: bold">暂无数据!!!</span>');
                     }
                     // 指定图表的配置项和数据

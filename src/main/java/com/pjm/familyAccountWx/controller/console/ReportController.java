@@ -1,6 +1,5 @@
 package com.pjm.familyAccountWx.controller.console;
 
-import com.alibaba.fastjson.JSON;
 import com.pjm.familyAccountWx.common.controller.BaseController;
 import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.common.vo.Json;
@@ -53,13 +52,21 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping("/yearTableManager")
-    public String yearTableManager() {
-        return "/console/report/yearList";
+    public String yearTableManager(Model model) {
+        try {
+            int nowYear = DateUtil.getYear(new Date());
+            model.addAttribute("nowYear", nowYear);
+            return "/console/report/yearList";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     @RequestMapping("/inAndOutList")
     @ResponseBody
     public Json inAndOutList(HttpServletRequest request, String year) {
+        System.out.println("year = " + year);
         Json json = new Json();
         try {
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
@@ -71,6 +78,8 @@ public class ReportController extends BaseController {
             json.setMsg("获取数据成功!!!");
         } catch (Exception e) {
             e.printStackTrace();
+            json.setMsg(e.getMessage());
+            json.setSuccess(false);
         }
         return json;
     }

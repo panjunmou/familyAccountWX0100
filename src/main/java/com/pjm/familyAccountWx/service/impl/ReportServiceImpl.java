@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.service.impl;
 
+import com.pjm.familyAccountWx.common.util.DateUtil;
 import com.pjm.familyAccountWx.dao.ReportDao;
 import com.pjm.familyAccountWx.model.TUser;
 import com.pjm.familyAccountWx.service.ReportService;
@@ -76,8 +77,7 @@ public class ReportServiceImpl implements ReportService {
     public Map<String, List<ReportTableVo>> getReportTableList(Long userId, String year) throws Exception {
         TUser tUser = reportDao.find(userId, TUser.class);
         if (StringUtils.isEmpty(year)) {
-//            year = String.valueOf(DateUtil.getYear(new Date()));
-            year = "2016";
+            throw new Exception("年份不能为空!!!");
         }
         List<Object[]> reportTableList = reportDao.getReportTableList(tUser.getUserNo(), year);
         Map<String, ReportTableVo> inMap = new HashMap<>();

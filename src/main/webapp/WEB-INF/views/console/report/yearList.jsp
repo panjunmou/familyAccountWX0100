@@ -51,9 +51,22 @@
         }
 
     </style>
+    <link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="${ctx}/js/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="${ctx}/js/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script type="text/javascript">
         $(function () {
             loadData();
+
+            $('.form_date').datetimepicker({
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 4,
+                minView: 4,
+                format: "yyyy"
+            });
         });
 
         function sortNumber(a, b) {
@@ -61,10 +74,36 @@
         }
 
         function loadData() {
+            $("#inTable tr:gt(0)").remove();
+            var tr = $('<tr/>');
+            var td = $('<td/>');
+            td.html('合计');
+            tr.append(td);
+            for(var i=0;i<13;i++){
+                var td1 = $('<td/>');
+                td1.html('0');
+                tr.append(td1);
+            }
+            $("#inTable tr:eq(0)").after(tr);
+            $("#outTable tr:gt(0)").remove();
+            var tr = $('<tr/>');
+            var td = $('<td/>');
+            td.html('合计');
+            tr.append(td);
+            for(var i=0;i<13;i++){
+                var td1 = $('<td/>');
+                td1.html('0');
+                tr.append(td1);
+            }
+            $("#outTable tr:eq(0)").after(tr);
+            var yearVal = $("#yearVal").val();
             $.ajax({
                 type: "get",
                 url: "${ctx}/console/report/inAndOutList",
                 dataType: "json",
+                data: {
+                    year: yearVal
+                },
                 success: function (result) {
 //                    console.log(result);
                     if (result.success) {
@@ -302,6 +341,22 @@
     </script>
 </head>
 <body>
+<div class="container">
+    <form action="" class="form-horizontal"  role="form">
+        <fieldset>
+            <div class="form-group">
+                <label for="dtp_input2" class="col-md-2 control-label">请选择年份</label>
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" type="text" value="${nowYear}" readonly id="yearVal">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search" onclick="loadData()"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>
+        </fieldset>
+    </form>
+</div>
 <div style="margin: 0px auto;width: 95%;text-align: center;">
     <!-- Table goes in the document BODY -->
     <table class="imagetable" id="inTable" style="margin: auto;width: 100%">
