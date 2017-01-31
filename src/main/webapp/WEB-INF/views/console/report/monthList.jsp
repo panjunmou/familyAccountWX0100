@@ -46,7 +46,7 @@
                         $("#main").html('<span style="font-size: 20px;font-weight: bold">暂无数据!!!</span>');
                     }
                     // 指定图表的配置项和数据
-                    var option = option = {
+                    var option = {
                         title: {
                             text: '消费比例',
                             subtext: '共计支出:${out}元;共计收入:${in}元',

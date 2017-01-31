@@ -53,12 +53,15 @@
     </style>
     <link href="${ctx}/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="${ctx}/js/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="${ctx}/js/echart/echarts.js"></script>
     <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="${ctx}/js/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="${ctx}/js/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
     <script type="text/javascript">
+        var myChart;
+
         $(function () {
-            loadData();
 
             $('.form_date').datetimepicker({
                 autoclose: 1,
@@ -67,6 +70,11 @@
                 minView: 4,
                 format: "yyyy"
             });
+
+            loadData();
+
+            myChart = echarts.init(document.getElementById('main'));
+
         });
 
         function sortNumber(a, b) {
@@ -79,7 +87,7 @@
             var td = $('<td/>');
             td.html('合计');
             tr.append(td);
-            for(var i=0;i<13;i++){
+            for (var i = 0; i < 13; i++) {
                 var td1 = $('<td/>');
                 td1.html('0');
                 tr.append(td1);
@@ -90,7 +98,7 @@
             var td = $('<td/>');
             td.html('合计');
             tr.append(td);
-            for(var i=0;i<13;i++){
+            for (var i = 0; i < 13; i++) {
                 var td1 = $('<td/>');
                 td1.html('0');
                 tr.append(td1);
@@ -331,8 +339,73 @@
                             tdInArr.eq(i + 1).html(sumIn);
                             tdOutArr.eq(i + 1).html(sumOut);
                         }
-
                         var tds = $("#inTable tr td:nth-child(13)");
+                        console.log(sumInArr);
+                        console.log(sumOutArr);
+
+                        var xAxisData = [];
+                        var data1 = [];
+                        var data2 = [];
+                        for (var i = 0; i < 12; i++) {
+                            xAxisData.push((i+1) + "月");
+                            data1.push(sumInArr[i]);
+                            data2.push(sumOutArr[i]);
+                        }
+
+                        console.log(xAxisData);
+                        console.log(data1);
+                        console.log(data2);
+                        //加载柱状图表
+                        var option = {
+                            title: {
+                                text: '收支柱状图'
+                            },
+                            legend: {
+                                data: ['收入', '支出'],
+                                align: 'left'
+                            },
+                            toolbox: {
+                                // y: 'bottom',
+                                feature: {
+                                    magicType: {
+                                        type: ['stack', 'tiled']
+                                    },
+                                    dataView: {},
+                                    saveAsImage: {
+                                        pixelRatio: 2
+                                    }
+                                }
+                            },
+                            tooltip: {},
+                            xAxis: {
+                                data: xAxisData,
+                                silent: false,
+                                splitLine: {
+                                    show: false
+                                }
+                            },
+                            yAxis: {},
+                            series: [{
+                                name: '收入',
+                                type: 'bar',
+                                data: data1,
+                                animationDelay: function (idx) {
+                                    return idx * 10;
+                                }
+                            }, {
+                                name: '支出',
+                                type: 'bar',
+                                data: data2,
+                                animationDelay: function (idx) {
+                                    return idx * 10 + 100;
+                                }
+                            }],
+                            animationEasing: 'elasticOut',
+                            animationDelayUpdate: function (idx) {
+                                return idx * 5;
+                            }
+                        };
+                        myChart.setOption(option);
                     }
                 }
             });
@@ -342,17 +415,19 @@
 </head>
 <body>
 <div class="container">
-    <form action="" class="form-horizontal"  role="form">
+    <form action="" class="form-horizontal" role="form">
         <fieldset>
             <div class="form-group">
                 <label for="dtp_input2" class="col-md-2 control-label">请选择年份</label>
-                <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy"
+                     data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                     <input class="form-control" type="text" value="${nowYear}" readonly id="yearVal">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search" onclick="loadData()"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"
+                                                          onclick="loadData()"></span></span>
                 </div>
-                <input type="hidden" id="dtp_input2" value="" /><br/>
+                <input type="hidden" id="dtp_input2" value=""/><br/>
             </div>
         </fieldset>
     </form>
@@ -430,6 +505,11 @@
             <td>0</td>
         </tr>
     </table>
+    <br/>
+    <hr/>
+    <br/>
+    <div id="main" style="width: 95%;height:500px;margin: 0 auto;text-align: center"></div>
 </div>
+<hr/>
 </body>
 </html>
