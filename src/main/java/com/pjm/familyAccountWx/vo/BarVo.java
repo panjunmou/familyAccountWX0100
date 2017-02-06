@@ -1,5 +1,6 @@
 package com.pjm.familyAccountWx.vo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -9,6 +10,10 @@ public class BarVo {
     private List<String> legendDatas;
 
     private List<ReportDataVo> seriesDatas;
+
+    private BigDecimal totalIn;
+
+    private BigDecimal totalOut;
 
     public List<String> getLegendDatas() {
         return legendDatas;
@@ -24,5 +29,21 @@ public class BarVo {
 
     public void setSeriesDatas(List<ReportDataVo> seriesDatas) {
         this.seriesDatas = seriesDatas;
+    }
+
+    public BigDecimal getTotalIn() {
+        return totalIn;
+    }
+
+    public void setTotalIn(BigDecimal totalIn) {
+        this.totalIn = totalIn;
+    }
+
+    public BigDecimal getTotalOut() {
+        return totalOut;
+    }
+
+    public void setTotalOut(BigDecimal totalOut) {
+        this.totalOut = totalOut;
     }
 }

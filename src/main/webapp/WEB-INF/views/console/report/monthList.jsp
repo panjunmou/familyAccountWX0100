@@ -49,7 +49,7 @@
                     var option = {
                         title: {
                             text: '消费比例',
-                            subtext: '共计支出:${out}元;共计收入:${in}元',
+                            subtext: '共计支出:'+result.obj.totalOut+'元;共计收入:'+result.obj.totalIn+'元',
                             x: 'center'
                         },
                         tooltip: {

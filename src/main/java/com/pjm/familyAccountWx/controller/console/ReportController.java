@@ -39,11 +39,11 @@ public class ReportController extends BaseController {
             model.addAttribute("dateEnd", monthLastStr);
             LoginUserInfo loginUserInfo = this.getLoginUserInfo(request);
             Long userId = loginUserInfo.getId();
-            BigDecimal[] inAndOut = reportService.getInAndOut(userId, monthFirstStr, monthLastStr);
-            BigDecimal in = inAndOut[0] == null ? new BigDecimal(0) : inAndOut[0];
-            BigDecimal out = inAndOut[1] == null ? new BigDecimal(0) : inAndOut[1];
-            model.addAttribute("in", in);
-            model.addAttribute("out", out);
+//            BigDecimal[] inAndOut = reportService.getInAndOut(userId, monthFirstStr, monthLastStr);
+//            BigDecimal in = inAndOut[0] == null ? new BigDecimal(0) : inAndOut[0];
+//            BigDecimal out = inAndOut[1] == null ? new BigDecimal(0) : inAndOut[1];
+//            model.addAttribute("in", in);
+//            model.addAttribute("out", out);
             return "/console/report/monthList";
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +111,11 @@ public class ReportController extends BaseController {
         json.setMsg("获取数据出错");
         try {
             BarVo monthBar = reportService.getMonthBar(userId, dateStart, dateEnd, Integer.parseInt(purposeType), tallyType);
+            BigDecimal[] inAndOut = reportService.getInAndOut(userId, dateStart, dateEnd);
+            BigDecimal in = inAndOut[0] == null ? new BigDecimal(0) : inAndOut[0];
+            BigDecimal out = inAndOut[1] == null ? new BigDecimal(0) : inAndOut[1];
+            monthBar.setTotalIn(in);
+            monthBar.setTotalOut(out);
             json.setMsg("获取数据成功");
             json.setObj(monthBar);
             json.setSuccess(true);
