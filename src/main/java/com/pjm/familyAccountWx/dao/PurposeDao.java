@@ -14,7 +14,7 @@ import java.util.List;
 public class PurposeDao extends BaseDao {
 
     public List<TPurpose> queryPurpose(String userName, Integer purposeType) {
-        StringBuffer sqlString = new StringBuffer("select t from TPurpose t where t.tUser.userName =:userName and t.purposeType =:purposeType and t.visible=true");
+        StringBuffer sqlString = new StringBuffer("select t from TPurpose t where t.tUser.userName =:userName and t.purposeType =:purposeType and t.visible=true order by seq asc");
         Query query = em.createQuery(sqlString.toString());
         query.setParameter("userName", userName);
         query.setParameter("purposeType", purposeType);

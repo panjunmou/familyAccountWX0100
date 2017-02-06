@@ -85,6 +85,9 @@
                 url: "${ctx}/console/tally/purposeInList",
                 dataType: "json",
                 success: function (result) {
+                    console.log("asdfasf");
+                    console.log(result);
+                    console.log("asdfasf");
                     purposeInList = result.obj;
                     console.log(purposeInList);
                     var data = [];

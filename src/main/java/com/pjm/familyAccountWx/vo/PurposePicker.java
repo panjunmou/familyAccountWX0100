@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by PanJM on 2016/11/22.
  */
-public class PurposePicker {
+public class PurposePicker implements Comparable {
 
     private Long id;
 
@@ -14,6 +14,8 @@ public class PurposePicker {
     private List<PurposePicker> sub;
 
     private String type;
+
+    private Integer seq;
 
     public Long getId() {
         return id;
@@ -47,4 +49,18 @@ public class PurposePicker {
         this.type = type;
     }
 
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        PurposePicker purposePicker = (PurposePicker) o;
+        Integer seq = purposePicker.getSeq();
+        return this.seq.compareTo(seq);
+    }
 }

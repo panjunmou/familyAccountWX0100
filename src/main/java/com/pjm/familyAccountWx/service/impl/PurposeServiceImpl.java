@@ -75,6 +75,7 @@ public class PurposeServiceImpl implements PurposeService {
                 purposePickerList.add(purposePicker);
             }
         }
+        Collections.sort(purposePickerList);
         String jsonString = JSON.toJSONString(purposePickerList);
         return jsonString;
     }
@@ -101,6 +102,7 @@ public class PurposeServiceImpl implements PurposeService {
         if (parent == null) {
             purposePicker.setType("0");
         }
+        purposePicker.setSeq(tPurpose.getSeq());
     }
 
     @Override
