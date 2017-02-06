@@ -151,18 +151,20 @@ public class PurposeServiceImpl implements PurposeService {
         purposeDao.save(tPayUser);
     }
 
-    private void copyVoToEntity(TPurpose tPayUser, PurposeVo purposeVo) throws Exception {
-        BeanUtils.copyProperties(purposeVo, tPayUser);
+    private void copyVoToEntity(TPurpose tPurpose, PurposeVo purposeVo) throws Exception {
+        BeanUtils.copyProperties(purposeVo, tPurpose);
         LoginUserInfo loginUserInfo = purposeVo.getLoginUserInfo();
         Long id = loginUserInfo.getId();
         TUser tUser = purposeDao.find(id, TUser.class);
-        tPayUser.settUser(tUser);
+        tPurpose.settUser(tUser);
         String pId = purposeVo.getpId();
         if (!StringUtils.isEmpty(pId)) {
-            TPurpose tPurpose = purposeDao.find(Long.parseLong(pId), TPurpose.class);
-            tPayUser.setParent(tPurpose);
+            TPurpose parent = purposeDao.find(Long.parseLong(pId), TPurpose.class);
+            tPurpose.setParent(parent);
         }
-        tPayUser.setVisible(true);
+        tPurpose.setVisible(true);
+        Integer purposeType = purposeVo.getPurposeType();
+        tPurpose.setPurposeType(purposeType);
     }
 
     @Override

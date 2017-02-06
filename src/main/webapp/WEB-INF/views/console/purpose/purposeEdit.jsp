@@ -62,6 +62,19 @@
             <tr>
                 <td>
                     <span class="require-star">*</span>
+                    类型
+                </td>
+                <td>
+                    <select name="purposeType" class="easyui-combobox" id="purposeType"
+                            data-options="width:150,height:20,editable:false,panelHeight:'auto'">
+                        <option value="-1" <c:if test="${purpose.purposeType == -1}">selected</c:if>>支出</option>
+                        <option value="1" <c:if test="${purpose.purposeType == 1}">selected</c:if>>收入</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="require-star">*</span>
                     用途名称
                 </td>
                 <td>
