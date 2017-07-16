@@ -56,8 +56,7 @@
     <script type="text/javascript" src="${ctx}/js/echart/echarts.js"></script>
     <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="${ctx}/js/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js"
-            charset="UTF-8"></script>
+    <script type="text/javascript" src="${ctx}/js/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script type="text/javascript">
         var myChart;
 

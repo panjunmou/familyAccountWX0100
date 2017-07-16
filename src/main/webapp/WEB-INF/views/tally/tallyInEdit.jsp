@@ -92,7 +92,9 @@
                     accountId: account,
                     purposeId: purpose,
                     payUserIds: payUser,
-                    remark: remark
+                    remark: remark,
+                    purposeType:'${tally.purposeType}',
+                    tallyNo:'${tally.tallyNo}'
                 }, false, "post", function (result) {
                     if (result.success) {
                         //成功
